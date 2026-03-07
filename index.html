@@ -703,30 +703,16 @@
     margin-bottom: 1.25rem;
   }
   .affil-logos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem 2rem;
-    align-items: center;
     margin-top: 1.25rem;
     padding-top: 1.25rem;
     border-top: 1px solid rgba(74,138,125,0.12);
   }
-  .affil-logo-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40px;
-    opacity: 0.7;
-  }
-  .affil-logo-item:hover {
-    opacity: 0.7;
-  }
-  .affil-logo-item img {
-    height: 36px;
-    width: auto;
-    max-width: 110px;
-    object-fit: contain;
+  .affil-logos-img {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
     display: block;
+    opacity: 0.75;
   }
   .researcher-badges {
     display: flex;
@@ -926,25 +912,6 @@
     margin-top: 1.25rem;
     padding-top: 1.25rem;
     border-top: 1px solid rgba(74,138,125,0.12);
-  }
-  .affil-logo-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 28px;
-    opacity: 0.55;
-    filter: grayscale(1) brightness(1.8);
-  }
-  .affil-logo-item:hover {
-    opacity: 0.45;
-    filter: grayscale(1) brightness(2);
-  }
-  .affil-logo-item img {
-    height: 24px;
-    width: auto;
-    max-width: 80px;
-    object-fit: contain;
-    display: block;
   }
   .researcher-badges {
     display: flex;
@@ -1198,24 +1165,7 @@
         <div class="team-role">Founder &amp; Chief Executive</div>
         <p class="team-bio">Former Takeda R&amp;D Clinical Operations leader. MIT-trained data scientist. Doctoral researcher in AI-enabled clinical trials. Gabrielle has designed research protocols, led regulatory inspection readiness programs, and managed clinical studies across global development programs. Foster Rx was built to solve the governance problems she observed firsthand at the intersection of clinical operations and AI adoption in biopharma.</p>
         <div class="affil-logos">
-          <div class="affil-logo-item" title="Massachusetts Institute of Technology">
-            <img src="assets/mit.png" alt="MIT" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';" /><span class="affil-text-fallback" style="display:none;">MIT</span>
-          </div>
-          <div class="affil-logo-item" title="Johns Hopkins Bloomberg School of Public Health">
-            <img src="assets/hopkins.png" alt="Johns Hopkins" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';" /><span class="affil-text-fallback" style="display:none;">Hopkins</span>
-          </div>
-          <div class="affil-logo-item" title="Takeda Pharmaceuticals">
-            <img src="assets/takeda.png" alt="Takeda" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';" /><span class="affil-text-fallback" style="display:none;">Takeda</span>
-          </div>
-          <div class="affil-logo-item" title="Bill &amp; Melinda Gates Foundation">
-            <img src="assets/gates-foundation.png" alt="Gates Foundation" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';" /><span class="affil-text-fallback" style="display:none;">Gates Fdn</span>
-          </div>
-          <div class="affil-logo-item" title="Harvard University">
-            <img src="assets/harvard.png" alt="Harvard" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';" /><span class="affil-text-fallback" style="display:none;">Harvard</span>
-          </div>
-          <div class="affil-logo-item" title="Maveric">
-            <img src="assets/maveric.png" alt="Maveric" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';" /><span class="affil-text-fallback" style="display:none;">Maveric</span>
-          </div>
+          <img src="assets/team-logos.png" alt="MIT, Johns Hopkins, Takeda, Gates Foundation, Harvard, Maveric" class="affil-logos-img" />
         </div>
         <div class="researcher-badges">
           <a href="https://orcid.org/0000-0003-2620-1065" target="_blank" class="researcher-badge" onmouseover="this.style.borderColor='#4a8a7d'" onmouseout="this.style.borderColor='rgba(74,138,125,0.3)'">
