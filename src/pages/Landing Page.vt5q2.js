@@ -3,7 +3,7 @@ import wixWindow from 'wix-window';
 
 $w.onReady(function () {
 
-  const BOOKING_URL = 'TODO_REPLACE_WITH_OUTLOOK_BOOKING_URL';
+  const https://outlook.office.com/bookwithme/user/fd4f04c623d94128b78993cd23fbead9@fosterrx.com/meetingtype/_0FJELVYr0OZK8BTji-Kzg2?anonymous&ismsaljsauthenabled&ep=mlink
   const CONTACT_EMAIL = 'mailto:info@fosterrx.com';
 
   // ── HERO CTAs ──────────────────────────────────────────────────────────────
