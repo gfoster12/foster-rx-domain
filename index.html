@@ -67,6 +67,7 @@
     backdrop-filter: blur(18px);
     border-bottom: 1px solid rgba(74, 138, 125, 0.12);
     transition: border-color 0.4s;
+    position: relative;
   }
   .nav-wordmark {
     font-family: var(--serif);
@@ -995,7 +996,7 @@
 <!-- ══════════════════════════════════════════════════════════ NAV -->
 <nav id="nav">
   <a href="#hero" class="nav-logo">
-    <img src="assets/logo.png" alt="Foster Rx" style="height:36px; width:auto; display:block;" onerror="this.style.display='none';" />
+    <img src="assets/logo.png" alt="" style="height:36px; width:auto; display:block;" onerror="this.style.display='none';" />
     <span class="nav-wordmark">Foster Rx</span>
   </a>
   <ul class="nav-links">
@@ -1140,7 +1141,7 @@
           <li>Commercial Outcome Predictor</li>
           <li>Inspection Readiness Package</li>
         </ul>
-        <a href="/cdn-cgi/l/email-protection#a6cfc8c0c9e6c0c9d5d2c3d4d4de88c5c9cb99d5d3c4ccc3c5d29bf6cec7d5c386efef86e2c3c5cfd5cfc9c886efc8d2c3cacacfc1c3c8c5c386efc8d7d3cfd4df" class="offering-btn">Contact the Team →</a>
+        <span id="offering-btn-1"></span>
       </div>
       <div class="offering-card light reveal">
         <span class="offering-tag">Data Products</span>
@@ -1152,7 +1153,7 @@
           <li>White-label partner product available</li>
           <li>Full SYNTHETIC_DATA certificate chain</li>
         </ul>
-        <a href="/cdn-cgi/l/email-protection#3851565e57785e574b4c5d4a4a40165b5755074b4d5a525d5b4c05705d59544c505b594a5d187971187c594c594b5d4c4b187156494d514a41" class="offering-btn">Contact the Team →</a>
+        <span id="offering-btn-2"></span>
       </div>
       <div class="offering-card light reveal">
         <span class="offering-tag">Discovery &amp; Transfer</span>
@@ -1164,7 +1165,7 @@
           <li>Two AI-discovered assets available now</li>
           <li>Fee-for-service &amp; co-development models</li>
         </ul>
-        <a href="/cdn-cgi/l/email-protection#0d64636b624d6b627e79687f7f75236e6260327e786f67686e7930597f6c637e616c796462636c612d5b646c6f64616479742d283f3b2d59686e652d597f6c637e6b687f2d44637c78647f74" class="offering-btn">Contact the Team →</a>
+        <span id="offering-btn-3"></span>
       </div>
     </div>
   </div>
@@ -1202,31 +1203,31 @@
         <p class="team-bio">Former Takeda R&amp;D Clinical Operations leader. MIT-trained data scientist. Doctoral researcher in AI-enabled clinical trials. Gabrielle has designed research protocols, led regulatory inspection readiness programs, and managed clinical studies across global development programs. Foster Rx was built to solve the governance problems she observed firsthand at the intersection of clinical operations and AI adoption in biopharma.</p>
         <div class="affil-logos">
           <div class="affil-logo-item" title="Massachusetts Institute of Technology">
-            <img src="assets/logos/mit.png" alt="MIT" />
+            <img src="assets/logos/mit.png" alt="MIT" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';" /><span class="affil-text-fallback" style="display:none;">MIT</span>
           </div>
           <div class="affil-logo-item" title="Johns Hopkins Bloomberg School of Public Health">
-            <img src="assets/logos/johns-hopkins.png" alt="Johns Hopkins" />
+            <img src="assets/logos/johns-hopkins.png" alt="Johns Hopkins" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';" /><span class="affil-text-fallback" style="display:none;">Hopkins</span>
           </div>
           <div class="affil-logo-item" title="Takeda Pharmaceuticals">
-            <img src="assets/logos/takeda.png" alt="Takeda" />
+            <img src="assets/logos/takeda.png" alt="Takeda" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';" /><span class="affil-text-fallback" style="display:none;">Takeda</span>
           </div>
           <div class="affil-logo-item" title="Tufts University">
-            <img src="assets/logos/tufts.png" alt="Tufts" />
+            <img src="assets/logos/tufts.png" alt="Tufts" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';" /><span class="affil-text-fallback" style="display:none;">Tufts</span>
           </div>
           <div class="affil-logo-item" title="MCPHS University">
-            <img src="assets/logos/mcphs.png" alt="MCPHS" />
+            <img src="assets/logos/mcphs.png" alt="MCPHS" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';" /><span class="affil-text-fallback" style="display:none;">MCPHS</span>
           </div>
           <div class="affil-logo-item" title="Bill &amp; Melinda Gates Foundation">
-            <img src="assets/logos/gates-foundation.png" alt="Gates Foundation" />
+            <img src="assets/logos/gates-foundation.png" alt="Gates Foundation" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';" /><span class="affil-text-fallback" style="display:none;">Gates Fdn</span>
           </div>
           <div class="affil-logo-item" title="U.S. Department of Veterans Affairs">
-            <img src="assets/logos/va.png" alt="U.S. Dept. of Veterans Affairs" />
+            <img src="assets/logos/va.png" alt="U.S. Dept. of Veterans Affairs" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';" /><span class="affil-text-fallback" style="display:none;">U.S. VA</span>
           </div>
           <div class="affil-logo-item" title="Atlantic Health System">
             <span class="affil-text-fallback">Atlantic Health</span>
           </div>
           <div class="affil-logo-item" title="Harvard University">
-            <img src="assets/logos/harvard.png" alt="Harvard" />
+            <img src="assets/logos/harvard.png" alt="Harvard" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';" /><span class="affil-text-fallback" style="display:none;">Harvard</span>
           </div>
         </div>
         <div class="researcher-badges">
@@ -1271,7 +1272,7 @@
       </div>
       <p class="footer-tagline">The governed decision intelligence layer for clinical trial execution.</p>
       <div class="footer-contact">
-        <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="147d7a727b54727b67607166666c3a777b79">[email&#160;protected]</a></span><br>
+        <span id="footer-email-display"></span><br>
         Delaware, USA
       </div>
     </div>
@@ -1306,9 +1307,9 @@
     <div>
       <div class="footer-col-title">Contact</div>
       <ul class="footer-links">
-        <li><a href="/cdn-cgi/l/email-protection#2841464e47684e475b5c4d5a5a50064b4745175b5d4a424d4b5c157b5d4a5b4b5a414a4d085c47086e475b5c4d5a087a50087d584c495c4d5b">Subscribe to Updates</a></li>
+        <li><span id="footer-subscribe"></span></li>
         <li><a href="https://outlook.office.com/bookwithme/user/fd4f04c623d94128b78993cd23fbead9@fosterrx.com/meetingtype/_0FJELVYr0OZK8BTji-Kzg2?anonymous&ismsaljsauthenabled&ep=mlink" target="_blank">Book a Conversation</a></li>
-        <li><a href="/cdn-cgi/l/email-protection#c9a0a7afa689afa6babdacbbbbb1e7aaa6a4f6babcaba3acaabdf499a8bbbda7acbbbaa1a0b9e980a7b8bca0bbb0">Partnership Inquiry</a></li>
+        <li><span id="footer-partnership"></span></li>
       </ul>
     </div>
   </div>
@@ -1321,7 +1322,47 @@
       <a href="#team" style="font-family:var(--mono); font-size:0.62rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--border); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--teal)'" onmouseout="this.style.color='var(--border)'">Team</a>
     </nav>
   </div>
-</footer><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+</footer>
+<script>
+  // Render email links without exposing them to static scrapers / Cloudflare obfuscation
+  (function() {
+    var u = 'info', d = 'fosterrx', t = 'com';
+    var email = u + '@' + d + '.' + t;
+    // Footer display email
+    var el = document.getElementById('footer-email-display');
+    if (el) el.innerHTML = '<a href="mailto:' + email + '" style="color:var(--teal-lt);text-decoration:none;">' + email + '</a>';
+    // Offering card buttons
+    var btns = [
+      ['offering-btn-1', 'Phase II Decision Intelligence Inquiry', 'offering-btn'],
+      ['offering-btn-2', 'Healthcare AI Datasets Inquiry', 'offering-btn'],
+      ['offering-btn-3', 'Translational Viability %26 Tech Transfer Inquiry', 'offering-btn'],
+    ];
+    btns.forEach(function(b) {
+      var span = document.getElementById(b[0]);
+      if (span) {
+        var a = document.createElement('a');
+        a.href = 'mailto:' + email + '?subject=' + b[1];
+        a.className = b[2];
+        a.textContent = 'Contact the Team →';
+        span.parentNode.replaceChild(a, span);
+      }
+    });
+    // Footer links
+    var flinks = [
+      ['footer-subscribe', 'Subscribe to Foster Rx Updates', 'Subscribe to Updates'],
+      ['footer-partnership', 'Partnership Inquiry', 'Partnership Inquiry'],
+    ];
+    flinks.forEach(function(f) {
+      var span = document.getElementById(f[0]);
+      if (span) {
+        var a = document.createElement('a');
+        a.href = 'mailto:' + email + '?subject=' + f[1];
+        a.textContent = f[2];
+        span.parentNode.replaceChild(a, span);
+      }
+    });
+  })();
+</script><script>
   // ─── Set footer year ───────────────────────────────────────
   document.getElementById('footer-year').textContent = new Date().getFullYear();
 
