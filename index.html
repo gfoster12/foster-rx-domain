@@ -827,7 +827,8 @@
 <!-- ══════════════════════════════════════════════════════════ NAV -->
 <nav id="nav">
   <a href="#hero" class="nav-logo">
-    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <img src="assets/logo.png" alt="Foster Rx" style="height:32px; width:auto;" onerror="this.style.display='none';" />
+    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="nav-logo-svg">
       <circle cx="14" cy="14" r="3" fill="#4a8a7d"/>
       <circle cx="14" cy="5" r="2" fill="#4a8a7d" opacity=".7"/>
       <circle cx="14" cy="23" r="2" fill="#4a8a7d" opacity=".7"/>
@@ -876,11 +877,6 @@
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════ PROOF STRIP -->
-<div id="proof">
-  <div class="proof-grid">
-    <div class="proof-item">
-      <div class="proof-dot"></div>
       <span class="proof-text">Patent Pending · No. 19/459,855</span>
     </div>
     <div class="proof-item">
@@ -1011,7 +1007,7 @@
           </div>
         </div>
         <div style="margin-top: 1.5rem; padding: 1rem 1.25rem; border: 1px dashed rgba(74,138,125,0.3); border-radius: var(--r);">
-          <p style="font-family: var(--mono); font-size: 0.65rem; color: var(--border); letter-spacing: 0.08em; line-height: 1.7;">Full technical architecture and governed pipeline documentation available under NDA. Contact <a href="/cdn-cgi/l/email-protection#1e777078715e78716d6a7b6c6c66307d7173" style="color: var(--teal); text-decoration: none;"><span class="__cf_email__" data-cfemail="a7cec9c1c8e7c1c8d4d3c2d5d5df89c4c8ca">[email&#160;protected]</span></a></p>
+          <p style="font-family: var(--mono); font-size: 0.65rem; color: var(--border); letter-spacing: 0.08em; line-height: 1.7;">Full technical architecture and governed pipeline documentation available under NDA. Contact info@fosterrx.com</p>
         </div>
       </div>
     </div>
@@ -1035,7 +1031,7 @@
           <li>Commercial Outcome Predictor</li>
           <li>Inspection Readiness Package</li>
         </ul>
-        <a href="/cdn-cgi/l/email-protection#523b3c343d12343d21263720202a7c313d3f6d212730383731266f023a332137721b1b721637313b213b3d3c721b3c26373e3e3b35373c3137721b3c23273b202b" class="offering-link">Speak to a sponsor team</a>
+        info@fosterrx.com
       </div>
       <div class="offering-card light reveal">
         <span class="offering-tag">Data Products</span>
@@ -1047,7 +1043,7 @@
           <li>White-label partner product available</li>
           <li>Full SYNTHETIC_DATA certificate chain</li>
         </ul>
-        <a href="/cdn-cgi/l/email-protection#630a0d050c23050c10170611111b4d000c0e5c101601090600175e270217024333110c0716001710432a0d12160a111a" class="offering-link">Explore data products</a>
+        info@fosterrx.com
       </div>
       <div class="offering-card light reveal">
         <span class="offering-tag">Discovery &amp; Transfer</span>
@@ -1059,7 +1055,7 @@
           <li>Two AI-discovered assets available now</li>
           <li>Fee-for-service &amp; co-development models</li>
         </ul>
-        <a href="/cdn-cgi/l/email-protection#3b52555d547b5d54484f5e4949431558545604484e59515e584f066f495a5548575a4f5254555a571b7e4d5a574e5a4f5254551b72554a4e524942" class="offering-link">Explore early-stage work</a>
+        info@fosterrx.com
       </div>
     </div>
   </div>
@@ -1085,7 +1081,13 @@
     <h2 class="section-title reveal">Built by someone who has<br><em>lived the problem.</em></h2>
     <div class="team-card reveal">
       <div>
-        <div class="team-photo" style="background: linear-gradient(135deg, #2c4440 0%, #3a5550 100%); display:flex; align-items:center; justify-content:center; font-family: var(--serif); font-size: 2.5rem; color: var(--teal-lt);">GF</div>
+        <img 
+          src="assets/gabrielle-foster.jpg" 
+          alt="Gabrielle Foster" 
+          class="team-photo"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <div class="team-photo" style="display:none; background: linear-gradient(135deg, #2c4440 0%, #3a5550 100%); align-items:center; justify-content:center; font-family: var(--serif); font-size: 2.5rem; color: var(--teal-lt);">GF</div>
       </div>
       <div>
         <div class="team-name">Gabrielle Foster</div>
@@ -1100,6 +1102,12 @@
           <span class="credential">U.S. Dept. of Veterans Affairs</span>
           <span class="credential">Doctoral Researcher</span>
         </div>
+        <div style="margin-top: 1.25rem;">
+          <a href="https://orcid.org/0009-0009-0783-3141" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em; color: var(--teal); border: 1px solid rgba(74,138,125,0.3); padding: 6px 14px; border-radius: 2px; text-decoration: none; transition: border-color 0.2s;" onmouseover="this.style.borderColor='#4a8a7d'" onmouseout="this.style.borderColor='rgba(74,138,125,0.3)'">
+            <svg width="16" height="16" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="128" cy="128" r="128" fill="#A6CE39"/><path d="M86.3 186.2H70.9V79.1h15.4v107.1zM108.9 79.1h41.6c39.6 0 57 28.3 57 53.6 0 27.5-21.5 53.6-56.8 53.6h-41.8V79.1zm15.4 93.3h24.5c34.9 0 42.9-26.5 42.9-39.7C191.7 111.2 178 93 148 93h-23.7v79.4zM88.7 56.8c0 5.5-4.5 9.9-10 9.9s-10-4.4-10-9.9c0-5.5 4.5-9.9 10-9.9s10 4.4 10 9.9z" fill="white"/></svg>
+            ORCID · 0009-0009-0783-3141
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -1109,11 +1117,11 @@
 <section id="cta">
   <div class="section-inner" style="text-align: center;">
     <p class="section-label reveal" style="justify-content: center; display: flex;">Work With Us</p>
-    <h2 class="section-title reveal" style="margin: 0 auto 1.5rem;">Foster Rx works with<br><em>pharma, biotech, CROs, and researchers.</em></h2>
-    <p class="section-body reveal" style="text-align: center; margin: 0 auto 2.5rem;">If you are working in clinical development — as a sponsor, CRO, researcher, or portfolio team — and you need your decisions to be defensible, we should talk.</p>
+    <h2 class="section-title reveal" style="margin: 0 auto 1.5rem;">Built for the scientists and teams<br><em>who refuse to guess.</em></h2>
+    <p class="section-body reveal" style="text-align: center; margin: 0 auto 2.5rem;">Whether you're a pharma team navigating go/no-go, a biotech preparing for a board, a CRO building for sponsors, or an academic researcher bridging the bench-to-trial gap — if your decisions need to be defensible, Foster Rx was built for you.</p>
     <div class="cta-actions reveal">
       <a href="https://outlook.office.com/bookwithme/user/fd4f04c623d94128b78993cd23fbead9@fosterrx.com/meetingtype/_0FJELVYr0OZK8BTji-Kzg2?anonymous&ismsaljsauthenabled&ep=mlink" class="btn-primary" target="_blank">Book a Conversation</a>
-      <a href="/cdn-cgi/l/email-protection#3b52555d547b5d54484f5e49494315585456" class="btn-secondary">Send a Note</a>
+      info@fosterrx.com
     </div>
     <p class="cta-subtext reveal">info@fosterrx.com · Delaware, USA</p>
   </div>
@@ -1126,7 +1134,7 @@
       <div class="footer-logo">Foster Rx</div>
       <p class="footer-tagline">The governed decision intelligence layer for clinical trial execution.</p>
       <div class="footer-contact">
-        <a href="/cdn-cgi/l/email-protection#a1c8cfc7cee1c7ced2d5c4d3d3d98fc2cecc"><span class="__cf_email__" data-cfemail="177e79717857717864637265656f3974787a">[email&#160;protected]</span></a><br>
+        info@fosterrx.com<br>
         Delaware, USA
       </div>
     </div>
@@ -1150,8 +1158,8 @@
       <div class="footer-col-title">Contact</div>
       <ul class="footer-links">
         <li><a href="https://outlook.office.com/bookwithme/user/fd4f04c623d94128b78993cd23fbead9@fosterrx.com/meetingtype/_0FJELVYr0OZK8BTji-Kzg2?anonymous&ismsaljsauthenabled&ep=mlink" target="_blank">Book a Conversation</a></li>
-        <li><a href="mailto:info@fosterrx.com">General Inquiries</a></li>
-        <li><a href="mailto:info@fosterrx.com?subject=Partnership Inquiry">Partnerships</a></li>
+        <li>info@fosterrx.com</li>
+        <li>info@fosterrx.com</li>
       </ul>
     </div>
   </div>
@@ -1161,5 +1169,4 @@
   </div>
 </footer>
 
-<!-- ══════════════════════════════════════════════════════════ JS -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfas
+<!-- ══════════════════════════�
