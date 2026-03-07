@@ -236,37 +236,6 @@
   }
   .btn-secondary:hover { border-color: var(--teal); color: var(--teal-lt); transform: translateY(-1px); }
 
-  .hero-trust {
-    margin-top: 4rem;
-    opacity: 0;
-    animation: fadeUp 1s var(--ease) 1s forwards;
-  }
-  .hero-trust-label {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--border);
-    margin-bottom: 1.2rem;
-  }
-  .trust-badges {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-  .trust-badge {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--sand);
-    opacity: 0.6;
-    padding: 6px 14px;
-    border: 1px solid rgba(74,138,125,0.2);
-    border-radius: 2px;
-  }
 
   /* ─── PROOF STRIP ─────────────────────────────────────────── */
   #proof {
@@ -716,70 +685,6 @@
     opacity: 0.8;
   }
 
-  /* ─── INSIGHTS ────────────────────────────────────────────── */
-  #insights { background: var(--deep); }
-  .insights-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 4rem;
-  }
-  .insight-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--r-lg);
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    transition: border-color 0.3s, transform 0.3s;
-    cursor: pointer;
-  }
-  .insight-card:hover { border-color: var(--teal); transform: translateY(-3px); }
-  .insight-category {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--teal);
-  }
-  .insight-title {
-    font-family: var(--serif);
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: var(--white);
-    line-height: 1.3;
-  }
-  .insight-preview {
-    font-size: 0.82rem;
-    color: var(--sand);
-    font-weight: 300;
-    line-height: 1.65;
-    flex: 1;
-  }
-  .insight-meta {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    color: var(--border);
-    letter-spacing: 0.06em;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .insight-card.placeholder {
-    border-style: dashed;
-    opacity: 0.5;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 220px;
-  }
-  .insight-placeholder-text {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--border);
-    letter-spacing: 0.08em;
-  }
 
   /* ─── CTA BANNER ──────────────────────────────────────────── */
   #cta {
@@ -946,7 +851,6 @@
   <ul class="nav-links">
     <li><a href="#problem">The Problem</a></li>
     <li><a href="#offerings">Offerings</a></li>
-    <li><a href="#insights">Insights</a></li>
     <li><a href="#team">Team</a></li>
   </ul>
   <a href="https://outlook.office.com/bookwithme/user/fd4f04c623d94128b78993cd23fbead9@fosterrx.com/meetingtype/_0FJELVYr0OZK8BTji-Kzg2?anonymous&ismsaljsauthenabled&ep=mlink" class="nav-cta" target="_blank">Book a Conversation</a>
@@ -957,7 +861,7 @@
   <div class="hero-bg"></div>
   <div class="hero-grid-lines"></div>
   <div class="hero-inner">
-    <p class="hero-eyebrow">Decision Intelligence for Phase II</p>
+    <p class="hero-eyebrow">Decision Infrastructure</p>
     <h1 class="hero-headline">
       The decision layer that makes<br>Phase II <em>defensible.</em>
     </h1>
@@ -968,15 +872,6 @@
       <a href="https://outlook.office.com/bookwithme/user/fd4f04c623d94128b78993cd23fbead9@fosterrx.com/meetingtype/_0FJELVYr0OZK8BTji-Kzg2?anonymous&ismsaljsauthenabled&ep=mlink" class="btn-primary" target="_blank">Book a Conversation</a>
       <a href="#solution" class="btn-secondary">How It Works</a>
     </div>
-    <div class="hero-trust">
-      <p class="hero-trust-label">Founder credentials</p>
-      <div class="trust-badges">
-        <span class="trust-badge">MIT Data Science</span>
-        <span class="trust-badge">Takeda R&amp;D</span>
-        <span class="trust-badge">Gates Foundation</span>
-        <span class="trust-badge">U.S. Department of Veterans Affairs</span>
-        <span class="trust-badge">Patent Pending</span>
-      </div>
     </div>
   </div>
 </section>
@@ -1058,15 +953,15 @@
     <h2 class="section-title reveal">Intelligent decision<br>infrastructure for<br><em>regulated biopharma.</em></h2>
     <div class="solution-grid">
       <div class="reveal">
-        <p class="section-body" style="margin-bottom: 2.5rem;">Foster Rx doesn't produce predictions. It produces certified evidence bundles — governed, attributed, reproducible outputs that answer the question any regulator, acquirer, or board will ask: what did you know, when did you know it, and what did you decide.</p>
+        <p class="section-body" style="margin-bottom: 2.5rem;">Foster Rx produces certified, auditable recommendations for Phase II decision points — not dashboards, not raw predictions. Every output is attributed, reproducible, and built to withstand scrutiny from regulators, boards, and acquirers.</p>
         <div class="feature-cards">
           <div class="feature-card">
             <svg class="feature-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M18 3L33 10.5V25.5L18 33L3 25.5V10.5L18 3Z"/>
               <path d="M18 12V18L22 22" stroke-linecap="round"/>
             </svg>
-            <div class="feature-name">Provenance-Linked Knowledge Graph</div>
-            <div class="feature-desc">Every node, every edge carries its data source, certification method, and timestamp.</div>
+            <div class="feature-name">Governed Data Integration</div>
+            <div class="feature-desc">Biological, clinical, payer, and regulatory data integrated through a governed architecture with documented attribution at every step.</div>
           </div>
           <div class="feature-card">
             <svg class="feature-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -1074,24 +969,24 @@
               <path d="M12 18h12M18 12v12"/>
               <circle cx="18" cy="18" r="4"/>
             </svg>
-            <div class="feature-name">Four Probabilistic Models</div>
-            <div class="feature-desc">Phase II success, FDA approval, payer feasibility, and commercial outcome — trained on 40+ years of outcomes.</div>
+            <div class="feature-name">Multi-Dimensional Risk Assessment</div>
+            <div class="feature-desc">Phase II success probability, FDA approval likelihood, payer feasibility, and commercial viability — evaluated together, not in silos.</div>
           </div>
           <div class="feature-card">
             <svg class="feature-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5">
               <rect x="4" y="8" width="28" height="20" rx="2"/>
               <path d="M4 14h28M10 14v14M26 14v14"/>
             </svg>
-            <div class="feature-name">Human Review Gate</div>
-            <div class="feature-desc">Every prediction passes a qualified reviewer before becoming a certified output. Non-optional. Non-automatable.</div>
+            <div class="feature-name">Human Review, Always</div>
+            <div class="feature-desc">Every recommendation is reviewed and approved by a qualified professional before delivery. Accountability is built in, not optional.</div>
           </div>
           <div class="feature-card">
             <svg class="feature-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M8 28L3 33V8a2 2 0 012-2h26a2 2 0 012 2v16a2 2 0 01-2 2H8z"/>
               <path d="M11 12h14M11 17h10M11 22h6"/>
             </svg>
-            <div class="feature-name">DecisionEvent Framework</div>
-            <div class="feature-desc">Every decision linked to the evidence that informed it. Inspection-ready. Cryptographically signed.</div>
+            <div class="feature-name">Auditable Decision Records</div>
+            <div class="feature-desc">Every recommendation is linked to the decision it informed — creating a searchable, inspection-ready record that survives due diligence.</div>
           </div>
         </div>
       </div>
@@ -1181,30 +1076,7 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════ INSIGHTS -->
-<section id="insights">
-  <div class="section-inner">
-    <p class="section-label reveal">From the Field</p>
-    <h2 class="section-title reveal">Perspectives on<br><em>governed AI in biopharma.</em></h2>
-    <div class="insights-grid">
-      <div class="insight-card reveal" onclick="window.location.href='mailto:info@fosterrx.com?subject=Insights Request'">
-        <div class="insight-category">Clinical Operations</div>
-        <div class="insight-title">Why 90% of Phase II Trials Hit an Amendment — and What the Data Actually Tells Us</div>
-        <p class="insight-preview">The amendment crisis is not a protocol quality problem. It's a decision intelligence problem. A look at what 40 years of clinical trial outcomes reveal about preventable failure patterns.</p>
-        <div class="insight-meta">Gabrielle Foster · Foster Rx Research</div>
-      </div>
-      <div class="insight-card reveal" onclick="window.location.href='mailto:info@fosterrx.com?subject=Insights Request'">
-        <div class="insight-category">AI Governance</div>
-        <div class="insight-title">Decision Intelligence vs. AI Dashboards: Why Governance Is the Product</div>
-        <p class="insight-preview">The pharma AI space is full of prediction tools. What's missing isn't better models — it's the governance architecture that makes model outputs defensible in regulated contexts.</p>
-        <div class="insight-meta">Gabrielle Foster · Foster Rx Research</div>
-      </div>
-      <div class="insight-card placeholder reveal">
-        <div class="insight-placeholder-text">More coming soon.<br>Subscribe for updates →<br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a7cec9c1c8e7c1c8d4d3c2d5d5df89c4c8ca">[email&#160;protected]</a></div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <!-- ══════════════════════════════════════════════════════════ TEAM -->
 <section id="team">
@@ -1237,13 +1109,13 @@
 <section id="cta">
   <div class="section-inner" style="text-align: center;">
     <p class="section-label reveal" style="justify-content: center; display: flex;">Work With Us</p>
-    <h2 class="section-title reveal" style="margin: 0 auto 1.5rem;">Foster Rx works with a<br><em>select group of sponsors.</em></h2>
-    <p class="section-body reveal" style="text-align: center; margin: 0 auto 2.5rem;">If you're making Phase II decisions and you need your intelligence to be defensible — to regulators, boards, acquirers, or your own program team — we should talk.</p>
+    <h2 class="section-title reveal" style="margin: 0 auto 1.5rem;">Foster Rx works with<br><em>pharma, biotech, CROs, and researchers.</em></h2>
+    <p class="section-body reveal" style="text-align: center; margin: 0 auto 2.5rem;">If you are working in clinical development — as a sponsor, CRO, researcher, or portfolio team — and you need your decisions to be defensible, we should talk.</p>
     <div class="cta-actions reveal">
       <a href="https://outlook.office.com/bookwithme/user/fd4f04c623d94128b78993cd23fbead9@fosterrx.com/meetingtype/_0FJELVYr0OZK8BTji-Kzg2?anonymous&ismsaljsauthenabled&ep=mlink" class="btn-primary" target="_blank">Book a Conversation</a>
       <a href="/cdn-cgi/l/email-protection#3b52555d547b5d54484f5e49494315585456" class="btn-secondary">Send a Note</a>
     </div>
-    <p class="cta-subtext reveal"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1970777f76597f766a6d7c6b6b61377a7674">[email&#160;protected]</a> · Annapolis, MD</p>
+    <p class="cta-subtext reveal">info@fosterrx.com · Delaware, USA</p>
   </div>
 </section>
 
@@ -1255,8 +1127,7 @@
       <p class="footer-tagline">The governed decision intelligence layer for clinical trial execution.</p>
       <div class="footer-contact">
         <a href="/cdn-cgi/l/email-protection#a1c8cfc7cee1c7ced2d5c4d3d3d98fc2cecc"><span class="__cf_email__" data-cfemail="177e79717857717864637265656f3974787a">[email&#160;protected]</span></a><br>
-        973-722-2532<br>
-        Annapolis, MD, USA
+        Delaware, USA
       </div>
     </div>
     <div>
@@ -1271,7 +1142,6 @@
       <div class="footer-col-title">Company</div>
       <ul class="footer-links">
         <li><a href="#team">Team</a></li>
-        <li><a href="#insights">From the Field</a></li>
         <li><a href="http://linkedin.com/company/foster-rx-llc/" target="_blank">LinkedIn</a></li>
         <li><a href="https://github.com/Foster-Rx" target="_blank">GitHub</a></li>
       </ul>
@@ -1280,8 +1150,8 @@
       <div class="footer-col-title">Contact</div>
       <ul class="footer-links">
         <li><a href="https://outlook.office.com/bookwithme/user/fd4f04c623d94128b78993cd23fbead9@fosterrx.com/meetingtype/_0FJELVYr0OZK8BTji-Kzg2?anonymous&ismsaljsauthenabled&ep=mlink" target="_blank">Book a Conversation</a></li>
-        <li><a href="/cdn-cgi/l/email-protection#5f363139301f39302c2b3a2d2d27713c3032">General Inquiries</a></li>
-        <li><a href="/cdn-cgi/l/email-protection#761f18101936101905021304040e5815191b490503141c1315024b26170402181304051e1f06563f1807031f040f">Partnerships</a></li>
+        <li><a href="mailto:info@fosterrx.com">General Inquiries</a></li>
+        <li><a href="mailto:info@fosterrx.com?subject=Partnership Inquiry">Partnerships</a></li>
       </ul>
     </div>
   </div>
