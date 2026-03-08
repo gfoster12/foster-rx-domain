@@ -1,45 +1,206 @@
-# Git Integration & Wix CLI <img align="left" src="https://user-images.githubusercontent.com/89579857/185785022-cab37bf5-26be-4f11-85f0-1fac63c07d3b.png">
+# foster-rx-domain
 
-This repo is part of Git Integration & Wix CLI, a set of tools that allows you to write, test, and publish code for your Wix site locally on your computer. 
+**Production website for [fosterrx.com](https://fosterrx.com)**  
+The decision intelligence layer for clinical trial execution.
 
-Connect your site to GitHub, develop in your favorite IDE, test your code in real time, and publish your site from the command line.
+---
 
-## Set up this repository in your IDE
-This repo is connected to a Wix site. That site tracks this repo's default branch. Any code committed and pushed to that branch from your local IDE appears on the site.
+## Overview
 
-Before getting started, make sure you have the following things installed:
-* [Git](https://git-scm.com/download)
-* [Node](https://nodejs.org/en/download/), version 14.8 or later.
-* [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or [yarn](https://yarnpkg.com/getting-started/install)
-* An SSH key [added to your GitHub account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account).
+This repository contains the complete source for the Foster Rx marketing and company website. It is a single-file static site deployed via GitHub Pages to a custom domain. There are no build tools, frameworks, or dependencies — the entire site ships as one self-contained HTML file.
 
-To set up your local environment and start coding locally, do the following:
+---
 
-1. Open your terminal and navigate to where you want to store the repo.
-1. Clone the repo by running `git clone <your-repository-url>`.
-1. Navigate to the repo's directory by running `cd <directory-name>`.
-1. Install the repo's dependencies by running `npm install` or `yarn install`.
-1. Install the Wix CLI by running `npm install -g @wix/cli` or `yarn global add @wix/cli`.  
-   Once you've installed the CLI globally, you can use it with any Wix site's repo.
+## Repository Structure
 
-For more information, see [Setting up Git Integration & Wix CLI](https://support.wix.com/en/article/velo-setting-up-git-integration-wix-cli-beta).
+```
+foster-rx-domain/
+├── index.html              ← Production site (deploy from repo root)
+├── og-image.html           ← Source file for generating the OG/social preview image
+├── README.md               ← This file
+└── assets/
+    ├── logo.png            ← Foster Rx brand logo (nav + footer)
+    ├── gabrielle-foster.jpg← Founder photo (team section)
+    ├── team-logos.png      ← Composite affiliation strip (MIT, Hopkins, Takeda, etc.)
+    └── og-image.png        ← Social preview image for LinkedIn/Slack/iMessage (1200×630px)
+```
 
-## Write Velo code in your IDE
-Once your repo is set up, you can write code in it as you would in any other non-Wix project. The repo's file structure matches the [public](https://support.wix.com/en/article/velo-working-with-the-velo-sidebar#public), [backend](https://support.wix.com/en/article/velo-working-with-the-velo-sidebar#backend), and [page code](https://support.wix.com/en/article/velo-working-with-the-velo-sidebar#page-code) sections in Editor X.
+> **Note:** `og-image.png` must be generated manually from `og-image.html`. See [Generating the OG Image](#generating-the-og-image) below.
 
-Learn more about [this repo's file structure](https://support.wix.com/en/article/velo-understanding-your-sites-github-repository-beta).
+---
 
-## Test your code with the Local Editor
-The Local Editor allows you test changes made to your site in real time. The code in your local IDE is synced with the Local Editor, so you can test your changes before committing them to your repo. You can also change the site design in the Local Editor and sync it with your IDE.
+## Deployment
 
-Start the Local Editor by navigating to this repo's directory in your terminal and running `wix dev`.
+This site is deployed via **GitHub Pages** from the `main` branch root.
 
-For more information, see [Working with the Local Editor](https://support.wix.com/en/article/velo-working-with-the-local-editor-beta).
+### GitHub Pages Configuration
 
-## Preview and publish with the Wix CLI
-The Wix CLI is a tool that allows you to work with your site locally from your computer's terminal. You can use it to build a preview version of your site and publish it. You can also use the CLI to install [approved npm packages](https://support.wix.com/en/article/velo-working-with-npm-packages) to your site.
+1. Go to **Settings → Pages** in this repository
+2. Source: **Deploy from a branch**
+3. Branch: `main` / `/ (root)`
+4. Custom domain: `fosterrx.com`
+5. Enforce HTTPS: ✅ (enabled after DNS propagates)
 
-Learn more about [working with the Wix CLI](https://support.wix.com/en/article/velo-working-with-the-wix-cli-beta).
+### DNS Records (at your domain registrar)
 
-## Invite contributors to work with you
-Git Integration & Wix CLI extends Editor X's [concurrent editing](https://support.wix.com/en/article/editor-x-about-concurrent-editing) capabilities. Invite other developers as collaborators on your [site](https://support.wix.com/en/article/inviting-people-to-contribute-to-your-site) and your [GitHub repo](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository). Multiple developers can work on a site's code at once.
+| Type  | Name | Value                   |
+|-------|------|-------------------------|
+| A     | @    | `185.199.108.153`       |
+| A     | @    | `185.199.109.153`       |
+| A     | @    | `185.199.110.153`       |
+| A     | @    | `185.199.111.153`       |
+| CNAME | www  | `gfoster12.github.io`   |
+
+DNS propagation typically takes 15–60 minutes. SSL certificate provisioning by GitHub takes an additional 30–60 minutes after DNS resolves.
+
+### Deployment Checklist
+
+- [ ] `index.html` is in the root of `main`
+- [ ] GitHub Pages is enabled (Settings → Pages)
+- [ ] DNS A records and CNAME are set at the registrar
+- [ ] Custom domain `fosterrx.com` is set in GitHub Pages settings
+- [ ] HTTPS enforcement is enabled
+- [ ] `assets/` folder contains all required files (see structure above)
+
+---
+
+## Site Architecture
+
+The site is a **single-file static HTML** application. All CSS and JavaScript are inlined in `index.html`. There is no build step, no bundler, no server-side code.
+
+### Fonts
+
+Loaded from Google Fonts at runtime:
+- **Cormorant Garamond** — headings and serif display text
+- **DM Mono** — labels, badges, monospaced UI elements
+- **DM Sans** — body copy
+
+### Sections (in order)
+
+| ID           | Description                                             |
+|--------------|---------------------------------------------------------|
+| `#hero`      | Full-viewport headline with CTA buttons                 |
+| `#problem`   | Stat cards (28% / 90% / $2.1M) + root cause analysis   |
+| `#solution`  | Four feature cards explaining the platform              |
+| `#offerings` | Three offering cards (Core Platform / Data / Discovery) |
+| `#traction`  | Patent, KOL count, orphan assets chips                  |
+| `#team`      | Founder card with photo, bio, affil logos, badges       |
+| `#cta`       | Full-width call to action                               |
+| `footer`     | 4-column grid: brand, platform, company, contact        |
+
+### Email Obfuscation
+
+All `mailto:` links are assembled at runtime via JavaScript to avoid exposure to static scrapers and Cloudflare proxy obfuscation. Do not hardcode email addresses directly in HTML attributes.
+
+```javascript
+var u = 'info', d = 'fosterrx', t = 'com';
+var email = u + '@' + d + '.' + t;
+```
+
+---
+
+## Key Assets
+
+### `assets/logo.png`
+Brand logo — used in the nav bar and footer. Should be a transparent PNG, ideally 2× resolution (e.g. 200×200px or wider if horizontal). Displays at 36px height in nav, 30px in footer.
+
+### `assets/gabrielle-foster.jpg`
+Founder portrait. Displays at 120×120px circular crop. If this file is missing or fails to load, the site falls back to a "GF" monogram placeholder automatically.
+
+### `assets/team-logos.png`
+Composite strip of all affiliation logos: MIT, Johns Hopkins, Takeda, Bill & Melinda Gates Foundation, Harvard, Maveric. Rendered with `mix-blend-mode: screen` so logos blend naturally against the dark card background.
+
+### `assets/og-image.png`
+Social preview image used by LinkedIn, Slack, iMessage, WhatsApp, and Twitter/X when `fosterrx.com` is shared as a link. Must be exactly **1200×630px**.
+
+---
+
+## Generating the OG Image
+
+`og-image.html` is a standalone 1200×630px HTML file that renders the social preview card in the same design system as the main site.
+
+**To export as PNG:**
+1. Open `og-image.html` in Chrome
+2. Set browser zoom to **100%** (critical for correct dimensions)
+3. Open DevTools → `Cmd+Shift+P` → type **"Capture full size screenshot"**
+4. Save as `og-image.png`
+5. Move to `assets/og-image.png` in this repo
+
+---
+
+## SEO & Meta Tags
+
+`index.html` includes a full meta tag block in `<head>`:
+
+- `<title>` — browser tab and Google search result title
+- `<meta name="description">` — Google search snippet
+- `<meta name="keywords">` — secondary keyword signal
+- **OpenGraph** (`og:*`) — controls LinkedIn, Slack, iMessage link previews
+- **Twitter Card** (`twitter:*`) — controls X link previews
+- `<link rel="canonical">` — prevents duplicate indexing
+
+**Do not change the `og:image` path** without also updating the file at `assets/og-image.png`.
+
+---
+
+## Analytics
+
+Google Analytics 4 (GA4) can be added by inserting the following snippet into `<head>` in `index.html`, replacing `G-XXXXXXXXXX` with the actual Measurement ID:
+
+```html
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+```
+
+The Measurement ID is found in Google Analytics → Admin → Data Streams → Web → your stream.
+
+---
+
+## Key Links
+
+| Resource                | URL                                                                                                           |
+|-------------------------|---------------------------------------------------------------------------------------------------------------|
+| Live site               | [fosterrx.com](https://fosterrx.com)                                                                         |
+| Book a meeting          | [Outlook Bookings](https://outlook.office.com/bookwithme/user/fd4f04c623d94128b78993cd23fbead9@fosterrx.com/meetingtype/_0FJELVYr0OZK8BTji-Kzg2?anonymous&ismsaljsauthenabled&ep=mlink) |
+| Company LinkedIn        | [linkedin.com/company/foster-rx-llc](https://linkedin.com/company/foster-rx-llc/)                           |
+| Instagram               | [@foster.rx](https://www.instagram.com/foster.rx)                                                            |
+| Patent                  | No. 19/459,855 (pending)                                                                                      |
+| Contact                 | info@fosterrx.com                                                                                             |
+
+---
+
+## Contributing / Editing
+
+This is a single-person repository. All edits go directly to `main` and deploy immediately via GitHub Pages.
+
+**When editing `index.html`:**
+- Test locally by opening in a browser before pushing
+- All CSS is in the `<style>` block in `<head>` — color tokens are in `:root`
+- All JavaScript is in `<script>` blocks at the bottom of `<body>`
+- Do not introduce external JS dependencies without reviewing load-order implications
+- Preserve the email obfuscation pattern — do not hardcode `info@fosterrx.com` in HTML
+
+**Color tokens (CSS variables):**
+
+```css
+--ink:     #0e1c18   /* page background */
+--deep:    #132119   /* section background */
+--surface: #1a2e2a   /* card background */
+--teal:    #4a8a7d   /* primary accent */
+--teal-lt: #6aaa9d   /* lighter accent, hover states */
+--cream:   #f0ebe0   /* primary text */
+--sand:    #d8d1c2   /* secondary text */
+```
+
+---
+
+## License
+
+Proprietary. All rights reserved. © Foster Rx LLC.  
+Patent Pending · No. 19/459,855
