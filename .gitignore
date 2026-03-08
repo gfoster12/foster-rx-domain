@@ -1,6 +1,33 @@
-# dependencies
-node_modules/
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Editor
 .vscode/
 .idea/
-.wix/
-jsconfig.json
+*.sublime-workspace
+*.sublime-project
+
+# Temp & backup
+*.bak
+*.tmp
+*.orig
+*~
+
+# Logs
+*.log
+
+# Node (no build step, but just in case)
+node_modules/
+npm-debug.log
+
+# Build outputs
+_site/
+dist/
+.jekyll-cache/
