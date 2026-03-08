@@ -1,7 +1,8 @@
-# foster-rx-domain
+# Foster-Rx-domain
+<img src="https://fosterrx.com/assets/logo.png" alt="Foster Rx" width="80" />
 
-**Production website for [fosterrx.com](https://fosterrx.com)**  
-The decision intelligence layer for clinical trial execution.
+Production website for fosterrx.com  
+**The decision intelligence layer for clinical trial execution.**
 
 ---
 
@@ -18,6 +19,7 @@ foster-rx-domain/
 ├── index.html              ← Production site (deploy from repo root)
 ├── og-image.html           ← Source file for generating the OG/social preview image
 ├── README.md               ← This file
+├── LICENSE                 ← Proprietary license
 └── assets/
     ├── logo.png            ← Foster Rx brand logo (nav + footer)
     ├── gabrielle-foster.jpg← Founder photo (team section)
@@ -25,13 +27,13 @@ foster-rx-domain/
     └── og-image.png        ← Social preview image for LinkedIn/Slack/iMessage (1200×630px)
 ```
 
-> **Note:** `og-image.png` must be generated manually from `og-image.html`. See [Generating the OG Image](#generating-the-og-image) below.
+> Note: `og-image.png` must be generated manually from `og-image.html`. See [Generating the OG Image](#generating-the-og-image) below.
 
 ---
 
 ## Deployment
 
-This site is deployed via **GitHub Pages** from the `main` branch root.
+This site is deployed via GitHub Pages from the `main` branch root.
 
 ### GitHub Pages Configuration
 
@@ -41,17 +43,9 @@ This site is deployed via **GitHub Pages** from the `main` branch root.
 4. Custom domain: `fosterrx.com`
 5. Enforce HTTPS: ✅ (enabled after DNS propagates)
 
-### DNS Records (at your domain registrar)
+### DNS Configuration
 
-| Type  | Name | Value                   |
-|-------|------|-------------------------|
-| A     | @    | `185.199.108.153`       |
-| A     | @    | `185.199.109.153`       |
-| A     | @    | `185.199.110.153`       |
-| A     | @    | `185.199.111.153`       |
-| CNAME | www  | `gfoster12.github.io`   |
-
-DNS propagation typically takes 15–60 minutes. SSL certificate provisioning by GitHub takes an additional 30–60 minutes after DNS resolves.
+DNS A records and CNAME are configured at the domain registrar pointing to GitHub Pages. Refer to [GitHub's official Pages documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site) for current IP values and setup instructions.
 
 ### Deployment Checklist
 
@@ -66,33 +60,36 @@ DNS propagation typically takes 15–60 minutes. SSL certificate provisioning by
 
 ## Site Architecture
 
-The site is a **single-file static HTML** application. All CSS and JavaScript are inlined in `index.html`. There is no build step, no bundler, no server-side code.
+The site is a single-file static HTML application. All CSS and JavaScript are inlined in `index.html`. There is no build step, no bundler, no server-side code.
 
 ### Fonts
 
 Loaded from Google Fonts at runtime:
+
 - **Cormorant Garamond** — headings and serif display text
 - **DM Mono** — labels, badges, monospaced UI elements
 - **DM Sans** — body copy
 
 ### Sections (in order)
 
-| ID           | Description                                             |
-|--------------|---------------------------------------------------------|
-| `#hero`      | Full-viewport headline with CTA buttons                 |
-| `#problem`   | Stat cards (28% / 90% / $2.1M) + root cause analysis   |
-| `#solution`  | Four feature cards explaining the platform              |
+| ID | Description |
+|----|-------------|
+| `#hero` | Full-viewport headline with CTA buttons |
+| `#problem` | Stat cards (28% / 90% / $2.1M) + root cause analysis |
+| `#solution` | Four feature cards explaining the platform |
 | `#offerings` | Three offering cards (Core Platform / Data / Discovery) |
-| `#traction`  | Patent, KOL count, orphan assets chips                  |
-| `#team`      | Founder card with photo, bio, affil logos, badges       |
-| `#cta`       | Full-width call to action                               |
-| `footer`     | 4-column grid: brand, platform, company, contact        |
+| `#traction` | Patent, KOL count, orphan assets chips |
+| `#team` | Founder card with photo, bio, affil logos, badges |
+| `#cta` | Full-width call to action |
+| `footer` | 4-column grid: brand, platform, company, contact |
 
-### Email Obfuscation
+---
 
-All `mailto:` links are assembled at runtime via JavaScript to avoid exposure to static scrapers and Cloudflare proxy obfuscation. Do not hardcode email addresses directly in HTML attributes.
+## Email Obfuscation
 
-```javascript
+All `mailto:` links are assembled at runtime via JavaScript to avoid exposure to static scrapers. Do not hardcode email addresses directly in HTML attributes.
+
+```js
 var u = 'info', d = 'fosterrx', t = 'com';
 var email = u + '@' + d + '.' + t;
 ```
@@ -101,25 +98,26 @@ var email = u + '@' + d + '.' + t;
 
 ## Key Assets
 
-### `assets/logo.png`
-Brand logo — used in the nav bar and footer. Should be a transparent PNG, ideally 2× resolution (e.g. 200×200px or wider if horizontal). Displays at 36px height in nav, 30px in footer.
+**`assets/logo.png`**  
+Brand logo — used in the nav bar and footer. Should be a transparent PNG, ideally 2× resolution. Displays at 36px height in nav, 30px in footer.
 
-### `assets/gabrielle-foster.jpg`
-Founder portrait. Displays at 120×120px circular crop. If this file is missing or fails to load, the site falls back to a "GF" monogram placeholder automatically.
+**`assets/gabrielle-foster.jpg`**  
+Founder portrait. Displays at 120×120px circular crop. Falls back to a "GF" monogram placeholder if missing.
 
-### `assets/team-logos.png`
-Composite strip of all affiliation logos: MIT, Johns Hopkins, Takeda, Bill & Melinda Gates Foundation, Harvard, Maveric. Rendered with `mix-blend-mode: screen` so logos blend naturally against the dark card background.
+**`assets/team-logos.png`**  
+Composite strip of affiliation logos. Rendered with `mix-blend-mode: screen` against the dark card background.
 
-### `assets/og-image.png`
-Social preview image used by LinkedIn, Slack, iMessage, WhatsApp, and Twitter/X when `fosterrx.com` is shared as a link. Must be exactly **1200×630px**.
+**`assets/og-image.png`**  
+Social preview image for LinkedIn, Slack, iMessage, WhatsApp, and X. Must be exactly 1200×630px.
 
 ---
 
 ## Generating the OG Image
 
-`og-image.html` is a standalone 1200×630px HTML file that renders the social preview card in the same design system as the main site.
+`og-image.html` is a standalone 1200×630px HTML file that renders the social preview card.
 
-**To export as PNG:**
+To export as PNG:
+
 1. Open `og-image.html` in Chrome
 2. Set browser zoom to **100%** (critical for correct dimensions)
 3. Open DevTools → `Cmd+Shift+P` → type **"Capture full size screenshot"**
@@ -132,14 +130,14 @@ Social preview image used by LinkedIn, Slack, iMessage, WhatsApp, and Twitter/X 
 
 `index.html` includes a full meta tag block in `<head>`:
 
-- `<title>` — browser tab and Google search result title
-- `<meta name="description">` — Google search snippet
+- `<title>` — browser tab and search result title
+- `<meta name="description">` — search snippet
 - `<meta name="keywords">` — secondary keyword signal
-- **OpenGraph** (`og:*`) — controls LinkedIn, Slack, iMessage link previews
-- **Twitter Card** (`twitter:*`) — controls X link previews
+- OpenGraph (`og:*`) — LinkedIn, Slack, iMessage previews
+- Twitter Card (`twitter:*`) — X link previews
 - `<link rel="canonical">` — prevents duplicate indexing
 
-**Do not change the `og:image` path** without also updating the file at `assets/og-image.png`.
+> Do not change the `og:image` path without also updating `assets/og-image.png`.
 
 ---
 
@@ -158,20 +156,19 @@ Google Analytics 4 (GA4) can be added by inserting the following snippet into `<
 </script>
 ```
 
-The Measurement ID is found in Google Analytics → Admin → Data Streams → Web → your stream.
+The Measurement ID is found in **Google Analytics → Admin → Data Streams → Web → your stream**.
 
 ---
 
 ## Key Links
 
-| Resource                | URL                                                                                                           |
-|-------------------------|---------------------------------------------------------------------------------------------------------------|
-| Live site               | [fosterrx.com](https://fosterrx.com)                                                                         |
-| Book a meeting          | [Outlook Bookings](https://outlook.office.com/bookwithme/user/fd4f04c623d94128b78993cd23fbead9@fosterrx.com/meetingtype/_0FJELVYr0OZK8BTji-Kzg2?anonymous&ismsaljsauthenabled&ep=mlink) |
-| Company LinkedIn        | [linkedin.com/company/foster-rx-llc](https://linkedin.com/company/foster-rx-llc/)                           |
-| Instagram               | [@foster.rx](https://www.instagram.com/foster.rx)                                                            |
-| Patent                  | No. 19/459,855 (pending)                                                                                      |
-| Contact                 | info@fosterrx.com                                                                                             |
+| Resource | URL |
+|----------|-----|
+| Live site | [fosterrx.com](https://fosterrx.com) |
+| Book a meeting | [Outlook Bookings](https://outlook.office.com/bookwithme/user/fd4f04c623d94128b78993cd23fbead9@fosterrx.com/meetingtype/_0FJELVYr0OZK8BTji-Kzg2) |
+| Company LinkedIn | [linkedin.com/company/foster-rx-llc](https://linkedin.com/company/foster-rx-llc) |
+| Patent | No. 19/459,855 (pending) |
+| Contact | info@fosterrx.com |
 
 ---
 
@@ -179,14 +176,15 @@ The Measurement ID is found in Google Analytics → Admin → Data Streams → W
 
 This is a single-person repository. All edits go directly to `main` and deploy immediately via GitHub Pages.
 
-**When editing `index.html`:**
+When editing `index.html`:
+
 - Test locally by opening in a browser before pushing
 - All CSS is in the `<style>` block in `<head>` — color tokens are in `:root`
 - All JavaScript is in `<script>` blocks at the bottom of `<body>`
 - Do not introduce external JS dependencies without reviewing load-order implications
 - Preserve the email obfuscation pattern — do not hardcode `info@fosterrx.com` in HTML
 
-**Color tokens (CSS variables):**
+### Color Tokens (CSS variables)
 
 ```css
 --ink:     #0e1c18   /* page background */
@@ -203,4 +201,3 @@ This is a single-person repository. All edits go directly to `main` and deploy i
 ## License
 
 Proprietary. All rights reserved. © Foster Rx LLC.  
-Patent Pending · No. 19/459,855
