@@ -955,46 +955,6 @@
     .proof-item:last-child { border-bottom: none; }
   }
 
-  /* ─── MODALS ─────────────────────────────────────────────── */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.75);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-  }
-  .modal-overlay.active { display: flex; }
-  .modal-container {
-    background: #1a2e2a;
-    border: 1px solid #3a5550;
-    border-radius: 12px;
-    padding: 24px;
-    position: relative;
-    width: 600px;
-    max-width: 95vw;
-  }
-  .modal-close {
-    position: absolute;
-    top: 12px;
-    right: 16px;
-    background: none;
-    border: none;
-    color: #6aaa9d;
-    font-size: 1.5rem;
-    cursor: pointer;
-    line-height: 1;
-    padding: 0;
-  }
-  .modal-container iframe {
-    width: 100%;
-    border: none;
-    display: block;
-  }
-  @media (max-width: 600px) {
-    .modal-container { width: 95vw; }
-  }
 </style>
 </head>
 <body>
@@ -1010,7 +970,7 @@
     <li><a href="#offerings">Offerings</a></li>
     <li><a href="#team">Team</a></li>
   </ul>
-  <a href="https://outlook.office.com/bookwithme/user/fd4f04c623d94128b78993cd23fbead9@fosterrx.com/meetingtype/_0FJELVYr0OZK8BTji-Kzg2?anonymous&ismsaljsauthenabled&ep=mlink" class="nav-cta" target="_blank">Book a Conversation</a>
+  <a href="https://calendar.app.google/Vr94RLo5LkZ8wyNX8" class="nav-cta" target="_blank">Book a Conversation</a>
 </nav>
 
 <!-- ══════════════════════════════════════════════════════════ HERO -->
@@ -1026,7 +986,7 @@
       Certified, audit-trailed recommendations for clinical development teams making go/no-go calls.<br>We foster innovation from concept through commercialization.
     </p>
     <div class="hero-actions">
-      <a href="https://outlook.office.com/bookwithme/user/fd4f04c623d94128b78993cd23fbead9@fosterrx.com/meetingtype/_0FJELVYr0OZK8BTji-Kzg2?anonymous&ismsaljsauthenabled&ep=mlink" class="btn-primary" target="_blank">Book a Conversation</a>
+      <a href="https://calendar.app.google/Vr94RLo5LkZ8wyNX8" class="btn-primary" target="_blank">Book a Conversation</a>
       <a href="#solution" class="btn-secondary">How It Works</a>
     </div>
     </div>
@@ -1236,7 +1196,7 @@
     <h2 class="section-title reveal" style="margin: 0 auto 1.5rem;">Built for the scientists and teams<br><em>who refuse to guess.</em></h2>
     <p class="section-body reveal" style="text-align: center; margin: 0 auto 2.5rem;">Whether you're a pharma team navigating go/no-go, a biotech preparing for a board, a CRO building for sponsors, or an academic researcher bridging the bench-to-trial gap — if your decisions need to be defensible, Foster Rx was built for you.</p>
     <div class="cta-actions reveal">
-      <a href="https://outlook.office.com/bookwithme/user/fd4f04c623d94128b78993cd23fbead9@fosterrx.com/meetingtype/_0FJELVYr0OZK8BTji-Kzg2?anonymous&ismsaljsauthenabled&ep=mlink" class="btn-primary" target="_blank">Book a Conversation</a>
+      <a href="https://calendar.app.google/Vr94RLo5LkZ8wyNX8" class="btn-primary" target="_blank">Book a Conversation</a>
     </div>
     
   </div>
@@ -1288,7 +1248,7 @@
       <div class="footer-col-title">Contact</div>
       <ul class="footer-links">
         <li><span id="footer-subscribe"></span></li>
-        <li><a href="https://outlook.office.com/bookwithme/user/fd4f04c623d94128b78993cd23fbead9@fosterrx.com/meetingtype/_0FJELVYr0OZK8BTji-Kzg2?anonymous&ismsaljsauthenabled&ep=mlink" target="_blank">Book a Conversation</a></li>
+        <li><a href="https://calendar.app.google/Vr94RLo5LkZ8wyNX8" target="_blank">Book a Conversation</a></li>
         <li><span id="footer-partnership"></span></li>
       </ul>
     </div>
@@ -1322,21 +1282,19 @@
         span.parentNode.replaceChild(a, span);
       }
     });
-    // Footer links — open modals
+    // Footer links — direct external links
     var flinks = [
-      ['footer-subscribe', 'modal-subscribe', 'Subscribe to Updates'],
-      ['footer-partnership', 'modal-partnership', 'Partnership Inquiry'],
+      ['footer-subscribe', 'https://forms.gle/cCxFNMvjkqar2nWG7', 'Subscribe to Updates'],
+      ['footer-partnership', 'https://forms.gle/6dCvKZht8ZQaLLca9', 'Partnership Inquiry'],
     ];
     flinks.forEach(function(f) {
       var span = document.getElementById(f[0]);
       if (span) {
         var a = document.createElement('a');
-        a.href = '#';
+        a.href = f[1];
         a.textContent = f[2];
-        a.addEventListener('click', function(e) {
-          e.preventDefault();
-          window.openModal(f[1]);
-        });
+        a.target = '_blank';
+        a.rel = 'noopener';
         span.parentNode.replaceChild(a, span);
       }
     });
@@ -1373,40 +1331,5 @@
   }
 </script>
 
-<!-- ══════════════════════════════════════════════════════════ MODALS -->
-<div id="modal-subscribe" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Subscribe to Updates">
-  <div class="modal-container">
-    <button class="modal-close" aria-label="Close">&times;</button>
-    <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=LLnvmsQnHU-ZR6YcxOzL3c9XmVrVLrRAk_Q49uBPiH1UNUczTTBGWElOTDFDTUFJVVVPWVlSRzBRVi4u&amp;embed=true" width="640px" height="480px" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen title="Subscribe to Updates"></iframe>
-  </div>
-</div>
-
-<div id="modal-partnership" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Partnership Inquiry">
-  <div class="modal-container">
-    <button class="modal-close" aria-label="Close">&times;</button>
-    <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=LLnvmsQnHU-ZR6YcxOzL3c9XmVrVLrRAk_Q49uBPiH1URUpFOVFaMTJRUEg1UzU3Nk82VElaODZZUi4u&amp;embed=true" width="640px" height="480px" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen title="Partnership Inquiry"></iframe>
-  </div>
-</div>
-
-<script>
-  // ─── Modal open/close behavior ─────────────────────────────
-  (function() {
-    function openModal(id) {
-      var modal = document.getElementById(id);
-      if (modal) modal.classList.add('active');
-    }
-    function closeModal(modal) {
-      modal.classList.remove('active');
-    }
-    document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
-      overlay.addEventListener('click', function(e) {
-        if (e.target === overlay) closeModal(overlay);
-      });
-      var btn = overlay.querySelector('.modal-close');
-      if (btn) btn.addEventListener('click', function() { closeModal(overlay); });
-    });
-    window.openModal = openModal;
-  })();
-</script>
 </body>
 </html>
