@@ -1,0 +1,29 @@
+{
+  "hosting": {
+    "site": "fosterrx-prod",
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      ".firebaserc",
+      ".firebase/**",
+      "**/.*",
+      "**/node_modules/**",
+      "og-image.html",
+      "README.md",
+      "LICENSE",
+      ".github/**"
+    ],
+    "headers": [
+      {
+        "source": "/.well-known/**",
+        "headers": [
+          {"key": "Content-Type", "value": "application/x-pem-file"},
+          {"key": "Cache-Control", "value": "public, max-age=3600"},
+          {"key": "Access-Control-Allow-Origin", "value": "*"}
+        ]
+      }
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false
+  }
+}
