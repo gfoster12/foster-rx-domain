@@ -8,7 +8,40 @@ Production website for fosterrx.com
 
 ## Overview
 
-This repository contains the complete source for the Foster Rx marketing and company website. It is a single-file static site deployed via GitHub Pages to a custom domain. There are no build tools, frameworks, or dependencies — the entire site ships as one self-contained HTML file.
+This repository contains the complete source for the Foster Rx marketing and company website. It is a single-file static site deployed via Firebase Hosting to a custom domain. There are no build tools, frameworks, or dependencies — the entire site ships as one self-contained HTML file.
+
+---
+
+## Deployment
+
+This site auto-deploys to Firebase Hosting (`fosterrx-prod` project)
+on push to `main` via the GitHub Action in
+`.github/workflows/firebase-deploy.yml`.
+
+The custom domain `fosterrx.com` is bound to the Firebase site in the
+Firebase console; DNS records (A/AAAA) point at Firebase Hosting IPs.
+
+### Manual deployment
+
+If the GitHub Action fails or you need to deploy locally:
+
+```bash
+firebase deploy --only hosting --project fosterrx-prod
+```
+
+This requires the Firebase CLI installed and authenticated against
+the `fosterrx-prod` project.
+
+### `.well-known/` assets
+
+`.well-known/angis-signing-key-v1.pub` and
+`.well-known/angis-signing-key-v1.fingerprint` are the published
+ANGIS ed25519 public key and its SHA-256 fingerprint. Firebase
+Hosting is configured (`firebase.json` → `headers`) to serve these
+with `Content-Type: application/x-pem-file`,
+`Cache-Control: public, max-age=3600`, and
+`Access-Control-Allow-Origin: *` so any client can fetch and verify
+ANGIS intelligence report certificates.
 
 ---
 
@@ -18,8 +51,16 @@ This repository contains the complete source for the Foster Rx marketing and com
 foster-rx-domain/
 ├── index.html              ← Production site (deploy from repo root)
 ├── og-image.html           ← Source file for generating the OG/social preview image
+├── firebase.json           ← Firebase Hosting config (site, ignore rules, headers)
+├── .firebaserc             ← Firebase project binding (fosterrx-prod)
 ├── README.md               ← This file
 ├── LICENSE                 ← Proprietary license
+├── .github/
+│   └── workflows/
+│       └── firebase-deploy.yml  ← Auto-deploy on push to main (WIF-based)
+├── .well-known/
+│   ├── angis-signing-key-v1.pub          ← ANGIS ed25519 public key (PEM)
+│   └── angis-signing-key-v1.fingerprint  ← SHA-256 of the DER pubkey
 └── assets/
     ├── logo.png            ← Foster Rx brand logo (nav + footer)
     ├── gabrielle-foster.jpg← Founder photo (team section)
@@ -28,33 +69,6 @@ foster-rx-domain/
 ```
 
 > Note: `og-image.png` must be generated manually from `og-image.html`. See [Generating the OG Image](#generating-the-og-image) below.
-
----
-
-## Deployment
-
-This site is deployed via GitHub Pages from the `main` branch root.
-
-### GitHub Pages Configuration
-
-1. Go to **Settings → Pages** in this repository
-2. Source: **Deploy from a branch**
-3. Branch: `main` / `/ (root)`
-4. Custom domain: `fosterrx.com`
-5. Enforce HTTPS: ✅ (enabled after DNS propagates)
-
-### DNS Configuration
-
-DNS A records and CNAME are configured at the domain registrar pointing to GitHub Pages. Refer to [GitHub's official Pages documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site) for current IP values and setup instructions.
-
-### Deployment Checklist
-
-- [ ] `index.html` is in the root of `main`
-- [ ] GitHub Pages is enabled (Settings → Pages)
-- [ ] DNS A records and CNAME are set at the registrar
-- [ ] Custom domain `fosterrx.com` is set in GitHub Pages settings
-- [ ] HTTPS enforcement is enabled
-- [ ] `assets/` folder contains all required files (see structure above)
 
 ---
 
