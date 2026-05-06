@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script defer src="https://unpkg.com/ngl@2.3.1/dist/ngl.js" onerror="window.__nglError=true"></script>
 <style>
 :root {
   --c-teal:        #4A7C7E;
@@ -21,8 +22,13 @@
   --c-ink-soft:    #4A5A5C;
   --c-ink-mute:    #7A8A8C;
   --c-rule:        #D9E2DC;
+  --c-rule-soft:   #E5ECE7;
+  --c-sand:        #F8F4EA;
+  --c-sand-rule:   #E1D9BD;
+  --c-warn-ink:    #8C7A2E;
   --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --font-sans:  'DM Sans', Calibri, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:  'SF Mono', Menlo, Consolas, monospace;
   --r-md: 6px;
   --r-sm: 4px;
 }
@@ -90,12 +96,6 @@ section {
   padding: 28px 32px;
   margin-bottom: 22px;
 }
-section.plain {
-  background: transparent;
-  border: none;
-  padding: 8px 0 0;
-  margin-bottom: 22px;
-}
 .section-h {
   display: flex;
   align-items: baseline;
@@ -113,6 +113,12 @@ section.plain {
   text-transform: uppercase;
 }
 .section-h h2 { font-size: 22px; }
+.section-h .aside {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--c-ink-mute);
+}
 
 /* SECTION 2 — Target identity card */
 .id-card {
@@ -199,35 +205,24 @@ section.plain {
   margin-top: 6px;
 }
 
-/* SECTION 4, 5, 6, 7, 8 — body content */
+/* body text */
 p { margin: 0 0 12px; }
 p:last-child { margin-bottom: 0; }
 .body-text { font-size: 15px; line-height: 1.6; color: var(--c-ink); }
-.body-text.serif { font-family: var(--font-serif); font-size: 16.5px; line-height: 1.6; }
 
-dl.kv {
-  display: grid;
-  grid-template-columns: minmax(180px, 28%) 1fr;
-  gap: 8px 18px;
-  margin: 0 0 14px;
-  font-size: 14px;
-}
-dl.kv dt { color: var(--c-ink-mute); font-weight: 500; }
-dl.kv dd { margin: 0; color: var(--c-ink); }
-
+/* TL;DR card (matches FCTDI dashboard) */
 .tldr {
-  margin-top: 14px;
-  padding: 12px 16px;
-  background: var(--c-sage-light);
+  background: var(--c-sage-pale);
   border-left: 3px solid var(--c-teal);
-  border-radius: 0 var(--r-sm) var(--r-sm) 0;
-  font-family: var(--font-serif);
-  font-size: 15.5px;
+  padding: 10px 14px;
+  margin: 0 0 14px;
+  font-size: 13.5px;
+  color: var(--c-ink-soft);
   font-style: italic;
-  color: var(--c-ink);
-  line-height: 1.55;
+  line-height: 1.5;
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
 }
-.tldr .tldr-lbl {
+.tldr .lbl {
   font-family: var(--font-sans);
   font-style: normal;
   font-size: 11px;
@@ -236,6 +231,142 @@ dl.kv dd { margin: 0; color: var(--c-ink); }
   text-transform: uppercase;
   color: var(--c-teal);
   margin-right: 10px;
+}
+.tldr strong { font-style: normal; color: var(--c-teal-dark); font-weight: 600; }
+
+/* kv-grid (matches FCTDI dashboard) */
+dl.kv-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 8px 18px;
+  font-size: 14px;
+  margin: 0 0 6px;
+}
+dl.kv-grid dt { color: var(--c-ink-mute); font-size: 12.5px; align-self: start; padding-top: 2px; }
+dl.kv-grid dd { color: var(--c-ink); margin: 0; }
+dl.kv-grid dd .nuance { color: var(--c-ink-mute); font-size: 12px; margin-left: 4px; }
+
+/* feas-pill (matches FCTDI dashboard) */
+.feas-pill {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 2px;
+  background: var(--c-sage-light);
+  border: 1px solid var(--c-sage);
+  color: var(--c-teal-dark);
+  letter-spacing: .03em;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+}
+.feas-pill.warn { background: var(--c-sand); border-color: var(--c-sand-rule); color: var(--c-warn-ink); }
+.feas-pill.muted { background: #F0F0EE; border-color: var(--c-rule); color: var(--c-ink-mute); }
+
+/* qa-flag (matches FCTDI dashboard) */
+.qa-flag-row {
+  font-size: 11.5px;
+  color: var(--c-ink-mute);
+  font-style: italic;
+  margin: 12px 0 0;
+  padding-top: 10px;
+  border-top: 1px dashed var(--c-rule-soft);
+}
+.qa-flag-row .qa-flag {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 1px 6px;
+  border-radius: 2px;
+  background: var(--c-sand);
+  border: 1px solid var(--c-sand-rule);
+  color: var(--c-warn-ink);
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: .02em;
+}
+
+/* confidence-pill (matches FCTDI dashboard) */
+.confidence-pill {
+  display: inline-block;
+  font-size: 11px;
+  padding: 2px 9px;
+  border-radius: 2px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  border: 1px solid transparent;
+  font-family: var(--font-sans);
+}
+.confidence-pill.c-high   { background: var(--c-teal); color: white; border-color: var(--c-teal-dark); }
+.confidence-pill.c-medium { background: var(--c-sage); color: var(--c-teal-deep); border-color: var(--c-teal); }
+.confidence-pill.c-low    { background: var(--c-sand); color: var(--c-warn-ink); border-color: var(--c-sand-rule); }
+
+/* sand-warning callout (matches FCTDI dashboard k-section empty state) */
+.sand-warn {
+  background: var(--c-sand);
+  border: 1px dashed var(--c-sand-rule);
+  border-radius: 2px;
+  padding: 10px 14px;
+  color: var(--c-warn-ink);
+  font-size: 13.5px;
+  font-style: italic;
+}
+
+/* SECTION 5 — 3D viewer (matches FCTDI dashboard) */
+.viewer-wrap {
+  background: var(--c-sage-pale);
+  border: 1px solid var(--c-rule);
+  border-radius: var(--r-md);
+  padding: 12px;
+}
+.viewer-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+  align-items: center;
+}
+.viewer-controls .v-btn {
+  background: var(--c-paper);
+  border: 1px solid var(--c-rule);
+  color: var(--c-ink-soft);
+  padding: 5px 12px;
+  font-size: 12px;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  text-decoration: none;
+}
+.viewer-controls .v-btn:hover { border-color: var(--c-teal); color: var(--c-teal-dark); }
+.viewer-controls .v-btn.active { background: var(--c-teal); color: white; border-color: var(--c-teal-dark); }
+.viewer-controls .v-btn:focus-visible { outline: 2px solid var(--c-teal); outline-offset: 2px; }
+.viewer-stage {
+  width: 100%;
+  height: 380px;
+  background: #FFF;
+  border: 1px solid var(--c-rule);
+  border-radius: 2px;
+  position: relative;
+}
+.viewer-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  color: var(--c-ink-soft);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.viewer-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-ink-mute);
+  font-size: 12px;
 }
 
 /* citations */
@@ -264,7 +395,7 @@ dl.kv dd { margin: 0; color: var(--c-ink); }
 }
 .cite-rel { font-size: 13.5px; color: var(--c-ink-soft); line-height: 1.5; }
 
-/* SECTION 9 — Regulatory precedent */
+/* SECTION 12 — Regulatory precedent */
 section.regulatory {
   background: linear-gradient(180deg, #FCFEFC 0%, var(--c-paper) 60%);
   border-top: 3px solid var(--c-teal-dark);
@@ -296,7 +427,7 @@ section.regulatory h4 {
 }
 section.regulatory p { font-size: 15px; line-height: 1.65; color: var(--c-ink); }
 
-/* SECTION 10 — Footer */
+/* Footer */
 footer.page-foot {
   margin-top: 48px;
   padding-top: 24px;
@@ -319,9 +450,11 @@ footer.page-foot .links a { margin-right: 18px; }
   .id-gene { font-size: 36px; }
   section, .id-card { padding: 22px 18px; }
   .metric-grid { grid-template-columns: repeat(2, 1fr); }
-  dl.kv { grid-template-columns: 1fr; gap: 2px 0; }
-  dl.kv dt { margin-top: 8px; }
-  dl.kv dt:first-child { margin-top: 0; }
+  dl.kv-grid { grid-template-columns: 1fr; gap: 2px 0; }
+  dl.kv-grid dt { margin-top: 8px; }
+  dl.kv-grid dt:first-child { margin-top: 0; }
+  .viewer-stage { height: 320px; }
+  .section-h .aside { display: none; }
 }
 </style>
 </head>
@@ -340,7 +473,7 @@ footer.page-foot .links a { margin-right: 18px; }
   <div class="id-gene">PRDX1</div>
   <div class="id-protein">Peroxiredoxin 1</div>
   <div class="id-meta">
-    <span class="lbl">UniProt</span>&nbsp;<span class="val">Q06830</span>
+    <span class="lbl">UniProt</span>&nbsp;<span class="val"><a href="https://www.uniprot.org/uniprotkb/Q06830" target="_blank" rel="noopener noreferrer">Q06830</a></span>
     &nbsp;&middot;&nbsp;
     <span class="lbl">Ensembl</span>&nbsp;<span class="val">ENSG00000117450</span>
     &nbsp;&middot;&nbsp;
@@ -415,60 +548,148 @@ footer.page-foot .links a { margin-right: 18px; }
   </p>
 </section>
 
-<!-- SECTION 5 — Knockout phenotype and safety signal -->
+<!-- SECTION 5 — 3D structure -->
 <section>
   <div class="section-h">
     <span class="section-num">05</span>
-    <h2>Knockout Phenotype &amp; Safety Signal</h2>
+    <h2>3D Structure</h2>
+    <span class="aside">PDB <span style="color:var(--c-teal-dark);font-weight:600">4XCS</span></span>
   </div>
 
-  <dl class="kv">
-    <dt>Mouse KO summary</dt>
-    <dd>Broad pleiotropic phenotype &mdash; 46 terms across 12 systems, including
-      hematopoietic, immune, homeostasis/metabolism, neoplasm, mortality/aging,
-      and skeleton phenotypes. Embryonic-lethality risk flagged.</dd>
-
-    <dt>gnomAD pLI</dt>
-    <dd>~1.0 &times; 10<sup>&minus;6</sup> &mdash; tolerant to loss-of-function</dd>
-
-    <dt>gnomAD o/e (LOEUF)</dt>
-    <dd>1.32 (19 observed LoF / 21.1 expected) &mdash; constraint decile 7</dd>
-
-    <dt>Brain expression (HPA)</dt>
-    <dd>Low cell-type specificity; detected in all brain cell types
-      (broadly expressed; brain avg TPM 6,893)</dd>
-
-    <dt>Subcellular</dt>
-    <dd>Cytoplasm, mitochondria, melanosome</dd>
-  </dl>
-
   <div class="tldr">
-    <span class="tldr-lbl">TL;DR</span>
-    Human population genetics indicate PRDX1 is LoF-tolerant, but mouse KO is
-    broadly pleiotropic with embryonic-lethality risk. Therapeutic strategy
-    should favor partial modulation over full ablation, and preclinical
-    characterization needs to address proliferation-relevant tissues given
-    PRDX1&rsquo;s documented non-redox roles.
+    <span class="lbl">TL;DR</span>
+    Human PRDX1 at 1.7&nbsp;&Aring; resolution in complex with a conoidin-class small-molecule
+    inhibitor &mdash; the only published PRDX1 structure with a bound small-molecule
+    ligand and the cleanest reference for binding-pocket geometry around the
+    catalytic Cys52. Cartoon representation by chain; ligand shown ball-and-stick.
+  </div>
+
+  <div class="viewer-wrap">
+    <div class="viewer-controls">
+      <button class="v-btn" type="button" data-vctl="spin" aria-pressed="false">Spin</button>
+      <button class="v-btn" type="button" data-vctl="surface" aria-pressed="false">Surface</button>
+      <button class="v-btn active" type="button" data-vctl="ligands" aria-pressed="true">Ligands</button>
+      <button class="v-btn" type="button" data-vctl="reset">Reset view</button>
+      <a class="v-btn" target="_blank" rel="noopener noreferrer" href="https://www.rcsb.org/structure/4XCS">RCSB&nbsp;4XCS</a>
+      <a class="v-btn" target="_blank" rel="noopener noreferrer" href="https://alphafold.ebi.ac.uk/entry/Q06830">AlphaFold</a>
+    </div>
+    <div class="viewer-stage" id="ngl-stage" role="region" aria-label="3D structure viewer for PRDX1 (PDB 4XCS)">
+      <div class="viewer-loading">Initializing&hellip;</div>
+    </div>
   </div>
 </section>
 
-<!-- SECTION 6 — In vivo model readiness -->
+<!-- SECTION 6 — Knockout phenotype & safety signal -->
 <section>
   <div class="section-h">
     <span class="section-num">06</span>
-    <h2>In Vivo Model Readiness</h2>
+    <h2>Knockout Phenotype &amp; Safety Signal</h2>
+    <span class="feas-pill" style="margin-left:auto" title="gnomAD pLI">pLI 0.000</span>
   </div>
 
-  <p class="body-text">
-    Established AD models with documented PRDX1 testing: <strong>none identified</strong>
-    in the curated public record. The most direct in&nbsp;vivo&ndash;adjacent work is the
-    Park et al. 2024 streptozotocin-induced AD-like hippocampal neuronal model,
-    which is a cell-based model of AD-like pathology rather than a cohort-tested
-    transgenic AD model.
-  </p>
+  <div class="tldr">
+    <span class="lbl">TL;DR</span>
+    Tolerant to LoF in humans (pLI &asymp; 0; 19 / 21.1 obs/exp) &mdash; partial
+    modulation likely well-tolerated; full inhibition could broadly perturb
+    function given pleiotropic KO. Mouse: broad pleiotropic KO phenotype
+    (46 terms across 12 systems); embryonic-lethality risk.
+  </div>
 
-  <p class="body-text">
-    Top-anchored mechanism citations supporting model-pathway selection:
+  <dl class="kv-grid">
+    <dt>gnomAD pLI</dt>
+    <dd>0.000 <span class="nuance">&mdash; tolerant to LoF</span></dd>
+
+    <dt>gnomAD LOEUF</dt>
+    <dd>1.32 <span class="nuance">&mdash; upper bound of o/e ratio (lower = more constrained)</span></dd>
+
+    <dt>Observed / expected LoF</dt>
+    <dd>19 / 21.1</dd>
+
+    <dt>Constraint decile</dt>
+    <dd>7 of 10 <span class="nuance">(1 = most constrained)</span></dd>
+
+    <dt>Mouse KO summary</dt>
+    <dd>broad pleiotropic KO phenotype (46 terms across 12 systems); embryonic-lethality risk</dd>
+
+    <dt>KO phenotype count</dt>
+    <dd>46 terms (IMPC / MGI)</dd>
+
+    <dt>Affected systems</dt>
+    <dd>cellular, endocrine/exocrine gland, growth/size/body region, hematopoietic, homeostasis/metabolism, immune, integument, liver/biliary, mortality/aging, neoplasm, respiratory, skeleton</dd>
+  </dl>
+
+  <div class="qa-flag-row">
+    <span class="qa-flag">lof_tolerant</span>
+    <span class="qa-flag">broad_pleiotropic_ko</span>
+    <span class="qa-flag">embryonic_lethality_risk</span>
+  </div>
+</section>
+
+<!-- SECTION 7 — Expression & cell-type specificity -->
+<section>
+  <div class="section-h">
+    <span class="section-num">07</span>
+    <h2>Expression &amp; Cell-Type Specificity</h2>
+    <span class="feas-pill" style="margin-left:auto">Low cell type specificity</span>
+  </div>
+
+  <div class="tldr">
+    <span class="lbl">TL;DR</span>
+    Broadly expressed across tissues with low brain cell-type specificity;
+    subcellular cytoplasm / melanosome / mitochondria. Avg brain ~6,893&nbsp;TPM
+    (rank 21 of 33 across organ groups) &mdash; abundant but unselective expression
+    profile, with implications for CNS delivery selectivity.
+  </div>
+
+  <dl class="kv-grid">
+    <dt>HPA tissue specificity</dt>
+    <dd>Low tissue specificity</dd>
+
+    <dt>HPA brain cell-type specificity</dt>
+    <dd>Low cell type specificity</dd>
+
+    <dt>HPA brain distribution</dt>
+    <dd>Detected in all</dd>
+
+    <dt>Brain avg expression</dt>
+    <dd>6,892.8 TPM <span class="nuance">(rank 21 of 33)</span></dd>
+
+    <dt>Brain cell-type-specific nCPM</dt>
+    <dd><span class="nuance">&mdash; (no predominant cell-type signal)</span></dd>
+
+    <dt>Subcellular locations</dt>
+    <dd>Cytoplasm, Melanosome, Mitochondria</dd>
+  </dl>
+
+  <div class="qa-flag-row">
+    <span class="qa-flag">broadly_expressed</span>
+  </div>
+</section>
+
+<!-- SECTION 8 — In vivo model readiness -->
+<section>
+  <div class="section-h">
+    <span class="section-num">08</span>
+    <h2>In Vivo Model Readiness</h2>
+    <span class="feas-pill warn" style="margin-left:auto">0 results</span>
+  </div>
+
+  <div class="tldr">
+    <span class="lbl">TL;DR</span>
+    No documented studies in canonical AD mouse models (5xFAD / APP/PS1 /
+    Tg2576 / P301S / 3xTg-AD) &mdash; initial validation requires either model
+    establishment or alternative neurodegeneration model adaptation
+    (12&ndash;18 month pathway).
+  </div>
+
+  <div class="sand-warn">
+    No documented AD mouse model studies &mdash; model establishment required as
+    part of validation pathway.
+  </div>
+
+  <p class="body-text" style="margin-top:14px;">
+    Mechanism-pathway anchors supporting model selection (drawn from the
+    scholarly evidence in Section 10):
   </p>
 
   <ul class="cite-list">
@@ -491,30 +712,73 @@ footer.page-foot .links a { margin-right: 18px; }
       <div class="cite-title">Szeliga M &mdash; Peroxiredoxins in Neurodegenerative
         Diseases.</div>
       <div class="cite-rel">Pre-2022 pathway anchor framing PRDX1 in oxidative-stress
-        signaling across neurodegenerative indications, scaffolding model selection.</div>
+        signaling across neurodegenerative indications.</div>
     </li>
   </ul>
 
-  <p class="body-text" style="margin-top:14px;">
-    <strong>Validation pathway.</strong> Model-readiness for PRDX1 is build-from-anchor
-    rather than off-the-shelf: existing 5xFAD/APP/PS1 cohorts have not been profiled
-    against PRDX1 modulation, but the Ca/Calpain/Cdk5 mechanism is testable
-    in standard hippocampal slice and STZ-ICV rodent paradigms before transgenic-cohort
-    commitment.
-  </p>
+  <div class="qa-flag-row">
+    <span class="qa-flag">no_documented_ad_model</span>
+  </div>
 </section>
 
-<!-- SECTION 7 — Scholarly evidence -->
+<!-- SECTION 9 — Chemistry strategy & starting points -->
 <section>
   <div class="section-h">
-    <span class="section-num">07</span>
+    <span class="section-num">09</span>
+    <h2>Chemistry Strategy &amp; Starting Points</h2>
+    <span class="confidence-pill c-high" style="margin-left:auto" title="Strategy confidence">HIGH CONFIDENCE</span>
+  </div>
+
+  <div class="tldr">
+    <span class="lbl">TL;DR</span>
+    High-confidence chemistry strategy for enzyme class &mdash; no published direct
+    chemistry; likely modality: active-site small-molecule inhibitor or allosteric
+    modulator. CNS chemistry precedent exists in adjacent active-site classes,
+    though selectivity bar applies per target.
+  </div>
+
+  <dl class="kv-grid">
+    <dt>Protein class</dt>
+    <dd>Enzyme</dd>
+
+    <dt>Chemistry status</dt>
+    <dd>virgin</dd>
+
+    <dt>Chemotype family</dt>
+    <dd>Open-class &mdash; no published direct chemistry; chemotype family undefined</dd>
+
+    <dt>Likely modality</dt>
+    <dd>Active-site small-molecule inhibitor or allosteric modulator</dd>
+
+    <dt>Strategy confidence</dt>
+    <dd><span class="confidence-pill c-high">HIGH</span></dd>
+
+    <dt>CNS chemistry precedent</dt>
+    <dd style="font-size:13px">BACE1 (&beta;-secretase) &mdash; verubecestat / lanabecestat /
+      elenbecestat all reached Phase 3 in AD; small-molecule active-site CNS
+      chemistry is precedent. Different selectivity bar applies per target.</dd>
+
+    <dt>Tractable chemotype excerpt</dt>
+    <dd style="font-size:13px;color:var(--c-ink-soft);font-style:italic">Chemically virgin
+      for AD/ADRD-relevant target modulation in the public record reviewed: no
+      published PRDX1 CNS small-molecule inhibitors / activators / allosteric
+      modulators / PROTACs or molecular glues tied to Alzheimer&rsquo;s discovery
+      programs. A non-CNS cancer-focused paper mentions candidate PRDX1 inhibitors,
+      but no clinical or ADRD chemotype is established.</dd>
+  </dl>
+</section>
+
+<!-- SECTION 10 — Scholarly evidence -->
+<section>
+  <div class="section-h">
+    <span class="section-num">10</span>
     <h2>Scholarly Evidence</h2>
   </div>
 
   <ul class="cite-list">
     <li>
       <div class="cite-meta">
-        <span class="pmid">PMID 38977865</span> &middot; <span class="yr">2024</span>
+        <span class="pmid"><a href="https://pubmed.ncbi.nlm.nih.gov/38977865/" target="_blank" rel="noopener noreferrer">PMID 38977865</a></span> &middot; <span class="yr">2024</span>
         &middot; <em>Sci Rep</em>
       </div>
       <div class="cite-title">Park J et al. &mdash; Peroxiredoxin 1 inhibits
@@ -526,7 +790,7 @@ footer.page-foot .links a { margin-right: 18px; }
     </li>
     <li>
       <div class="cite-meta">
-        <span class="pmid">PMID 33265993</span> &middot; <span class="yr">2020</span>
+        <span class="pmid"><a href="https://pubmed.ncbi.nlm.nih.gov/33265993/" target="_blank" rel="noopener noreferrer">PMID 33265993</a></span> &middot; <span class="yr">2020</span>
         &middot; <em>Antioxidants (Basel)</em>
       </div>
       <div class="cite-title">Szeliga M &mdash; Peroxiredoxins in Neurodegenerative
@@ -536,7 +800,7 @@ footer.page-foot .links a { margin-right: 18px; }
     </li>
     <li>
       <div class="cite-meta">
-        <span class="pmid">PMID 38444388</span> &middot; <span class="yr">2025</span>
+        <span class="pmid"><a href="https://pubmed.ncbi.nlm.nih.gov/38444388/" target="_blank" rel="noopener noreferrer">PMID 38444388</a></span> &middot; <span class="yr">2025</span>
         &middot; <em>J Biomol Struct Dyn</em>
       </div>
       <div class="cite-title">Zheng N et al. &mdash; In silico analysis of small-molecule
@@ -548,10 +812,10 @@ footer.page-foot .links a { margin-right: 18px; }
   </ul>
 </section>
 
-<!-- SECTION 8 — Patent landscape -->
+<!-- SECTION 11 — Patent landscape -->
 <section>
   <div class="section-h">
-    <span class="section-num">08</span>
+    <span class="section-num">11</span>
     <h2>Patent Landscape</h2>
   </div>
 
@@ -564,7 +828,7 @@ footer.page-foot .links a { margin-right: 18px; }
     FTO verdict.
   </p>
 
-  <dl class="kv">
+  <dl class="kv-grid">
     <dt>Last-10-year COM portfolio (CNS)</dt>
     <dd>None identified</dd>
     <dt>Adjacent activity (non-CNS)</dt>
@@ -576,9 +840,9 @@ footer.page-foot .links a { margin-right: 18px; }
   </dl>
 </section>
 
-<!-- SECTION 9 — Regulatory precedent -->
+<!-- SECTION 12 — Regulatory precedent -->
 <section class="regulatory">
-  <div class="reg-sub">Section 09 &middot; Foster Rx differentiated layer</div>
+  <div class="reg-sub">Section 12 &middot; Foster Rx differentiated layer</div>
   <h2 class="reg-h">Regulatory Precedent &mdash; Nrf2/Antioxidant Pathway in Neurodegeneration</h2>
 
   <h4>FDA Action History</h4>
@@ -642,7 +906,7 @@ footer.page-foot .links a { margin-right: 18px; }
   </p>
 
   <div class="tldr" style="margin-top: 22px;">
-    <span class="tldr-lbl">TL;DR</span>
+    <span class="lbl">TL;DR</span>
     PRDX1 regulatory pathway has meaningful precedent through omaveloxolone&rsquo;s
     2023 approval as the first FDA-approved Nrf2/antioxidant pathway modulator
     in a neurodegenerative indication. Established CSF oxidative stress biomarkers
@@ -654,7 +918,7 @@ footer.page-foot .links a { margin-right: 18px; }
   </div>
 </section>
 
-<!-- SECTION 10 — Footer -->
+<!-- SECTION 13 — Footer -->
 <footer class="page-foot">
   <p>
     This page presents a single target as evaluation material. Foster Rx&rsquo;s
@@ -670,5 +934,117 @@ footer.page-foot .links a { margin-right: 18px; }
 </footer>
 
 </div>
+
+<script>
+(function () {
+  'use strict';
+  var PDB = '4XCS';
+  var ALPHAFOLD = 'https://alphafold.ebi.ac.uk/entry/Q06830';
+  var stage = null, comp = null;
+  var repCartoon = null, repSurface = null, repLigand = null;
+  var viewerState = { spin: false, surface: false, ligands: true };
+  var resizeAttached = false;
+
+  function ensureNGL(timeoutMs) {
+    timeoutMs = timeoutMs || 8000;
+    return new Promise(function (resolve) {
+      if (window.NGL) return resolve(true);
+      if (window.__nglError) return resolve(false);
+      var start = Date.now();
+      var t = setInterval(function () {
+        if (window.NGL) { clearInterval(t); resolve(true); }
+        else if (window.__nglError || Date.now() - start > timeoutMs) {
+          clearInterval(t); resolve(false);
+        }
+      }, 200);
+    });
+  }
+
+  function fallback(stageEl, msg) {
+    stageEl.innerHTML = '<div class="viewer-fallback">' + msg +
+      '<br>AlphaFold predicted structure: <a target="_blank" rel="noopener noreferrer" href="' +
+      ALPHAFOLD + '">' + ALPHAFOLD + '</a>.</div>';
+  }
+
+  async function bootViewer() {
+    var stageEl = document.getElementById('ngl-stage');
+    if (!stageEl) return;
+    stageEl.innerHTML = '<div class="viewer-loading">Loading PDB ' + PDB + '&hellip;</div>';
+    var ok = await ensureNGL();
+    if (!ok || !window.NGL) {
+      fallback(stageEl, '3D viewer library failed to load from CDN.');
+      return;
+    }
+    stageEl.innerHTML = '';
+    try {
+      stage = new NGL.Stage('ngl-stage', { backgroundColor: 'white', cameraType: 'perspective' });
+    } catch (e) {
+      fallback(stageEl, '3D viewer failed to initialize.');
+      return;
+    }
+    if (!resizeAttached) {
+      resizeAttached = true;
+      window.addEventListener('resize', function () {
+        if (stage) try { stage.handleResize(); } catch (e) {}
+      });
+    }
+    stageEl.insertAdjacentHTML('beforeend',
+      '<div class="viewer-loading" id="ngl-loading">Loading PDB ' + PDB + '&hellip;</div>');
+    try {
+      comp = await stage.loadFile('rcsb://' + PDB);
+      repCartoon = comp.addRepresentation('cartoon', { colorScheme: 'chainid' });
+      repLigand = comp.addRepresentation('ball+stick', {
+        sele: 'hetero and not (water or ion)',
+        colorScheme: 'element'
+      });
+      comp.autoView();
+      var loading = document.getElementById('ngl-loading');
+      if (loading) loading.remove();
+    } catch (err) {
+      fallback(stageEl, 'Failed to load PDB ' + PDB + ' from RCSB.');
+    }
+  }
+
+  function onViewerControl(action, btn) {
+    if (action === 'reset' && comp) { comp.autoView(); return; }
+    if (!stage || !comp) return;
+    if (action === 'spin') {
+      viewerState.spin = !viewerState.spin;
+      try { stage.setSpin(viewerState.spin); } catch (e) {}
+      btn.classList.toggle('active', viewerState.spin);
+      btn.setAttribute('aria-pressed', String(viewerState.spin));
+    } else if (action === 'surface') {
+      viewerState.surface = !viewerState.surface;
+      if (viewerState.surface) {
+        repSurface = comp.addRepresentation('surface', {
+          sele: 'polymer', opacity: 0.28, colorScheme: 'sstruc'
+        });
+      } else if (repSurface) {
+        try { comp.removeRepresentation(repSurface); } catch (e) {}
+        repSurface = null;
+      }
+      btn.classList.toggle('active', viewerState.surface);
+      btn.setAttribute('aria-pressed', String(viewerState.surface));
+    } else if (action === 'ligands') {
+      viewerState.ligands = !viewerState.ligands;
+      if (repLigand) try { repLigand.setVisibility(viewerState.ligands); } catch (e) {}
+      btn.classList.toggle('active', viewerState.ligands);
+      btn.setAttribute('aria-pressed', String(viewerState.ligands));
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-vctl]');
+    if (!btn) return;
+    onViewerControl(btn.getAttribute('data-vctl'), btn);
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootViewer);
+  } else {
+    bootViewer();
+  }
+})();
+</script>
 </body>
 </html>
