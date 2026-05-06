@@ -37,7 +37,6 @@
     },
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Camden",
       "addressRegion": "DE",
       "addressCountry": "US"
     },
@@ -73,8 +72,8 @@
   {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": "Foster Rx Thesis",
-    "alternateName": "Thesis",
+    "name": "Thesis Rx",
+    "alternateName": "Thesis Rx by Foster Rx Systems Inc.",
     "description": "Governed AI intelligence platform for biopharma builders evaluating their own clinical assets. Built on the ANGIS engine.",
     "brand": { "@type": "Brand", "name": "Foster Rx Systems Inc." },
     "category": "Governed AI Intelligence Platform",
@@ -90,8 +89,8 @@
   {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": "Foster Rx Capital",
-    "alternateName": "Capital",
+    "name": "Capital Rx",
+    "alternateName": "Capital Rx by Foster Rx Systems Inc.",
     "description": "Governed AI intelligence platform for biopharma funders evaluating clinical assets for investment. Built on the ANGIS engine.",
     "brand": { "@type": "Brand", "name": "Foster Rx Systems Inc." },
     "category": "Governed AI Intelligence Platform",
@@ -113,7 +112,7 @@
         "name": "What does Foster Rx Systems Inc. do?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Foster Rx Systems Inc. builds governed AI infrastructure for regulated biopharma. The company's ANGIS engine produces cryptographically signed, audit-trail-backed intelligence outputs designed to meet the standards of regulated drug development. Foster Rx offers two products built on ANGIS: Thesis for biopharma builders and Capital for biopharma funders."
+          "text": "Foster Rx Systems Inc. builds governed AI infrastructure for regulated biopharma. The company's ANGIS engine produces cryptographically signed, audit-trail-backed intelligence outputs designed to meet the standards of regulated drug development. Foster Rx offers two products built on ANGIS: Thesis Rx for biopharma builders and Capital Rx for biopharma funders."
         }
       },
       {
@@ -126,18 +125,18 @@
       },
       {
         "@type": "Question",
-        "name": "What is Foster Rx Thesis?",
+        "name": "What is Thesis Rx?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Thesis is the Foster Rx product for biopharma builders — innovators evaluating their own clinical assets. The audience includes academic translational researchers, early- and mid-stage biotech, and pharma business development teams reviewing in-licensing candidates. Thesis is currently in limited early access."
+          "text": "Thesis Rx is the Foster Rx product for biopharma builders — innovators evaluating their own clinical assets. The audience includes academic translational researchers, early- and mid-stage biotech, and pharma business development teams reviewing in-licensing candidates. Thesis Rx is currently in limited early access."
         }
       },
       {
         "@type": "Question",
-        "name": "What is Foster Rx Capital?",
+        "name": "What is Capital Rx?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Capital is the Foster Rx product for biopharma funders — investors evaluating clinical assets for investment. The audience includes venture capital, hedge funds, growth equity firms, and healthcare-focused angel investors. Capital is currently in limited early access."
+          "text": "Capital Rx is the Foster Rx product for biopharma funders — investors evaluating clinical assets for investment. The audience includes venture capital, hedge funds, growth equity firms, and healthcare-focused angel investors. Capital Rx is currently in limited early access."
         }
       }
     ]
@@ -146,15 +145,20 @@
 
   <style>
     :root {
-      --color-bg: #F7F9F9;
-      --color-bg-alt: #FFFFFF;
-      --color-text: #2D3748;
-      --color-text-muted: #718096;
-      --color-accent: #4A7C7E;
+      --color-bg: #1F4547;
+      --color-bg-alt: #173638;
+      --color-bg-light: #F7F4EE;
+      --color-bg-light-alt: #FFFFFF;
+      --color-text: #E8EEEE;
+      --color-text-muted: #A8BCBE;
+      --color-text-dark: #1A2E2F;
+      --color-text-dark-muted: #5A6E70;
+      --color-accent: #7AADAF;
       --color-accent-dark: #2C5F61;
-      --color-accent-light: #7AADAF;
-      --color-accent-pale: #C8DDDE;
-      --color-rule: #E2E8F0;
+      --color-accent-bright: #A4D4D6;
+      --color-accent-pale: #2C5F61;
+      --color-rule: rgba(255, 255, 255, 0.12);
+      --color-rule-light: #E2E8F0;
       --max-width: 1100px;
       --font-display: Georgia, "Times New Roman", serif;
       --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Calibri, "Helvetica Neue", Arial, sans-serif;
@@ -176,16 +180,16 @@
     h1, h2, h3 {
       font-family: var(--font-display);
       font-weight: 400;
-      color: var(--color-accent-dark);
+      color: var(--color-text);
       letter-spacing: -0.01em;
     }
     h1 { font-size: 3.2rem; line-height: 1.1; margin: 0 0 24px; }
     h2 { font-size: 2.2rem; line-height: 1.2; margin: 0 0 20px; }
-    h3 { font-size: 1.3rem; line-height: 1.3; margin: 0 0 12px; color: var(--color-accent); }
+    h3 { font-size: 1.3rem; line-height: 1.3; margin: 0 0 12px; color: var(--color-accent-bright); }
 
     p { margin: 0 0 18px; }
-    a { color: var(--color-accent-dark); text-decoration: none; border-bottom: 1px solid var(--color-accent-pale); transition: border-color 120ms ease; }
-    a:hover { border-color: var(--color-accent-dark); }
+    a { color: var(--color-accent-bright); text-decoration: none; border-bottom: 1px solid rgba(164, 212, 214, 0.3); transition: all 120ms ease; }
+    a:hover { color: #fff; border-bottom-color: #fff; }
 
     header.site-header {
       padding: 28px 0;
@@ -195,39 +199,65 @@
     .site-header .container { display: flex; align-items: center; justify-content: space-between; }
     .site-header .brand {
       display: flex; align-items: center; gap: 14px;
-      font-family: var(--font-display); font-size: 1.15rem; color: var(--color-accent-dark);
+      font-family: var(--font-display); font-size: 1.15rem; color: var(--color-text);
       border: none;
     }
     .site-header .brand img { width: 38px; height: 38px; }
+    .site-header .brand:hover { border: none; color: var(--color-accent-bright); }
     .site-header nav a {
-      margin-left: 28px; color: var(--color-text); border: none;
+      margin-left: 28px; color: var(--color-text-muted); border: none;
       font-size: 0.95rem;
     }
-    .site-header nav a:hover { color: var(--color-accent-dark); }
+    .site-header nav a:hover { color: var(--color-accent-bright); }
+    .site-header nav a.header-login-btn {
+      background: var(--color-accent-bright);
+      color: var(--color-bg);
+      padding: 8px 18px;
+      border-radius: 6px;
+      margin-left: 28px;
+      font-weight: 500;
+      transition: all 120ms ease;
+    }
+    .site-header nav a.header-login-btn:hover {
+      background: #fff;
+      color: var(--color-bg);
+    }
 
     section.hero {
       padding: 96px 0 84px;
       background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
     }
-    .hero h1 { max-width: 880px; }
+    .hero h1 { max-width: 880px; color: var(--color-text); }
     .hero .subhead {
       font-size: 1.25rem; color: var(--color-text); max-width: 760px;
       margin: 0 0 36px;
     }
-    .hero .patent { font-size: 0.92rem; color: var(--color-text-muted); margin-top: -28px; margin-bottom: 36px; }
     .cta-row { display: flex; gap: 16px; flex-wrap: wrap; }
     .btn {
       display: inline-block; padding: 14px 28px; border-radius: 6px;
       font-size: 1rem; font-weight: 500; cursor: pointer;
-      border: 1px solid var(--color-accent-dark); transition: all 120ms ease;
+      transition: all 120ms ease;
     }
-    .btn-primary { background: var(--color-accent-dark); color: #fff; }
-    .btn-primary:hover { background: var(--color-accent); border-color: var(--color-accent); }
-    .btn-secondary { background: transparent; color: var(--color-accent-dark); }
-    .btn-secondary:hover { background: var(--color-accent-pale); }
+    .btn-primary { background: var(--color-accent-bright); color: var(--color-bg); border: 1px solid var(--color-accent-bright); }
+    .btn-primary:hover { background: #fff; border-color: #fff; color: var(--color-bg); }
+    .btn-secondary { background: transparent; color: var(--color-text); border: 1px solid var(--color-text-muted); }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.08); border-color: var(--color-text); color: #fff; }
 
     section.section { padding: 84px 0; }
     section.section-alt { background: var(--color-bg-alt); }
+
+    /* Light section - founder bio */
+    section.section-light {
+      background: var(--color-bg-light);
+      color: var(--color-text-dark);
+    }
+    section.section-light h1, section.section-light h2, section.section-light h3 {
+      color: var(--color-text-dark);
+    }
+    section.section-light p { color: var(--color-text-dark); }
+    section.section-light .founder strong { color: var(--color-accent-dark); }
+    section.section-light .founder .closing { color: var(--color-accent-dark); }
+
     section .lead { font-size: 1.1rem; max-width: 760px; margin-bottom: 48px; }
 
     .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
@@ -235,16 +265,18 @@
       background: var(--color-bg-alt); border: 1px solid var(--color-rule); border-radius: 8px;
       padding: 32px 28px; display: flex; flex-direction: column;
     }
-    section.section-alt .card { background: var(--color-bg); }
+    section.section-alt .card { background: var(--color-bg); border-color: var(--color-rule); }
     .card .status {
-      display: inline-block; font-size: 0.82rem; color: var(--color-accent-dark);
-      background: var(--color-accent-pale); padding: 4px 10px; border-radius: 4px;
-      margin-bottom: 16px; align-self: flex-start;
+      display: inline-block; font-size: 0.82rem; color: var(--color-accent-bright);
+      background: rgba(164, 212, 214, 0.15); padding: 4px 10px; border-radius: 4px;
+      border: 1px solid rgba(164, 212, 214, 0.3);
     }
-    .card .card-cta { margin-top: auto; padding-top: 20px; }
-    .card .card-cta a { font-weight: 500; border: none; color: var(--color-accent-dark); }
-    .card .card-cta a:hover { color: var(--color-accent); }
-    .card p { font-size: 0.97rem; }
+    .card .card-cta .status { margin: 0; }
+    .card .card-cta { margin-top: auto; padding-top: 20px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+    .card .card-cta a:not(.btn) { font-weight: 500; border: none; color: var(--color-accent-bright); }
+    .card .card-cta a.btn { border: 1px solid var(--color-accent-bright); }
+    .card .card-cta a:not(.btn):hover { color: #fff; }
+    .card p { font-size: 0.97rem; color: var(--color-text); }
     .card .patent-line { font-size: 0.85rem; color: var(--color-text-muted); margin-top: 12px; }
 
     ul.bullets { list-style: none; padding: 0; margin: 24px 0; }
@@ -253,30 +285,51 @@
     ul.bullets li::before {
       content: ""; position: absolute; left: 0; top: 22px;
       width: 8px; height: 8px; border-radius: 50%;
-      background: var(--color-accent);
+      background: var(--color-accent-bright);
     }
-    ul.bullets strong { color: var(--color-accent-dark); }
+    ul.bullets strong { color: var(--color-accent-bright); }
 
     .founder { display: grid; grid-template-columns: 200px 1fr; gap: 48px; align-items: start; }
     .founder img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; }
     .founder p { max-width: 720px; }
-    .founder .closing { font-style: italic; color: var(--color-accent-dark); margin-top: 28px; }
+    .founder .closing { font-style: italic; margin-top: 28px; }
 
     .chooser { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .chooser .card { text-align: left; }
-    .chooser .card h3 { color: var(--color-accent-dark); }
+    .chooser .card h3 { color: var(--color-accent-bright); }
 
     footer.site-footer {
       padding: 56px 0 48px; border-top: 1px solid var(--color-rule);
       background: var(--color-bg-alt); color: var(--color-text-muted); font-size: 0.92rem;
     }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; }
-    .footer-grid h4 { font-family: var(--font-display); color: var(--color-accent-dark); margin: 0 0 12px; font-size: 1rem; font-weight: 400; }
+    .footer-grid h4 { font-family: var(--font-display); color: var(--color-text); margin: 0 0 12px; font-size: 1rem; font-weight: 400; }
     .footer-grid p, .footer-grid a { color: var(--color-text-muted); font-size: 0.92rem; }
-    .footer-grid a { border: none; }
-    .footer-grid a:hover { color: var(--color-accent-dark); }
+    .footer-grid a { border: none; text-decoration: none; }
+    .footer-grid p a { border-bottom: 1px dotted var(--color-text-muted); }
+    .footer-grid p a:hover { border-bottom-color: #fff; color: #fff; }
+    .footer-grid a:hover { color: var(--color-accent-bright); }
     .footer-grid .links a { display: block; margin-bottom: 6px; }
-    .footer-bottom { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--color-rule); font-size: 0.85rem; }
+    .footer-bottom { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--color-rule); font-size: 0.85rem; color: var(--color-text-muted); }
+    .footer-legal-links { margin-bottom: 12px; font-size: 0.88rem; }
+    .footer-legal-links a { color: var(--color-text-muted); border: none; text-decoration: none; }
+    .footer-legal-links a:hover { color: var(--color-accent-bright); }
+    .footer-legal-sep { color: var(--color-text-muted); margin: 0 8px; }
+    .footer-legal-copyright { font-size: 0.78rem; color: var(--color-text-muted); line-height: 1.5; max-width: 720px; }
+    .footer-grid p.footer-trust-anchor {
+      color: var(--color-accent-bright);
+      font-size: 0.88rem;
+      margin-top: 16px;
+    }
+    .footer-grid p.footer-trust-anchor a {
+      color: var(--color-accent-bright);
+      border-bottom: 1px solid var(--color-accent-bright);
+      font-weight: 500;
+    }
+    .footer-grid p.footer-trust-anchor a:hover {
+      color: #fff;
+      border-bottom-color: #fff;
+    }
 
     @media (max-width: 880px) {
       h1 { font-size: 2.4rem; }
@@ -302,7 +355,7 @@
         <a href="#platform">Platform</a>
         <a href="#governance">Governance</a>
         <a href="#about">About</a>
-        <a href="#login">Login</a>
+        <a href="#login" class="header-login-btn">Login</a>
       </nav>
     </div>
   </header>
@@ -314,10 +367,8 @@
         Foster Rx Systems Inc. builds governed AI infrastructure for the
         teams who can&rsquo;t afford to be wrong about a clinical asset.
       </p>
-      <p class="patent">Patent Pending No. 19/459,855</p>
       <div class="cta-row">
-        <a href="#login" class="btn btn-primary">Login</a>
-        <a href="mailto:info@fosterrx.com?subject=Demo%20request%20%E2%80%94%20Foster%20Rx" class="btn btn-secondary">Request a demo</a>
+        <a href="mailto:info@fosterrx.com?subject=Demo%20request%20%E2%80%94%20Foster%20Rx" class="btn btn-primary">Request a demo</a>
       </div>
     </div>
   </section>
@@ -345,8 +396,7 @@
         </div>
 
         <div class="card" id="thesis">
-          <span class="status">Limited early access</span>
-          <h3>Thesis</h3>
+          <h3>Thesis Rx</h3>
           <p>
             For the builders. Innovators evaluating their own clinical
             assets &mdash; academic translational researchers, early- and
@@ -354,20 +404,21 @@
             candidates.
           </p>
           <div class="card-cta">
-            <a href="mailto:info@fosterrx.com?subject=Thesis%20early%20access%20request">Request access &rarr;</a>
+            <span class="status">Limited early access</span>
+            <a href="mailto:info@fosterrx.com?subject=Thesis%20Rx%20early%20access%20request">Request access &rarr;</a>
           </div>
         </div>
 
         <div class="card" id="capital">
-          <span class="status">Limited early access</span>
-          <h3>Capital</h3>
+          <h3>Capital Rx</h3>
           <p>
             For the funders. Investors evaluating others&rsquo; clinical
             assets &mdash; venture capital, hedge funds, growth equity,
             healthcare-focused angels.
           </p>
           <div class="card-cta">
-            <a href="mailto:info@fosterrx.com?subject=Capital%20early%20access%20request">Request access &rarr;</a>
+            <span class="status">Limited early access</span>
+            <a href="mailto:info@fosterrx.com?subject=Capital%20Rx%20early%20access%20request">Request access &rarr;</a>
           </div>
         </div>
 
@@ -377,14 +428,15 @@
 
   <section class="section" id="governance">
     <div class="container">
-      <h2>Inspection-readiness as standing posture, not fire drill.</h2>
+      <h2>Decisions you can defend, on demand.</h2>
       <p class="lead">
-        The biopharma teams who win are not the ones who scramble before
-        an audit. They&rsquo;re the ones whose governance architecture is
-        so clean that an audit is a routine exercise.
+        Whether you&rsquo;re advancing a clinical asset or evaluating one
+        for investment, the AI in the loop has to be defensible &mdash; to
+        regulators, to LPs, to boards, to the next person who asks
+        &ldquo;how do you know?&rdquo;
       </p>
 
-      <p>That&rsquo;s the standard ANGIS holds itself &mdash; and the customers running on it &mdash; to:</p>
+      <p>Foster Rx Systems Inc. builds for that question. Every output ANGIS produces is constructed to four standards:</p>
 
       <ul class="bullets">
         <li>Every intelligence output is <strong>cryptographically signed</strong> with a public key anyone can verify.</li>
@@ -418,7 +470,7 @@
     </div>
   </section>
 
-  <section class="section" id="about">
+  <section class="section section-light" id="about">
     <div class="container">
       <h2>Built by someone who has lived the problem.</h2>
 
@@ -476,26 +528,26 @@
         </div>
 
         <div class="card">
-          <span class="status">Limited early access</span>
-          <h3>Thesis</h3>
+          <h3>Thesis Rx</h3>
           <p>
-            Thesis is in limited early access. Request your invite to be
+            Thesis Rx is in limited early access. Request your invite to be
             considered for the first cohort.
           </p>
           <div class="card-cta">
-            <a href="mailto:info@fosterrx.com?subject=Thesis%20early%20access%20request">Request access &rarr;</a>
+            <span class="status">Limited early access</span>
+            <a href="mailto:info@fosterrx.com?subject=Thesis%20Rx%20early%20access%20request">Request access &rarr;</a>
           </div>
         </div>
 
         <div class="card">
-          <span class="status">Limited early access</span>
-          <h3>Capital</h3>
+          <h3>Capital Rx</h3>
           <p>
-            Capital is in limited early access. Request your invite to
+            Capital Rx is in limited early access. Request your invite to
             be considered for the first cohort.
           </p>
           <div class="card-cta">
-            <a href="mailto:info@fosterrx.com?subject=Capital%20early%20access%20request">Request access &rarr;</a>
+            <span class="status">Limited early access</span>
+            <a href="mailto:info@fosterrx.com?subject=Capital%20Rx%20early%20access%20request">Request access &rarr;</a>
           </div>
         </div>
 
@@ -509,19 +561,19 @@
 
         <div>
           <h4>Foster Rx Systems Inc.</h4>
-          <p>Camden, Delaware</p>
+          <p>A Delaware corporation</p>
           <p>Patent Pending No. 19/459,855</p>
-          <p>
-            Public verification key:<br />
-            <a href="/.well-known/angis-signing-key-v1.pub">/.well-known/angis-signing-key-v1.pub</a>
+          <p class="footer-trust-anchor">
+            Verify ANGIS certificates &rarr;
+            <a href="/.well-known/angis-signing-key-v1.pub">trust anchor</a>
           </p>
         </div>
 
         <div class="links">
           <h4>Platform</h4>
           <a href="#angis">ANGIS</a>
-          <a href="#thesis">Thesis</a>
-          <a href="#capital">Capital</a>
+          <a href="#thesis">Thesis Rx</a>
+          <a href="#capital">Capital Rx</a>
           <a href="#governance">Governance</a>
         </div>
 
@@ -534,7 +586,21 @@
       </div>
 
       <div class="footer-bottom">
-        &copy; Foster Rx Systems Inc. Proprietary. All rights reserved.
+        <div class="footer-legal-links">
+          <a href="/privacy">Privacy Policy</a>
+          <span class="footer-legal-sep">·</span>
+          <a href="/terms">Terms of Use</a>
+          <span class="footer-legal-sep">·</span>
+          <a href="mailto:info@fosterrx.com">Contact</a>
+        </div>
+        <div class="footer-legal-copyright">
+          &copy; Foster Rx Systems Inc. Proprietary. All rights reserved.
+          Foster Rx Systems Inc. and ANGIS are trademarks of Foster Rx
+          Systems Inc. Patent Pending No. 19/459,855. Information on
+          this site does not constitute medical, legal, or investment
+          advice. Products described as &ldquo;Limited early access&rdquo;
+          are pre-launch and not yet generally available.
+        </div>
       </div>
     </div>
   </footer>
