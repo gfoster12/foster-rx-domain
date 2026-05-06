@@ -1,6 +1,9 @@
 # fosterrx.com — robots policy
 # Confidential intelligence deliverables under /intelligence/ are CDA-protected.
 # Cloudflare Access enforces the gate; this file is belt-and-braces.
+# /intelligence/conifer-eval/ is non-confidential evaluation material but is
+# also kept out of search indexing.
 
 User-agent: *
 Disallow: /intelligence/
+Disallow: /intelligence/conifer-eval/

@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Foster Rx — Sample Target Evaluation (PRDX1)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --c-teal:        #4A7C7E;
+  --c-teal-dark:   #365A5C;
+  --c-teal-deep:   #244244;
+  --c-sage:        #C5D5CC;
+  --c-sage-light:  #EEF2EF;
+  --c-sage-pale:   #F4F7F4;
+  --c-paper:       #FFFFFF;
+  --c-ink:         #1F2D2E;
+  --c-ink-soft:    #4A5A5C;
+  --c-ink-mute:    #7A8A8C;
+  --c-rule:        #D9E2DC;
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans:  'DM Sans', Calibri, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --r-md: 6px;
+  --r-sm: 4px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--c-ink);
+  background: var(--c-sage-pale);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  color: var(--c-teal-deep);
+  margin: 0;
+  letter-spacing: -.005em;
+}
+a { color: var(--c-teal-dark); text-decoration: underline; text-decoration-color: var(--c-sage); text-underline-offset: 2px; }
+a:hover { color: var(--c-teal-deep); text-decoration-color: var(--c-teal); }
+strong { color: var(--c-teal-deep); font-weight: 600; }
+
+.page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 56px 32px 96px;
+}
+
+/* SECTION 1 — Header */
+.site-head {
+  border-bottom: 2px solid var(--c-teal);
+  padding-bottom: 28px;
+  margin-bottom: 40px;
+}
+.wordmark {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--c-teal-deep);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.wordmark .rx { color: var(--c-teal); font-style: italic; text-transform: lowercase; }
+.page-title {
+  font-size: 38px;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+.page-sub {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--c-ink-soft);
+  line-height: 1.45;
+}
+
+/* Sections */
+section {
+  background: var(--c-paper);
+  border: 1px solid var(--c-rule);
+  border-radius: var(--r-md);
+  padding: 28px 32px;
+  margin-bottom: 22px;
+}
+section.plain {
+  background: transparent;
+  border: none;
+  padding: 8px 0 0;
+  margin-bottom: 22px;
+}
+.section-h {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--c-rule);
+}
+.section-num {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--c-ink-mute);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.section-h h2 { font-size: 22px; }
+
+/* SECTION 2 — Target identity card */
+.id-card {
+  background: linear-gradient(180deg, var(--c-sage-light) 0%, var(--c-paper) 100%);
+  border: 1px solid var(--c-sage);
+  border-top: 3px solid var(--c-teal-dark);
+  border-radius: var(--r-md);
+  padding: 28px 32px;
+  margin-bottom: 28px;
+}
+.id-gene {
+  font-family: var(--font-serif);
+  font-size: 44px;
+  color: var(--c-teal-deep);
+  letter-spacing: -.01em;
+  line-height: 1;
+}
+.id-protein {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 19px;
+  color: var(--c-ink-soft);
+  margin-top: 6px;
+}
+.id-meta {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--c-ink-mute);
+  margin-top: 12px;
+  letter-spacing: .02em;
+}
+.id-meta .lbl { color: var(--c-ink-mute); }
+.id-meta .val { color: var(--c-teal-dark); font-weight: 500; }
+.id-context {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--c-ink);
+  line-height: 1.55;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--c-rule);
+}
+
+/* SECTION 3 — Drugability snapshot — metric grid */
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.metric {
+  background: var(--c-sage-pale);
+  border: 1px solid var(--c-rule);
+  border-radius: var(--r-sm);
+  padding: 14px 14px 12px;
+}
+.metric-lbl {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--c-ink-mute);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.metric-val {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  color: var(--c-teal-deep);
+  line-height: 1;
+}
+.metric-val .unit { font-size: 14px; color: var(--c-ink-soft); margin-left: 2px; }
+.metric.verdict .metric-val {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--c-teal-dark);
+}
+.metric-note {
+  font-size: 14px;
+  color: var(--c-ink-soft);
+  line-height: 1.55;
+  margin-top: 6px;
+}
+
+/* SECTION 4, 5, 6, 7, 8 — body content */
+p { margin: 0 0 12px; }
+p:last-child { margin-bottom: 0; }
+.body-text { font-size: 15px; line-height: 1.6; color: var(--c-ink); }
+.body-text.serif { font-family: var(--font-serif); font-size: 16.5px; line-height: 1.6; }
+
+dl.kv {
+  display: grid;
+  grid-template-columns: minmax(180px, 28%) 1fr;
+  gap: 8px 18px;
+  margin: 0 0 14px;
+  font-size: 14px;
+}
+dl.kv dt { color: var(--c-ink-mute); font-weight: 500; }
+dl.kv dd { margin: 0; color: var(--c-ink); }
+
+.tldr {
+  margin-top: 14px;
+  padding: 12px 16px;
+  background: var(--c-sage-light);
+  border-left: 3px solid var(--c-teal);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  font-family: var(--font-serif);
+  font-size: 15.5px;
+  font-style: italic;
+  color: var(--c-ink);
+  line-height: 1.55;
+}
+.tldr .tldr-lbl {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--c-teal);
+  margin-right: 10px;
+}
+
+/* citations */
+.cite-list { list-style: none; margin: 0; padding: 0; }
+.cite-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--c-rule);
+}
+.cite-list li:last-child { border-bottom: none; padding-bottom: 0; }
+.cite-list li:first-child { padding-top: 0; }
+.cite-meta {
+  font-size: 12.5px;
+  color: var(--c-ink-mute);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+  margin-bottom: 4px;
+}
+.cite-meta .pmid { color: var(--c-teal-dark); font-weight: 500; }
+.cite-meta .yr { color: var(--c-ink-soft); }
+.cite-title {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--c-ink);
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+.cite-rel { font-size: 13.5px; color: var(--c-ink-soft); line-height: 1.5; }
+
+/* SECTION 9 — Regulatory precedent */
+section.regulatory {
+  background: linear-gradient(180deg, #FCFEFC 0%, var(--c-paper) 60%);
+  border-top: 3px solid var(--c-teal-dark);
+}
+section.regulatory .reg-h {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  color: var(--c-teal-deep);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+section.regulatory .reg-sub {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--c-ink-mute);
+  margin-bottom: 18px;
+}
+section.regulatory h4 {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--c-teal);
+  margin: 22px 0 8px;
+}
+section.regulatory p { font-size: 15px; line-height: 1.65; color: var(--c-ink); }
+
+/* SECTION 10 — Footer */
+footer.page-foot {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--c-rule);
+  font-size: 14px;
+  color: var(--c-ink-soft);
+  line-height: 1.6;
+}
+footer.page-foot .links {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--c-ink-mute);
+}
+footer.page-foot .links a { margin-right: 18px; }
+
+/* Mobile */
+@media (max-width: 720px) {
+  .page { padding: 36px 18px 64px; }
+  .page-title { font-size: 30px; }
+  .id-gene { font-size: 36px; }
+  section, .id-card { padding: 22px 18px; }
+  .metric-grid { grid-template-columns: repeat(2, 1fr); }
+  dl.kv { grid-template-columns: 1fr; gap: 2px 0; }
+  dl.kv dt { margin-top: 8px; }
+  dl.kv dt:first-child { margin-top: 0; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- SECTION 1 — Header -->
+<header class="site-head">
+  <div class="wordmark">Foster <span class="rx">rx</span></div>
+  <h1 class="page-title">Sample Target Evaluation</h1>
+  <p class="page-sub">Single-target preview of Foster Rx&rsquo;s integrated target analysis. Shared as evaluation material.</p>
+</header>
+
+<!-- SECTION 2 — Target identity card -->
+<div class="id-card">
+  <div class="id-gene">PRDX1</div>
+  <div class="id-protein">Peroxiredoxin 1</div>
+  <div class="id-meta">
+    <span class="lbl">UniProt</span>&nbsp;<span class="val">Q06830</span>
+    &nbsp;&middot;&nbsp;
+    <span class="lbl">Ensembl</span>&nbsp;<span class="val">ENSG00000117450</span>
+    &nbsp;&middot;&nbsp;
+    <span class="lbl">Length</span>&nbsp;<span class="val">199 aa</span>
+    &nbsp;&middot;&nbsp;
+    <span class="lbl">Class</span>&nbsp;<span class="val">Enzyme</span>
+  </div>
+  <p class="id-context">
+    Antioxidant enzyme operating downstream of Nrf2 transcriptional regulation,
+    with emerging neurodegeneration mechanism evidence via Ca/Calpain/Cdk5
+    signaling pathways.
+  </p>
+</div>
+
+<!-- SECTION 3 — Drugability snapshot -->
+<section>
+  <div class="section-h">
+    <span class="section-num">03</span>
+    <h2>Drugability Snapshot</h2>
+  </div>
+
+  <div class="metric-grid">
+    <div class="metric">
+      <div class="metric-lbl">CanSAR network<br>druggability %ile</div>
+      <div class="metric-val">81.6<span class="unit">%</span></div>
+    </div>
+    <div class="metric">
+      <div class="metric-lbl">ChEMBL bioactivity records</div>
+      <div class="metric-val">81</div>
+    </div>
+    <div class="metric">
+      <div class="metric-lbl">Probe Miner curated probes</div>
+      <div class="metric-val">0</div>
+    </div>
+    <div class="metric verdict">
+      <div class="metric-lbl">FTO verdict</div>
+      <div class="metric-val">CLEAR</div>
+    </div>
+  </div>
+
+  <p class="metric-note">
+    PRDX1 sits in the top quartile of CanSAR network druggability with a
+    structurally tractable enzyme fold and 1,040 chain-level entries available
+    for cavity work, but ChEMBL bioactivity is shallow (81 records) and Probe
+    Miner returns no curated chemical probe. The structural drugability is real;
+    the chemical exploration is not yet underway.
+  </p>
+</section>
+
+<!-- SECTION 4 — Freedom-to-operate findings -->
+<section>
+  <div class="section-h">
+    <span class="section-num">04</span>
+    <h2>Freedom-to-Operate Findings</h2>
+  </div>
+
+  <p class="body-text">
+    Public-record review across patents, ClinicalTrials.gov, SEC filings, and
+    2023&ndash;2026 corporate disclosures returns no documented composition-of-matter
+    portfolio claiming small-molecule PRDX1 modulators in CNS or neurodegenerative
+    indications, no Phase&nbsp;1+ clinical program for a small-molecule PRDX1 modulator
+    in AD/ADRD, and no active disclosed discovery program from public-company
+    pipelines. A 2025 cancer-context inhibitor candidate paper (Zheng et al.,
+    PMID 38444388) confirms exploratory non-CNS chemistry exists in academic
+    literature but does not establish a CNS chemotype.
+  </p>
+
+  <p class="body-text">
+    Verdict: <strong>CLEAR</strong>. PRDX1 is chemically virgin for AD/ADRD-relevant
+    target modulation in the public record. Chemical exploration on this target
+    is genuinely thin &mdash; an open-class discovery setup, not a crowded landscape.
+  </p>
+</section>
+
+<!-- SECTION 5 — Knockout phenotype and safety signal -->
+<section>
+  <div class="section-h">
+    <span class="section-num">05</span>
+    <h2>Knockout Phenotype &amp; Safety Signal</h2>
+  </div>
+
+  <dl class="kv">
+    <dt>Mouse KO summary</dt>
+    <dd>Broad pleiotropic phenotype &mdash; 46 terms across 12 systems, including
+      hematopoietic, immune, homeostasis/metabolism, neoplasm, mortality/aging,
+      and skeleton phenotypes. Embryonic-lethality risk flagged.</dd>
+
+    <dt>gnomAD pLI</dt>
+    <dd>~1.0 &times; 10<sup>&minus;6</sup> &mdash; tolerant to loss-of-function</dd>
+
+    <dt>gnomAD o/e (LOEUF)</dt>
+    <dd>1.32 (19 observed LoF / 21.1 expected) &mdash; constraint decile 7</dd>
+
+    <dt>Brain expression (HPA)</dt>
+    <dd>Low cell-type specificity; detected in all brain cell types
+      (broadly expressed; brain avg TPM 6,893)</dd>
+
+    <dt>Subcellular</dt>
+    <dd>Cytoplasm, mitochondria, melanosome</dd>
+  </dl>
+
+  <div class="tldr">
+    <span class="tldr-lbl">TL;DR</span>
+    Human population genetics indicate PRDX1 is LoF-tolerant, but mouse KO is
+    broadly pleiotropic with embryonic-lethality risk. Therapeutic strategy
+    should favor partial modulation over full ablation, and preclinical
+    characterization needs to address proliferation-relevant tissues given
+    PRDX1&rsquo;s documented non-redox roles.
+  </div>
+</section>
+
+<!-- SECTION 6 — In vivo model readiness -->
+<section>
+  <div class="section-h">
+    <span class="section-num">06</span>
+    <h2>In Vivo Model Readiness</h2>
+  </div>
+
+  <p class="body-text">
+    Established AD models with documented PRDX1 testing: <strong>none identified</strong>
+    in the curated public record. The most direct in&nbsp;vivo&ndash;adjacent work is the
+    Park et al. 2024 streptozotocin-induced AD-like hippocampal neuronal model,
+    which is a cell-based model of AD-like pathology rather than a cohort-tested
+    transgenic AD model.
+  </p>
+
+  <p class="body-text">
+    Top-anchored mechanism citations supporting model-pathway selection:
+  </p>
+
+  <ul class="cite-list">
+    <li>
+      <div class="cite-meta">
+        <span class="pmid">PMID 38977865</span> &middot; <span class="yr">2024</span>
+        &middot; <em>Sci Rep</em>
+      </div>
+      <div class="cite-title">Park J et al. &mdash; PRDX1 inhibits streptozotocin-induced
+        Alzheimer&rsquo;s disease-like pathology in hippocampal neuronal cells via
+        Ca<sup>2+</sup>/Calpain/Cdk5-mediated mitochondrial fragmentation.</div>
+      <div class="cite-rel">Establishes the Ca/Calpain/Cdk5 mechanistic anchor and
+        an AD-relevant pharmacology readout for downstream model design.</div>
+    </li>
+    <li>
+      <div class="cite-meta">
+        <span class="pmid">PMID 33265993</span> &middot; <span class="yr">2020</span>
+        &middot; <em>Antioxidants (Basel)</em>
+      </div>
+      <div class="cite-title">Szeliga M &mdash; Peroxiredoxins in Neurodegenerative
+        Diseases.</div>
+      <div class="cite-rel">Pre-2022 pathway anchor framing PRDX1 in oxidative-stress
+        signaling across neurodegenerative indications, scaffolding model selection.</div>
+    </li>
+  </ul>
+
+  <p class="body-text" style="margin-top:14px;">
+    <strong>Validation pathway.</strong> Model-readiness for PRDX1 is build-from-anchor
+    rather than off-the-shelf: existing 5xFAD/APP/PS1 cohorts have not been profiled
+    against PRDX1 modulation, but the Ca/Calpain/Cdk5 mechanism is testable
+    in standard hippocampal slice and STZ-ICV rodent paradigms before transgenic-cohort
+    commitment.
+  </p>
+</section>
+
+<!-- SECTION 7 — Scholarly evidence -->
+<section>
+  <div class="section-h">
+    <span class="section-num">07</span>
+    <h2>Scholarly Evidence</h2>
+  </div>
+
+  <ul class="cite-list">
+    <li>
+      <div class="cite-meta">
+        <span class="pmid">PMID 38977865</span> &middot; <span class="yr">2024</span>
+        &middot; <em>Sci Rep</em>
+      </div>
+      <div class="cite-title">Park J et al. &mdash; Peroxiredoxin 1 inhibits
+        streptozotocin-induced Alzheimer&rsquo;s disease-like pathology in hippocampal
+        neuronal cells via Ca<sup>2+</sup>/Calpain/Cdk5-mediated mitochondrial
+        fragmentation.</div>
+      <div class="cite-rel">Strongest target-anchored AD biology in the public
+        record &mdash; primary mechanism citation for PRDX1 in AD.</div>
+    </li>
+    <li>
+      <div class="cite-meta">
+        <span class="pmid">PMID 33265993</span> &middot; <span class="yr">2020</span>
+        &middot; <em>Antioxidants (Basel)</em>
+      </div>
+      <div class="cite-title">Szeliga M &mdash; Peroxiredoxins in Neurodegenerative
+        Diseases.</div>
+      <div class="cite-rel">Pre-2022 pathway anchor for the broader peroxiredoxin /
+        redox homeostasis biology that motivates the AD link.</div>
+    </li>
+    <li>
+      <div class="cite-meta">
+        <span class="pmid">PMID 38444388</span> &middot; <span class="yr">2025</span>
+        &middot; <em>J Biomol Struct Dyn</em>
+      </div>
+      <div class="cite-title">Zheng N et al. &mdash; In silico analysis of small-molecule
+        compounds based on pharmacophore- and backbone-leaping PRDX1 inhibitors.</div>
+      <div class="cite-rel">Cancer-context PRDX1 inhibitor candidates &mdash; non-CNS,
+        but completes the chemistry-tractability picture and establishes that
+        PRDX1 inhibition is being explored elsewhere.</div>
+    </li>
+  </ul>
+</section>
+
+<!-- SECTION 8 — Patent landscape -->
+<section>
+  <div class="section-h">
+    <span class="section-num">08</span>
+    <h2>Patent Landscape</h2>
+  </div>
+
+  <p class="body-text">
+    A 2026 public-record patent review surfaces <strong>no representative
+    composition-of-matter records</strong> claiming small-molecule PRDX1 modulators
+    for CNS or neurodegenerative indications. Public Google Patents queries
+    return primarily biomarker, diagnostic, and non-CNS workups rather than
+    PRDX1 inhibitor compositions. This absence is consistent with the CLEAR
+    FTO verdict.
+  </p>
+
+  <dl class="kv">
+    <dt>Last-10-year COM portfolio (CNS)</dt>
+    <dd>None identified</dd>
+    <dt>Adjacent activity (non-CNS)</dt>
+    <dd>Cancer-context inhibitor exploration in the academic literature
+      (Zheng et al. 2025); no granted CNS-claiming filings tied to that work
+      in the records reviewed</dd>
+    <dt>Clinical-stage programs</dt>
+    <dd>None identified for small-molecule PRDX1 modulators in AD/ADRD</dd>
+  </dl>
+</section>
+
+<!-- SECTION 9 — Regulatory precedent -->
+<section class="regulatory">
+  <div class="reg-sub">Section 09 &middot; Foster Rx differentiated layer</div>
+  <h2 class="reg-h">Regulatory Precedent &mdash; Nrf2/Antioxidant Pathway in Neurodegeneration</h2>
+
+  <h4>FDA Action History</h4>
+  <p>
+    PRDX1 is an Nrf2-regulated antioxidant enzyme, situating any PRDX1 modulator
+    program within a broader Nrf2/oxidative stress pathway that has documented
+    FDA precedent. Most directly relevant: omaveloxolone (Skyclarys, Reata/Biogen),
+    an Nrf2 activator, received FDA approval in February 2023 for Friedreich
+    ataxia &mdash; the first FDA-approved drug for FA and a meaningful precedent for
+    Nrf2-pathway modulation in a neurodegenerative indication. Approval was
+    based on the Phase 2 MOXIe Part 2 trial showing &minus;2.41 mFARS point benefit
+    vs. placebo at week 48, with orphan drug, fast track, priority review, and
+    rare pediatric disease designations. The omaveloxolone precedent demonstrates
+    FDA receptivity to oxidative stress mechanisms in neurodegeneration when
+    supported by mechanistic biomarker evidence and clinical functional improvement.
+  </p>
+
+  <h4>Historical AD Antioxidant Trial Outcomes</h4>
+  <p>
+    Two foundational AD antioxidant trials inform the PRDX1 development context.
+    The Sano et al. 1997 ADCS trial of selegiline plus alpha-tocopherol (NEJM
+    336:1216&ndash;22) showed delayed time-to-clinical-endpoint in moderately impaired
+    AD patients, but only after MMSE baseline adjustment &mdash; illustrating the
+    design sensitivity of antioxidant AD trials. The Galasko et al. 2012 ADCS
+    antioxidant biomarker trial (Arch Neurol, NCT00117403) showed CSF F2-isoprostane
+    reduction of 19% in the E/C/ALA group at week 16, validating that oxidative
+    stress biomarkers can move with appropriate intervention &mdash; but also raised
+    an accelerated cognitive decline safety signal in that arm. The canonical
+    pattern: biomarker engagement is achievable, but cognitive endpoint outcomes
+    require careful design.
+  </p>
+
+  <h4>Biomarker Endpoint Feasibility</h4>
+  <p>
+    The endpoint stack for a PRDX1 modulator program in AD has three established
+    components: CSF oxidative stress biomarkers (F2-isoprostanes, 8-isoprostane)
+    for engagement assessment; plasma p-tau217 (FDA-accepted as supportive AD
+    biomarker in 2024 guidance) for downstream neurodegeneration anchor; and
+    clinical endpoints following the post-Aduhelm/Leqembi standard &mdash; CDR-SB or
+    equivalent global function measure as primary, with biomarker composite
+    supporting evidence. The Aduhelm 2021 AdComm (10&ndash;0 against approval, FDA
+    approval over committee, market withdrawal 2024) versus Leqembi 2023 AdComm
+    (6&ndash;0 in favor, clean approval) defines the contemporary regulatory standard:
+    agency receptivity is contingent on robust clinical effect plus biomarker
+    support, not biomarker engagement alone.
+  </p>
+
+  <h4>Complete Response Letter Risk Factors</h4>
+  <p>
+    Predictable CRL risk factors for a PRDX1 modulator program: (1) inadequate
+    clinical effect size on cognitive endpoints despite biomarker engagement
+    (the Aduhelm-pattern risk, sharpened by the Galasko 2012 accelerated-cognitive-decline
+    safety signal in the antioxidant arm); (2) target redundancy and selectivity
+    concerns &mdash; the peroxiredoxin family includes six members with partially
+    overlapping function, raising selectivity questions FDA reviewers may probe
+    in CMC and pharmacology review; (3) safety signals from PRDX1&rsquo;s documented
+    roles in cell proliferation signaling beyond redox homeostasis, requiring
+    careful preclinical characterization of effects on proliferation in non-target
+    tissues; (4) CMC challenges on activator-class chemistry, less established
+    than inhibitor chemistry for review pathway purposes.
+  </p>
+
+  <div class="tldr" style="margin-top: 22px;">
+    <span class="tldr-lbl">TL;DR</span>
+    PRDX1 regulatory pathway has meaningful precedent through omaveloxolone&rsquo;s
+    2023 approval as the first FDA-approved Nrf2/antioxidant pathway modulator
+    in a neurodegenerative indication. Established CSF oxidative stress biomarkers
+    and the post-Aduhelm/Leqembi clinical endpoint framework support development
+    feasibility. Primary risks are antioxidant-specific clinical effect size
+    adequacy and PRDX1 family redundancy/selectivity questions. Pre-IND meeting
+    strongly recommended to align endpoint package and address selectivity
+    preclinical strategy.
+  </div>
+</section>
+
+<!-- SECTION 10 — Footer -->
+<footer class="page-foot">
+  <p>
+    This page presents a single target as evaluation material. Foster Rx&rsquo;s
+    full analysis includes additional dimensions, cross-target analyses, and
+    indication-level context not shown here. For information on engaging with
+    Foster Rx for substantive analysis, contact
+    <a href="mailto:gabrielle@fosterrx.com">gabrielle@fosterrx.com</a>.
+  </p>
+  <div class="links">
+    <a href="https://fosterrx.com">fosterrx.com</a>
+    <a href="mailto:gabrielle@fosterrx.com">gabrielle@fosterrx.com</a>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
