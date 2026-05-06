@@ -56,25 +56,64 @@ strong { color: var(--c-teal-deep); font-weight: 600; }
 .page {
   max-width: 880px;
   margin: 0 auto;
-  padding: 56px 32px 96px;
+  padding: 32px 32px 80px;
 }
 
-/* SECTION 1 — Header */
-.site-head {
+/* Corporate header — matches FCTDI dashboard .brand treatment */
+.brand {
+  position: relative;
+  padding: 14px 0 18px;
   border-bottom: 2px solid var(--c-teal);
-  padding-bottom: 28px;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
 }
-.wordmark {
+.brand::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -5px;
+  height: 1px;
+  background: var(--c-sage);
+}
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.brand-logo {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  display: block;
+}
+.brand-id {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.brand-name {
   font-family: var(--font-serif);
   font-size: 22px;
-  font-weight: 500;
   color: var(--c-teal-deep);
+  font-weight: 500;
   letter-spacing: .04em;
   text-transform: uppercase;
-  margin-bottom: 18px;
+  font-variant-caps: small-caps;
+  line-height: 1.1;
 }
-.wordmark .rx { color: var(--c-teal); font-style: italic; text-transform: lowercase; }
+.brand-name .frx { font-weight: 600; }
+.brand-tag {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  color: var(--c-ink-mute);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+/* SECTION 1 — Page title section */
+.site-head {
+  border-bottom: 1px solid var(--c-rule);
+  padding-bottom: 22px;
+  margin-bottom: 22px;
+}
 .page-title {
   font-size: 38px;
   line-height: 1.15;
@@ -87,6 +126,37 @@ strong { color: var(--c-teal-deep); font-weight: 600; }
   color: var(--c-ink-soft);
   line-height: 1.45;
 }
+
+/* Official-use statement */
+.official-use {
+  background: var(--c-sage-light);
+  border: 1px solid var(--c-sage);
+  border-left: 3px solid var(--c-teal);
+  border-radius: var(--r-md);
+  padding: 18px 22px;
+  margin-bottom: 28px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--c-ink-soft);
+}
+.official-use .lbl {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--c-teal);
+  margin-bottom: 8px;
+}
+.official-use em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14.5px;
+  color: var(--c-teal-dark);
+}
+.official-use strong { color: var(--c-teal-deep); font-weight: 600; }
 
 /* Sections */
 section {
@@ -427,46 +497,90 @@ section.regulatory h4 {
 }
 section.regulatory p { font-size: 15px; line-height: 1.65; color: var(--c-ink); }
 
-/* Footer */
-footer.page-foot {
-  margin-top: 48px;
-  padding-top: 24px;
+/* Footer — matches FCTDI dashboard .foot treatment */
+footer.foot {
+  margin-top: 56px;
+  padding-top: 16px;
   border-top: 1px solid var(--c-rule);
-  font-size: 14px;
-  color: var(--c-ink-soft);
-  line-height: 1.6;
+  font-size: 12px;
+  color: var(--c-ink-mute);
+  line-height: 1.7;
+  letter-spacing: .01em;
 }
-footer.page-foot .links {
-  margin-top: 12px;
-  font-size: 13px;
+footer.foot .foot-corp {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+  justify-content: space-between;
+}
+footer.foot .foot-corp span { color: var(--c-ink-mute); }
+footer.foot .foot-contact {
+  margin-top: 4px;
+  font-size: 12px;
   color: var(--c-ink-mute);
 }
-footer.page-foot .links a { margin-right: 18px; }
+footer.foot .foot-inquiry {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--c-rule-soft);
+  font-size: 12.5px;
+  color: var(--c-ink-soft);
+  font-style: italic;
+}
+footer.foot a { color: var(--c-teal-dark); font-size: 12px; text-decoration: underline; text-decoration-color: var(--c-sage); text-underline-offset: 2px; }
+footer.foot a:hover { color: var(--c-teal-deep); text-decoration-color: var(--c-teal); }
 
 /* Mobile */
 @media (max-width: 720px) {
-  .page { padding: 36px 18px 64px; }
+  .page { padding: 22px 18px 64px; }
   .page-title { font-size: 30px; }
   .id-gene { font-size: 36px; }
-  section, .id-card { padding: 22px 18px; }
+  section, .id-card, .official-use { padding: 18px 16px; }
   .metric-grid { grid-template-columns: repeat(2, 1fr); }
   dl.kv-grid { grid-template-columns: 1fr; gap: 2px 0; }
   dl.kv-grid dt { margin-top: 8px; }
   dl.kv-grid dt:first-child { margin-top: 0; }
   .viewer-stage { height: 320px; }
   .section-h .aside { display: none; }
+  .brand-logo { width: 44px; height: 44px; }
+  .brand-name { font-size: 18px; }
+  footer.foot .foot-corp { flex-direction: column; gap: 2px; }
 }
 </style>
 </head>
 <body>
 <div class="page">
 
-<!-- SECTION 1 — Header -->
+<!-- Corporate header -->
+<header class="brand" role="banner">
+  <div class="brand-row">
+    <img class="brand-logo" src="/assets/logo.png" alt="Foster Rx Systems Inc. logo" width="56" height="56">
+    <div class="brand-id">
+      <div class="brand-name"><span class="frx">Foster Rx</span> Systems Inc.</div>
+      <div class="brand-tag">Target Intelligence &middot; Evaluation Sample</div>
+    </div>
+  </div>
+</header>
+
+<!-- SECTION 1 — Page title -->
 <header class="site-head">
-  <div class="wordmark">Foster <span class="rx">rx</span></div>
   <h1 class="page-title">Sample Target Evaluation</h1>
   <p class="page-sub">Single-target preview of Foster Rx&rsquo;s integrated target analysis. Shared as evaluation material.</p>
 </header>
+
+<!-- Official-use statement -->
+<aside class="official-use" aria-label="Official use statement">
+  <span class="lbl">Official use statement</span>
+  This page is shared by <strong>Foster Rx Systems Inc.</strong> as a non-confidential
+  <em>evaluation sample</em>, intended to demonstrate the analytical depth and
+  structure of Foster Rx&rsquo;s target intelligence work. The analysis presented draws
+  on public data sources combined with Foster Rx&rsquo;s proprietary integration
+  architecture and scoring framework, the subject of U.S. Patent Application
+  No.&nbsp;19/459,855 (patent pending). This page may be reviewed for evaluation
+  purposes; the methodology, scoring framework, and integrated analytical pipeline
+  remain proprietary to Foster Rx Systems Inc.
+</aside>
 
 <!-- SECTION 2 — Target identity card -->
 <div class="id-card">
@@ -919,18 +1033,17 @@ footer.page-foot .links a { margin-right: 18px; }
 </section>
 
 <!-- SECTION 13 — Footer -->
-<footer class="page-foot">
-  <p>
-    This page presents a single target as evaluation material. Foster Rx&rsquo;s
-    full analysis includes additional dimensions, cross-target analyses, and
-    indication-level context not shown here. For information on engaging with
-    Foster Rx for substantive analysis, contact
-    <a href="mailto:gabrielle@fosterrx.com">gabrielle@fosterrx.com</a>.
-  </p>
-  <div class="links">
-    <a href="https://fosterrx.com">fosterrx.com</a>
-    <a href="mailto:gabrielle@fosterrx.com">gabrielle@fosterrx.com</a>
+<footer class="foot" role="contentinfo">
+  <div class="foot-corp">
+    <span>&copy;&nbsp;2026 Foster Rx Systems Inc. &nbsp;|&nbsp; Annapolis, MD, USA &nbsp;|&nbsp; Patent Pending No.&nbsp;19/459,855</span>
   </div>
+  <div class="foot-contact">
+    Contact: <a href="mailto:gabrielle@fosterrx.com">gabrielle@fosterrx.com</a> &nbsp;|&nbsp; <a href="https://fosterrx.com">fosterrx.com</a>
+  </div>
+  <p class="foot-inquiry">
+    For inquiries about engaging with Foster Rx for substantive analysis, please
+    contact <a href="mailto:gabrielle@fosterrx.com">gabrielle@fosterrx.com</a>.
+  </p>
 </footer>
 
 </div>
