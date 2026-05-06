@@ -1,0 +1,6 @@
+# fosterrx.com — robots policy
+# Confidential intelligence deliverables under /intelligence/ are CDA-protected.
+# Cloudflare Access enforces the gate; this file is belt-and-braces.
+
+User-agent: *
+Disallow: /intelligence/
