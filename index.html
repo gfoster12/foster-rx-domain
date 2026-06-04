@@ -209,6 +209,13 @@
       font-size: 0.95rem;
     }
     .site-header nav a:hover { color: var(--color-accent-bright); }
+    .site-header nav a.nav-thesis {
+      color: var(--color-accent-bright);
+      margin-left: 36px;
+      padding-left: 28px;
+      border-left: 1px solid var(--color-rule);
+    }
+    .site-header nav a.nav-thesis:hover { color: #fff; }
     .site-header nav a.header-login-btn {
       background: var(--color-accent-bright);
       color: var(--color-bg);
@@ -340,6 +347,7 @@
       section.hero { padding: 64px 0 56px; }
       section.section { padding: 56px 0; }
       .site-header nav a { margin-left: 16px; font-size: 0.9rem; }
+      .site-header nav a.nav-thesis { margin-left: 18px; padding-left: 14px; }
     }
   </style>
 </head>
@@ -355,6 +363,7 @@
         <a href="#platform">Platform</a>
         <a href="#governance">Governance</a>
         <a href="#about">About</a>
+        <a href="/thesis" class="nav-thesis">Thesis</a>
         <a href="#login" class="header-login-btn">Login</a>
       </nav>
     </div>
