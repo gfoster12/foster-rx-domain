@@ -290,6 +290,92 @@
 
     <p data-reveal>It is the same shape. The thing that made my thesis hard to do well is the same thing that makes asset evaluation hard to do well. Once you see the isomorphism, you cannot unsee it — and you start asking a different question. Not <em>"what is the right answer for this asset,"</em> but <em>"what would it take to make the reasoning itself trustworthy."</em></p>
 
+    <!-- Foster Rx — Isomorphism diagram v2 (essay embed)
+      Refinements: symmetric mirror (left/right answer the SAME question per row),
+      moral clause cut from strip (caption carries inequity), no logo. Scoped .frx-iso. -->
+    <figure class="frx-iso" role="img"
+      aria-label="The same four-part structure — distant cause, mediated mechanism, fragmented evidence, no auditable chain — underlies both biological causation and biopharma asset evaluation. For each row, the biology and biopharma sides answer the same question.">
+      <style>
+        .frx-iso{
+          --forest:#1E3D37; --sage:#6F958E; --aqua:#AAC3BD; --bone:#FAF8F2;
+          --carbon:#0A1413; --ink:#10211D; --muted:#5C6F6A; --line:#DDE6E2;
+          --serif:"Fraunces",Georgia,serif; --sans:"Inter Tight",Arial,sans-serif;
+          margin:44px 0; padding:0; max-width:760px;
+        }
+        .frx-iso figcaption{
+          font-family:var(--sans); font-size:13px; line-height:1.5;
+          color:var(--muted); font-style:italic; margin:18px 4px 0; text-align:center;
+        }
+        .frx-iso svg{display:block; width:100%; height:auto;}
+        .frx-iso .dom{font-family:var(--sans); font-weight:600; font-size:11px; letter-spacing:.14em;}
+        .frx-iso .domsub{font-family:var(--sans); font-weight:400; font-size:12px;}
+        .frx-iso .ask{font-family:var(--sans); font-weight:600; font-size:10.5px; letter-spacing:.05em;}
+        .frx-iso .spine{font-family:var(--serif); font-weight:600; font-size:15px;}
+        .frx-iso .side{font-family:var(--sans); font-weight:400; font-size:12.5px;}
+      </style>
+
+      <svg viewBox="0 0 760 462" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <text class="dom" x="150" y="34" text-anchor="middle" fill="#1E3D37">BIOLOGY</text>
+        <text class="domsub" x="150" y="52" text-anchor="middle" fill="#5C6F6A">how disease arises in a body</text>
+        <text class="dom" x="610" y="34" text-anchor="middle" fill="#1E3D37">BIOPHARMA</text>
+        <text class="domsub" x="610" y="52" text-anchor="middle" fill="#5C6F6A">how an asset gets evaluated</text>
+        <text class="dom" x="380" y="34" text-anchor="middle" fill="#6F958E">THE SHARED SHAPE</text>
+
+        <line x1="380" y1="130" x2="380" y2="156" stroke="#AAC3BD" stroke-width="1"/>
+        <line x1="380" y1="174" x2="380" y2="180" stroke="#AAC3BD" stroke-width="1"/>
+        <line x1="380" y1="220" x2="380" y2="246" stroke="#AAC3BD" stroke-width="1"/>
+        <line x1="380" y1="264" x2="380" y2="270" stroke="#AAC3BD" stroke-width="1"/>
+        <line x1="380" y1="310" x2="380" y2="336" stroke="#AAC3BD" stroke-width="1"/>
+        <line x1="380" y1="354" x2="380" y2="360" stroke="#AAC3BD" stroke-width="1"/>
+        <line x1="380" y1="400" x2="380" y2="424" stroke="#AAC3BD" stroke-width="1"/>
+
+        <line x1="260" y1="110" x2="300" y2="110" stroke="#DDE6E2" stroke-width="1"/>
+        <line x1="460" y1="110" x2="500" y2="110" stroke="#DDE6E2" stroke-width="1"/>
+        <rect x="300" y="90" width="160" height="40" rx="8" fill="#1E3D37"/>
+        <text class="spine" x="380" y="115" text-anchor="middle" fill="#FAF8F2">Distant cause</text>
+        <text class="ask" x="380" y="79" text-anchor="middle" fill="#6F958E">HOW FAR FROM THE EFFECT?</text>
+        <text class="side" x="252" y="106" text-anchor="end" fill="#10211D">Stress, decades</text>
+        <text class="side" x="252" y="122" text-anchor="end" fill="#10211D">before onset</text>
+        <text class="side" x="508" y="106" text-anchor="start" fill="#10211D">An outcome years</text>
+        <text class="side" x="508" y="122" text-anchor="start" fill="#10211D">past the decision</text>
+
+        <line x1="260" y1="200" x2="300" y2="200" stroke="#DDE6E2" stroke-width="1"/>
+        <line x1="460" y1="200" x2="500" y2="200" stroke="#DDE6E2" stroke-width="1"/>
+        <rect x="300" y="180" width="160" height="40" rx="8" fill="#1E3D37"/>
+        <text class="spine" x="380" y="205" text-anchor="middle" fill="#FAF8F2">Mediated mechanism</text>
+        <text class="ask" x="380" y="169" text-anchor="middle" fill="#6F958E">THROUGH WHAT LAYERS?</text>
+        <text class="side" x="252" y="196" text-anchor="end" fill="#10211D">Epigenetic and</text>
+        <text class="side" x="252" y="212" text-anchor="end" fill="#10211D">immune pathways</text>
+        <text class="side" x="508" y="196" text-anchor="start" fill="#10211D">Biology, trials,</text>
+        <text class="side" x="508" y="212" text-anchor="start" fill="#10211D">regulation, access</text>
+
+        <line x1="260" y1="290" x2="300" y2="290" stroke="#DDE6E2" stroke-width="1"/>
+        <line x1="460" y1="290" x2="500" y2="290" stroke="#DDE6E2" stroke-width="1"/>
+        <rect x="300" y="270" width="160" height="40" rx="8" fill="#1E3D37"/>
+        <text class="spine" x="380" y="295" text-anchor="middle" fill="#FAF8F2">Fragmented evidence</text>
+        <text class="ask" x="380" y="259" text-anchor="middle" fill="#6F958E">SCATTERED WHERE?</text>
+        <text class="side" x="252" y="286" text-anchor="end" fill="#10211D">Across partial</text>
+        <text class="side" x="252" y="302" text-anchor="end" fill="#10211D">studies and data</text>
+        <text class="side" x="508" y="286" text-anchor="start" fill="#10211D">Across filings,</text>
+        <text class="side" x="508" y="302" text-anchor="start" fill="#10211D">registries, judgment</text>
+
+        <line x1="260" y1="380" x2="300" y2="380" stroke="#DDE6E2" stroke-width="1"/>
+        <line x1="460" y1="380" x2="500" y2="380" stroke="#DDE6E2" stroke-width="1"/>
+        <rect x="300" y="360" width="160" height="40" rx="8" fill="#1E3D37"/>
+        <text class="spine" x="380" y="385" text-anchor="middle" fill="#FAF8F2">No auditable chain</text>
+        <text class="ask" x="380" y="349" text-anchor="middle" fill="#6F958E">WHO CAN CHECK IT?</text>
+        <text class="side" x="252" y="376" text-anchor="end" fill="#10211D">Inside an</text>
+        <text class="side" x="252" y="392" text-anchor="end" fill="#10211D">expert's head</text>
+        <text class="side" x="508" y="376" text-anchor="start" fill="#10211D">Inside an opinion,</text>
+        <text class="side" x="508" y="392" text-anchor="start" fill="#10211D">not inspectable</text>
+
+        <rect x="210" y="424" width="340" height="32" rx="8" fill="#FAF8F2" stroke="#6F958E" stroke-width="1"/>
+        <text x="380" y="445" text-anchor="middle" fill="#1E3D37" font-style="italic" font-family="Fraunces,Georgia,serif" font-size="14" font-weight="600">Same structure. Same failure mode.</text>
+      </svg>
+
+      <figcaption>One structure underlies both — and the inequity studied as a mechanism in the body reappears as a mechanism in the market.</figcaption>
+    </figure>
+
     <h2 class="frx-h2" data-reveal>Why today's infrastructure fails this shape — and who pays</h2>
 
     <p data-reveal>The biopharma industry evaluates assets with infrastructure that is editorial, opaque, and slow. Expert synthesis is valuable, but it is unverifiable by design: the conclusions rest on brand and reputation rather than on a chain anyone outside the room can inspect. Bolting generic AI onto that process does not fix it. It makes it worse — adding fluency, and with it the risk of confident fabrication, to decisions that already lacked verifiable evidence chains. You get answers that <em>sound</em> more authoritative and are <em>less</em> possible to audit.</p>
