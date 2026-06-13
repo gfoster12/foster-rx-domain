@@ -1,0 +1,41 @@
+name: Deploy to Firebase Preview Channel
+
+on:
+  push:
+    branches: [feat/verify-page]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+          service_account: ${{ secrets.FIREBASE_DEPLOY_SA }}
+
+      - name: Setup Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Deploy to Firebase Preview Channel
+        id: deploy
+        run: |
+          firebase hosting:channel:deploy verify-page \
+            --expires 7d \
+            --project fosterrx-prod \
+            --non-interactive \
+            --json > channel_output.json
+          cat channel_output.json
+          URL=$(python3 -c "import json; d=json.load(open('channel_output.json')); print(next(iter(d['result'].values()))['url'])")
+          echo "preview_url=$URL" >> "$GITHUB_OUTPUT"
+
+      - name: Report preview URL
+        run: |
+          echo "Firebase preview channel deployed."
+          echo "Preview URL: ${{ steps.deploy.outputs.preview_url }}"
