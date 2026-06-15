@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--
+  Dev-only test harness. Not deployed to production. See firebase.json `ignore`
+  rules (assets/verify/fixtures/** and verify/_test.html are excluded).
+
+  Purpose: exercise the verify.js building-block functions against LOCAL
+  synthetic fixtures signed by a TEST keypair (assets/verify/fixtures/), never
+  against the production trust anchor. This harness does NOT call
+  orchestrate(); it composes the audited primitives directly with the test key,
+  so the production page retains no path that could redirect the trust anchor.
+
+  Serve over http (module imports + fetch need a server, not file://), e.g.:
+      python3 -m http.server 8099   # from the repo root, then open
+      http://localhost:8099/verify/_test.html
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>[DEV] verify.js test harness — Foster Rx</title>
+<link rel="modulepreload" href="/assets/verify/noble-ed25519.js"
+      integrity="sha384-SS39iyS6M/DXmYFYsmRm+Lxgt7CaTeu9MFKXliCVnq/dh9i3WVIcIWED27NjC/UR">
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 760px; margin: 2rem auto; padding: 0 1rem; color: #1F2D2E; }
+  h1 { font-size: 1.3rem; } h2 { font-size: 1rem; margin-top: 1.5rem; }
+  .warn { background: #F8F4EA; border: 1px solid #E1D9BD; padding: .6rem .8rem; border-radius: 6px; color: #8C7A2E; }
+  button { font-size: .9rem; padding: .45rem .8rem; margin: .25rem .25rem 0 0; border: 1px solid #4A7C7E; background: #fff; color: #244244; border-radius: 6px; cursor: pointer; }
+  button:hover { background: #EEF2EF; }
+  /* Reuse the production badge ids so renderBadgeState() drives this DOM. */
+  #frx-cert-id { font-family: monospace; word-break: break-all; display: inline-block; background: #fff; border: 1px solid #D9E2DC; border-radius: 6px; padding: .4rem .6rem; }
+  #frx-badge { border: 1px solid #D9E2DC; border-left-width: 5px; border-radius: 8px; padding: 1rem; margin-top: .6rem; }
+  #frx-badge-label { font-weight: 700; font-size: 1.25rem; }
+  #frx-badge[data-state="valid"] { border-color:#2E7D52; background:#EAF5EE; } #frx-badge[data-state="valid"] #frx-badge-label { color:#2E7D52; }
+  #frx-badge[data-state="invalid"] { border-color:#B23A3A; background:#FBEDED; } #frx-badge[data-state="invalid"] #frx-badge-label { color:#B23A3A; }
+  #frx-badge[data-state="pending"] { border-color:#4A5A5C; background:#EEF2EF; }
+  #frx-badge:not([data-state="valid"]):not([data-state="invalid"]):not([data-state="pending"]) { border-color:#8C7A2E; background:#F8F4EA; }
+  #expected { font-family: monospace; color: #4A5A5C; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<h1>[DEV] verify.js test harness</h1>
+<p class="warn">Dev-only. Uses synthetic fixtures + a TEST keypair (not the production trust anchor). Not deployed.</p>
+
+<h2>Fixture scenarios (real crypto via the test key)</h2>
+<button data-fixture="valid-envelope.json" data-expect="valid">valid-envelope → expect VALID</button>
+<button data-fixture="invalid-signature-envelope.json" data-expect="invalid">invalid-signature → expect INVALID</button>
+<button data-fixture="tampered-canonical-envelope.json" data-expect="invalid">tampered-canonical → expect INVALID</button>
+
+<h2>Pure client-side states (preview copy)</h2>
+<button data-state="landing">landing</button>
+<button data-state="pending">pending</button>
+<button data-state="malformed_cert_id">malformed_cert_id</button>
+<button data-state="cert_not_found">cert_not_found</button>
+<button data-state="network_error">network_error</button>
+<button data-state="trust_anchor_error" data-detail="pem">trust_anchor_error (pem)</button>
+<button data-state="trust_anchor_error" data-detail="fingerprint">trust_anchor_error (fingerprint)</button>
+<button data-state="key_mismatch">key_mismatch</button>
+<button data-state="signature_missing">signature_missing</button>
+<button data-state="fetch_error">fetch_error</button>
+<button data-state="envelope_parse_error">envelope_parse_error</button>
+
+<h2>Result</h2>
+<p>Expected: <span id="expected">—</span></p>
+<section id="frx-result">
+  <div id="frx-cert-id-row" hidden><div class="label">Certificate ID</div><div id="frx-cert-id"></div></div>
+  <div id="frx-badge" data-state="pending"><div id="frx-badge-label"></div><p id="frx-badge-explanation"></p></div>
+</section>
+<section id="frx-landing" hidden><p>(landing state shown)</p></section>
+
+<script type="module">
+import {
+  pemToRawKey, compareFingerprintCaseInsensitive, verifySignature, renderBadgeState,
+} from "/assets/verify/verify.js";
+
+const FIXTURES = "/assets/verify/fixtures/";
+
+async function loadJson(path) {
+  const r = await fetch(path);
+  if (!r.ok) throw new Error("fetch failed: " + path + " " + r.status);
+  return r.json();
+}
+
+// Replays the production verify flow steps 7–9 using the TEST key.
+async function runFixture(fixtureFile, expect) {
+  document.getElementById("expected").textContent = expect.toUpperCase();
+  const [envelope, keypair] = await Promise.all([
+    loadJson(FIXTURES + fixtureFile),
+    loadJson(FIXTURES + "test-keypair.json"),
+  ]);
+  if (envelope.payload && envelope.payload.certificate_id) {
+    const row = document.getElementById("frx-cert-id-row");
+    row.hidden = false;
+    document.getElementById("frx-cert-id").textContent = envelope.payload.certificate_id;
+  }
+  if (!compareFingerprintCaseInsensitive(envelope.signing_key_fingerprint, keypair.signing_key_fingerprint)) {
+    return renderBadgeState("key_mismatch");
+  }
+  if (!envelope.signature_hex || envelope.signature_hex.trim().length === 0) {
+    return renderBadgeState("signature_missing");
+  }
+  let rawKey;
+  try { rawKey = pemToRawKey(keypair.public_key_pem); }
+  catch { return renderBadgeState("trust_anchor_error", { detail: "pem" }); }
+  try {
+    const ok = await verifySignature(envelope.canonical_form_b64, envelope.signature_hex, rawKey);
+    renderBadgeState(ok ? "valid" : "invalid");
+  } catch { renderBadgeState("invalid"); }
+}
+
+document.querySelectorAll("button[data-fixture]").forEach((b) =>
+  b.addEventListener("click", () => runFixture(b.dataset.fixture, b.dataset.expect)));
+
+document.querySelectorAll("button[data-state]").forEach((b) =>
+  b.addEventListener("click", () => {
+    document.getElementById("expected").textContent = "(preview)";
+    renderBadgeState(b.dataset.state, { detail: b.dataset.detail });
+  }));
+</script>
+</body>
+</html>

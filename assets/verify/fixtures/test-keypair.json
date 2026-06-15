@@ -1,0 +1,7 @@
+{
+  "note": "DEV-ONLY TEST PUBLIC KEY — freshly generated, NOT the production key. Private key not persisted.",
+  "algorithm": "ed25519",
+  "public_key_hex": "d129e02c61d37d5f486f86d21fe4119040ba091f2208ae8634f88746c62e121d",
+  "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA0SngLGHTfV9Ib4bSH+QRkEC6CR8iCK6GNPiHRsYuEh0=\n-----END PUBLIC KEY-----\n",
+  "signing_key_fingerprint": "5164cff880051bc20268089ec1d9e571accc015f01ba2300b6000ae7c8147a62"
+}
