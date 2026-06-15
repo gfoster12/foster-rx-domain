@@ -1,0 +1,19 @@
+{
+  "payload": {
+    "certificate_id": "FRXS-0F1E2D3C-4B5A-4988-8776-655443322110",
+    "kind": "intelligence_report",
+    "status": "VALID",
+    "note": "SYNTHETIC TEST FIXTURE — not a real Foster Rx certificate",
+    "output_description": {
+      "kind": "intelligence_report",
+      "target": "TEST-TARGET",
+      "indication": "Synthetic indication (verify-page fixture)"
+    },
+    "signature_algorithm": "ed25519",
+    "signing_key_fingerprint": "5164cff880051bc20268089ec1d9e571accc015f01ba2300b6000ae7c8147a62"
+  },
+  "canonical_form_b64": "eyJjZXJ0aWZpY2F0ZV9pZCI6IkZSWFMtMEYxRTJEM0MtNEI1QS00OTg4LTg3NzYtNjU1NDQzMzIyMTEwIiwia2luZCI6ImludGVsbGlnZW5jZV9yZXBvcnQiLCJub3RlIjoiU1lOVEhFVElDIFRFU1QgRklYVFVSRSDigJQgbm90IGEgcmVhbCBGb3N0ZXIgUnggY2VydGlmaWNhdGUiLCJvdXRwdXRfZGVzY3JpcHRpb24iOnsiaW5kaWNhdGlvbiI6IlN5bnRoZXRpYyBpbmRpY2F0aW9uICh2ZXJpZnktcGFnZSBmaXh0dXJlKSIsImtpbmQiOiJpbnRlbGxpZ2VuY2VfcmVwb3J0IiwidGFyZ2V0IjoiVEVTVC1UQVJHRVQifSwic3RhdHVzIjoiVkFMSUQifQ==",
+  "signature_hex": "21172234f0e9a4b4abdef9b976bda524369f23648f383d3ac7bdffa011065588492f3b1d7c861cd50c147e1198ba8d989eb2e7e3bfc210c6cc0ac1da80f02304",
+  "signing_key_fingerprint": "5164cff880051bc20268089ec1d9e571accc015f01ba2300b6000ae7c8147a62",
+  "signature_algorithm": "ed25519"
+}

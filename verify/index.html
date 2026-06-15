@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<!-- S1 -->
+<title>Verify a certificate — Foster Rx</title>
+
+<!-- Self-hosted, SRI-pinned Ed25519 verifier (not a CDN). The modulepreload
+     integrity hash pins the exact vendored bytes; verify.js imports it. -->
+<link rel="modulepreload" href="/assets/verify/noble-ed25519.js"
+      integrity="sha384-SS39iyS6M/DXmYFYsmRm+Lxgt7CaTeu9MFKXliCVnq/dh9i3WVIcIWED27NjC/UR">
+
+<style>
+:root {
+  --c-teal:        #4A7C7E;
+  --c-teal-deep:   #244244;
+  --c-ink:         #1F2D2E;
+  --c-ink-soft:    #4A5A5C;
+  --c-ink-mute:    #7A8A8C;
+  --c-rule:        #D9E2DC;
+  --c-sage-pale:   #F4F7F4;
+  --c-paper:       #FFFFFF;
+  --c-valid:       #2E7D52;
+  --c-valid-bg:    #EAF5EE;
+  --c-invalid:     #B23A3A;
+  --c-invalid-bg:  #FBEDED;
+  --c-unable:      #8C7A2E;
+  --c-unable-bg:   #F8F4EA;
+  --c-pending:     #4A5A5C;
+  --c-pending-bg:  #EEF2EF;
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans:  'DM Sans', Calibri, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--c-sage-pale); color: var(--c-ink);
+  font-family: var(--font-sans); line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 720px; margin: 0 auto; padding: 2.5rem 1.25rem 3rem; }
+header.site { border-bottom: 1px solid var(--c-rule); padding-bottom: 1.25rem; margin-bottom: 1.75rem; }
+h1 { font-family: var(--font-serif); font-weight: 600; font-size: 2rem; color: var(--c-teal-deep); margin: 0 0 .35rem; }
+.tagline { color: var(--c-ink-soft); margin: 0; }
+h2 { font-family: var(--font-serif); font-weight: 600; color: var(--c-teal-deep); font-size: 1.3rem; margin: 2rem 0 .6rem; }
+h3 { font-weight: 600; font-size: 1rem; margin: 1.25rem 0 .35rem; color: var(--c-ink); }
+p { margin: .5rem 0; color: var(--c-ink-soft); }
+section { margin-top: 1.5rem; }
+.label { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--c-ink-mute); margin-bottom: .25rem; }
+
+/* Cert ID */
+#frx-cert-id-row { margin-bottom: 1.25rem; }
+#frx-cert-id { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 1rem; color: var(--c-ink); word-break: break-all; background: var(--c-paper); border: 1px solid var(--c-rule); border-radius: 6px; padding: .55rem .7rem; display: inline-block; }
+
+/* Badge */
+#frx-badge { border: 1px solid var(--c-rule); border-left-width: 5px; border-radius: 8px; background: var(--c-paper); padding: 1rem 1.1rem; }
+#frx-badge-label { font-family: var(--font-serif); font-weight: 600; font-size: 1.45rem; display: flex; align-items: center; gap: .55rem; }
+#frx-badge-label::before { content: "•"; font-size: 1.2rem; line-height: 1; }
+#frx-badge-explanation { margin: .5rem 0 0; color: var(--c-ink-soft); }
+#frx-badge[data-state="valid"]   { border-color: var(--c-valid);   background: var(--c-valid-bg); }
+#frx-badge[data-state="valid"] #frx-badge-label { color: var(--c-valid); }
+#frx-badge[data-state="valid"] #frx-badge-label::before { content: "✓"; }
+#frx-badge[data-state="invalid"] { border-color: var(--c-invalid); background: var(--c-invalid-bg); }
+#frx-badge[data-state="invalid"] #frx-badge-label { color: var(--c-invalid); }
+#frx-badge[data-state="invalid"] #frx-badge-label::before { content: "✕"; }
+#frx-badge[data-state="pending"] { border-color: var(--c-pending); background: var(--c-pending-bg); }
+#frx-badge[data-state="pending"] #frx-badge-label { color: var(--c-pending); }
+#frx-badge[data-state="pending"] #frx-badge-label::before { content: "…"; }
+#frx-badge[data-state="key_mismatch"], #frx-badge[data-state="signature_missing"],
+#frx-badge[data-state="fetch_error"], #frx-badge[data-state="cert_not_found"],
+#frx-badge[data-state="network_error"], #frx-badge[data-state="trust_anchor_error"],
+#frx-badge[data-state="malformed_cert_id"], #frx-badge[data-state="envelope_parse_error"] {
+  border-color: var(--c-unable); background: var(--c-unable-bg);
+}
+#frx-badge[data-state="key_mismatch"] #frx-badge-label, #frx-badge[data-state="signature_missing"] #frx-badge-label,
+#frx-badge[data-state="fetch_error"] #frx-badge-label, #frx-badge[data-state="cert_not_found"] #frx-badge-label,
+#frx-badge[data-state="network_error"] #frx-badge-label, #frx-badge[data-state="trust_anchor_error"] #frx-badge-label,
+#frx-badge[data-state="malformed_cert_id"] #frx-badge-label, #frx-badge[data-state="envelope_parse_error"] #frx-badge-label {
+  color: var(--c-unable);
+}
+#frx-badge[data-state="key_mismatch"] #frx-badge-label::before, #frx-badge[data-state="signature_missing"] #frx-badge-label::before,
+#frx-badge[data-state="fetch_error"] #frx-badge-label::before, #frx-badge[data-state="cert_not_found"] #frx-badge-label::before,
+#frx-badge[data-state="network_error"] #frx-badge-label::before, #frx-badge[data-state="trust_anchor_error"] #frx-badge-label::before,
+#frx-badge[data-state="malformed_cert_id"] #frx-badge-label::before, #frx-badge[data-state="envelope_parse_error"] #frx-badge-label::before {
+  content: "!";
+}
+
+/* Landing form */
+#frx-landing form { margin: 1rem 0 1.5rem; display: flex; flex-wrap: wrap; gap: .6rem; align-items: flex-end; }
+#frx-landing .field { display: flex; flex-direction: column; flex: 1 1 320px; }
+#frx-landing input[type="text"] { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .95rem; padding: .6rem .7rem; border: 1px solid var(--c-rule); border-radius: 6px; }
+#frx-landing button { font-family: var(--font-sans); font-size: 1rem; font-weight: 600; color: #fff; background: var(--c-teal); border: 0; border-radius: 6px; padding: .65rem 1.4rem; cursor: pointer; }
+#frx-landing button:hover { background: var(--c-teal-deep); }
+
+footer.site { border-top: 1px solid var(--c-rule); margin-top: 2.5rem; padding-top: 1.25rem; color: var(--c-ink-mute); font-size: .88rem; }
+footer.site a { color: var(--c-teal); }
+footer.site .links { margin-top: .5rem; display: flex; flex-wrap: wrap; gap: 1rem; }
+footer.site p { margin: .15rem 0; color: var(--c-ink-mute); }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="site">
+    <!-- S2 --><h1>Verify a Foster Rx certificate</h1>
+    <!-- S3 --><p class="tagline">Cryptographically verify the signature on a Foster Rx ANGIS certificate, in your browser.</p>
+  </header>
+
+  <!-- Landing state (bare /verify). Shown by default; hidden by JS when a
+       certificate ID is present in the URL. -->
+  <section id="frx-landing">
+    <!-- L1 --><h2>Verify a certificate</h2>
+    <!-- L2 --><p>Foster Rx ANGIS certificates carry a cryptographic signature. Enter a certificate ID below to verify that signature against Foster Rx's published signing key.</p>
+    <form id="frx-landing-form" autocomplete="off">
+      <div class="field">
+        <!-- L3 --><label class="label" for="frx-cert-input">Certificate ID</label>
+        <!-- L4 --><input type="text" id="frx-cert-input" name="cert_id" placeholder="FRXS-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" spellcheck="false">
+      </div>
+      <!-- L5 --><button type="submit">Verify</button>
+    </form>
+    <!-- L6 --><h3>Where do I find a certificate ID?</h3>
+    <!-- L7 --><p>A certificate ID appears on the Foster Rx ANGIS certificate you received. It begins with "FRXS-" followed by a 36-character identifier. Paste the full ID, including the "FRXS-" prefix.</p>
+  </section>
+
+  <!-- Result state (/verify/<cert_id>). Hidden until JS renders a state. -->
+  <section id="frx-result" hidden>
+    <div id="frx-cert-id-row" hidden>
+      <!-- S4 / C1 --><div class="label">Certificate ID</div>
+      <div id="frx-cert-id"></div>
+    </div>
+    <!-- S5 --><div class="label">Verification status</div>
+    <div id="frx-badge" data-state="pending">
+      <div id="frx-badge-label"></div>
+      <p id="frx-badge-explanation"></p>
+    </div>
+  </section>
+
+  <!-- Always-visible explainers -->
+  <section>
+    <!-- S6 --><h2>What this verifies</h2>
+    <!-- W1 --><p>A "Signature valid" result means Foster Rx's published ANGIS signing key produced the signature on this certificate. Because only Foster Rx holds the corresponding private key, a valid signature confirms the certificate was issued by Foster Rx and has not been altered since it was signed.</p>
+  </section>
+
+  <section>
+    <!-- S8 --><h2>How verification works</h2>
+    <!-- W2 --><p>The check runs entirely in your browser. Your browser fetches Foster Rx's published Ed25519 signing key from fosterrx.com and verifies the certificate's signature against it. No third party is involved, and no personal data is transmitted.</p>
+    <!-- W3 --><p>Before verifying, the page confirms that the signing-key fingerprint named in the certificate matches the fingerprint of Foster Rx's currently published key. If they differ, the page reports that it cannot verify rather than checking against the wrong key.</p>
+  </section>
+
+  <section>
+    <!-- S7 --><h2>What this does not verify</h2>
+    <!-- N1 --><p>A valid signature confirms who issued this certificate — Foster Rx — and that it has not been altered. It does not, by itself, attest to the accuracy or correctness of the findings the certificate describes.</p>
+    <!-- N2 --><p>This page verifies the certificate's signature only. It does not yet display the certificate's contents — the sources and methodologies that contributed to it. Itemized provenance is a planned addition to this page.</p>
+  </section>
+
+  <footer class="site">
+    <!-- F1 --><p>Foster Rx Systems Inc.</p>
+    <!-- F2 --><p>Patent Pending No. 19/459,855</p>
+    <!-- F3 --><p>Built by Foster Rx Systems Inc.</p>
+    <div class="links">
+      <!-- F4 --><a href="https://fosterrx.com/">fosterrx.com</a>
+      <!-- F6 --><a href="/.well-known/angis-signing-key-v1.pub">Signing key (PEM)</a>
+      <!-- F8 --><a href="/.well-known/angis-signing-key-v1.fingerprint">Signing key fingerprint</a>
+    </div>
+  </footer>
+
+</div>
+
+<script type="module">
+  import { orchestrate } from "/assets/verify/verify.js";
+
+  // Landing form: navigate to /verify/<id> so the rewrite + orchestrate flow
+  // handles validation and verification. No verification logic here.
+  const form = document.getElementById("frx-landing-form");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const v = document.getElementById("frx-cert-input").value.trim();
+      if (v.length > 0) window.location.assign("/verify/" + encodeURIComponent(v));
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", orchestrate);
+  if (document.readyState !== "loading") orchestrate();
+</script>
+</body>
+</html>
