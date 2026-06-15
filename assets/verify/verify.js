@@ -76,7 +76,7 @@ const COPY = {
   },
   malformed_cert_id: {
     label: "Unable to verify", // E2
-    body: 'That doesn’t look like a Foster Rx certificate ID. A valid ID begins with "FRXS-". Please check the ID and try again.',
+    body: "That doesn't look like a Foster Rx certificate ID. A valid ID begins with \"FRXS-\". Please check the ID and try again.",
   },
   cert_not_found: {
     label: "Unable to verify", // E3
@@ -311,7 +311,15 @@ export async function orchestrate() {
     return renderBadgeState("trust_anchor_error", { detail: which });
   }
 
-  // 7. Fingerprint cross-check (before verifying).
+  // 7. Signature must be present. Checked before the fingerprint
+  //    cross-check so an unsigned cert (empty signature_hex, empty
+  //    signing_key_fingerprint) renders signature_missing rather than
+  //    key_mismatch — each state honest about its actual failure mode.
+  if (!envelope.signature_hex || envelope.signature_hex.trim().length === 0) {
+    return renderBadgeState("signature_missing");
+  }
+
+  // 8. Fingerprint cross-check (before verifying).
   if (
     !compareFingerprintCaseInsensitive(
       envelope.signing_key_fingerprint,
@@ -319,11 +327,6 @@ export async function orchestrate() {
     )
   ) {
     return renderBadgeState("key_mismatch");
-  }
-
-  // 8. Signature must be present.
-  if (!envelope.signature_hex || envelope.signature_hex.trim().length === 0) {
-    return renderBadgeState("signature_missing");
   }
 
   // 9. Verify.
