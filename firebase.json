@@ -30,5 +30,11 @@
     ],
     "cleanUrls": true,
     "trailingSlash": false
-  }
+  },
+  "firestore": [
+    {
+      "database": "foster-rx-synth",
+      "rules": "firestore.rules"
+    }
+  ]
 }
