@@ -97,6 +97,18 @@ footer.site { border-top: 1px solid var(--c-rule); margin-top: 2.5rem; padding-t
 footer.site a { color: var(--c-teal); }
 footer.site .links { margin-top: .5rem; display: flex; flex-wrap: wrap; gap: 1rem; }
 footer.site p { margin: .15rem 0; color: var(--c-ink-mute); }
+/* Signed manifests */
+#frx-manifests { margin-top: 1.5rem; }
+.frx-manifest-intro { color: var(--c-ink-soft); margin: 0 0 .5rem; }
+.frx-manifest-heading { font-family: var(--font-serif); font-weight: 600; font-size: 1.1rem; color: var(--c-teal-deep); margin: 1.25rem 0 .4rem; }
+.frx-manifest-list { list-style: none; margin: 0; padding: 0; }
+.frx-manifest-item { background: var(--c-paper); border: 1px solid var(--c-rule); border-radius: 6px; padding: .6rem .75rem; margin-bottom: .5rem; }
+.frx-manifest-name { font-weight: 600; color: var(--c-ink); }
+.frx-manifest-meta { font-size: .82rem; color: var(--c-ink-mute); margin-top: .15rem; }
+.frx-manifest-desc { font-size: .9rem; color: var(--c-ink-soft); margin-top: .3rem; }
+.frx-manifest-url { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .8rem; color: var(--c-ink-mute); margin-top: .25rem; word-break: break-all; }
+.frx-manifest-empty { color: var(--c-ink-soft); font-style: italic; margin: .25rem 0 0; }
+
 [hidden] { display: none !important; }
 </style>
 </head>
@@ -135,6 +147,9 @@ footer.site p { margin: .15rem 0; color: var(--c-ink-mute); }
       <div id="frx-badge-label"></div>
       <p id="frx-badge-explanation"></p>
     </div>
+    <!-- Signed manifests. Populated by verify.js only after a valid signature;
+         stays hidden in every other state. -->
+    <div id="frx-manifests" hidden></div>
   </section>
 
   <!-- Always-visible explainers -->
@@ -152,7 +167,8 @@ footer.site p { margin: .15rem 0; color: var(--c-ink-mute); }
   <section>
     <!-- S7 --><h2>What this does not verify</h2>
     <!-- N1 --><p>A valid signature confirms who issued this certificate — Foster Rx — and that it has not been altered. It does not, by itself, attest to the accuracy or correctness of the findings the certificate describes.</p>
-    <!-- N2 --><p>This page verifies the certificate's signature only. It does not yet display the certificate's contents — the sources and methodologies that contributed to it. Itemized provenance is a planned addition to this page.</p>
+    <!-- N2 --><p>When a certificate's signature is valid, this page lists the sources and methodologies recorded in it. Those entries are part of the signed certificate, so the signature check covers them. Confirming that a source is listed is not the same as confirming that the finding drawn from it is correct.</p>
+    <!-- N3 --><p>Not every certificate itemizes sources and methodologies, and some certificate types do not carry them at all. Where a list is absent, this page says so rather than omitting the section.</p>
   </section>
 
   <footer class="site">
