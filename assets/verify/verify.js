@@ -23,7 +23,7 @@
  * block functions and drives them with local fixtures + a test key.
  *
  * All customer-visible strings are the approved prose
- * (.claude/workstream2/verify_page_prose_draft.md). Do not edit copy here
+ * (docs/verify_page_prose_draft.md). Do not edit copy here
  * without a corresponding prose-doc change.
  */
 
