@@ -52,10 +52,18 @@ const ED25519_SPKI_PREFIX = Uint8Array.from([
   0x30, 0x2a, 0x30, 0x05, 0x06, 0x03, 0x2b, 0x65, 0x70, 0x03, 0x21, 0x00,
 ]);
 
-// Lenient on the UUID version/variant nibbles (internal detail); strict on the
-// FRXS- prefix and the 8-4-4-4-12 hex shape. Case-insensitive (recon OQ-2).
+// Two ID shapes are legitimately producible by the platform:
+//   FRXS-<16 hex>                      -- what every production call site emits
+//                                         (certificate_builder, app, certify_brief,
+//                                         full_pipeline); this is the common case.
+//   FRXS-<8-4-4-4-12 hex>              -- Certificate.certificate_id's
+//                                         default_factory, which fires only when a
+//                                         Certificate is built with no explicit id.
+// Both are accepted: a certificate carrying either is real, and rejecting one at
+// the format gate would tell a genuine holder their ID is malformed. Strict on the
+// FRXS- prefix; lenient on UUID version/variant nibbles. Case-insensitive (OQ-2).
 const CERT_ID_RE =
-  /^FRXS-[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i;
+  /^FRXS-(?:[0-9A-F]{16}|[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})$/i;
 
 // ─── Approved copy (single source of truth for JS-rendered strings) ──────────
 // Each entry: { label, body }. IDs reference the prose document.
