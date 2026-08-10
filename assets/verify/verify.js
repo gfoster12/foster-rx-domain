@@ -23,14 +23,25 @@
  * block functions and drives them with local fixtures + a test key.
  *
  * All customer-visible strings are the approved prose
- * (.claude/workstream2/verify_page_prose_draft.md). Do not edit copy here
+ * (docs/verify_page_prose_draft.md). Do not edit copy here
  * without a corresponding prose-doc change.
  */
 
 import * as ed25519 from "./noble-ed25519.js";
 
 // ─── Constants (production, hardcoded — not overridable from the page) ───────
-const API_BASE = "https://foster-rx-synth-api-oheqxmpdqa-uk.a.run.app";
+// The public envelope is read directly from the world-readable Firestore
+// collection `public_envelopes`, written by the platform's public-envelope
+// publisher. The document carries exactly the 4-key verification projection:
+// canonical_form_b64, signature_hex, signing_key_fingerprint,
+// signature_algorithm. No API key, no Cloud Run hop, no credentials.
+const FIRESTORE_PROJECT = "fosterrx-prod";
+const FIRESTORE_DATABASE = "foster-rx-synth";
+const FIRESTORE_COLLECTION = "public_envelopes";
+const FIRESTORE_ENVELOPE_URL = (certId) =>
+  `https://firestore.googleapis.com/v1/projects/${FIRESTORE_PROJECT}` +
+  `/databases/${FIRESTORE_DATABASE}/documents/${FIRESTORE_COLLECTION}` +
+  `/${encodeURIComponent(certId)}`;
 const TRUST_ANCHOR_PEM_URL = "/.well-known/angis-signing-key-v1.pub";
 // NOTE: real published file is `…-v1.fingerprint` (NOT `…-v1.pub.fingerprint`,
 // which 404s). Confirmed against the deployed apex. See Phase A report.
@@ -41,10 +52,18 @@ const ED25519_SPKI_PREFIX = Uint8Array.from([
   0x30, 0x2a, 0x30, 0x05, 0x06, 0x03, 0x2b, 0x65, 0x70, 0x03, 0x21, 0x00,
 ]);
 
-// Lenient on the UUID version/variant nibbles (internal detail); strict on the
-// FRXS- prefix and the 8-4-4-4-12 hex shape. Case-insensitive (recon OQ-2).
+// Two ID shapes are legitimately producible by the platform:
+//   FRXS-<16 hex>                      -- what every production call site emits
+//                                         (certificate_builder, app, certify_brief,
+//                                         full_pipeline); this is the common case.
+//   FRXS-<8-4-4-4-12 hex>              -- Certificate.certificate_id's
+//                                         default_factory, which fires only when a
+//                                         Certificate is built with no explicit id.
+// Both are accepted: a certificate carrying either is real, and rejecting one at
+// the format gate would tell a genuine holder their ID is malformed. Strict on the
+// FRXS- prefix; lenient on UUID version/variant nibbles. Case-insensitive (OQ-2).
 const CERT_ID_RE =
-  /^FRXS-[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i;
+  /^FRXS-(?:[0-9A-F]{16}|[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})$/i;
 
 // ─── Approved copy (single source of truth for JS-rendered strings) ──────────
 // Each entry: { label, body }. IDs reference the prose document.
@@ -96,6 +115,21 @@ const COPY = {
     body: "We couldn't load Foster Rx's published signing key, so we can't verify this certificate right now. Please try again shortly.", // E7 (PEM), default
     bodyFingerprint:
       "We couldn't load Foster Rx's published signing-key fingerprint, so we can't verify this certificate right now. Please try again shortly.", // E8
+  },
+  // Manifest sections (M1-M8). Rendered only after a valid signature; these
+  // describe the signed contents, never the verification result itself.
+  manifests: {
+    intro:
+      "The sources and methodologies below are part of the signed certificate. They were covered by the signature check above.", // M1
+    sourcesHeading: "Sources", // M2
+    methodologiesHeading: "Methodologies", // M3
+    sourcesEmpty: "This certificate does not itemize its sources.", // M4
+    methodologiesEmpty: "This certificate does not itemize its methodologies.", // M5
+    notApplicable:
+      "This certificate type does not carry source or methodology manifests.", // M6
+    unavailable:
+      "The certificate's contents could not be displayed. This does not affect the signature result above.", // M7
+    accessedLabel: "Accessed", // M8
   },
 };
 
@@ -151,21 +185,55 @@ export function validateCertIdFormat(certId) {
   return typeof certId === "string" && CERT_ID_RE.test(certId);
 }
 
+/**
+ * Unwrap Firestore REST's typed field encoding into a flat object.
+ * Firestore returns { fields: { k: { stringValue: "..." } } }; the rest of this
+ * module consumes bare strings. Only stringValue is expected in this
+ * collection -- any other type is coerced via String() rather than dropped, so
+ * a schema drift surfaces downstream as a verification failure (honest) rather
+ * than as a silently-absent field (dishonest).
+ */
+export function unwrapFirestoreFields(doc) {
+  const fields = doc && doc.fields;
+  if (!fields || typeof fields !== "object") {
+    throw new ParseError("envelope document has no fields");
+  }
+  const out = {};
+  for (const [key, val] of Object.entries(fields)) {
+    if (val && typeof val === "object" && "stringValue" in val) {
+      out[key] = val.stringValue;
+    } else if (val && typeof val === "object") {
+      const inner = Object.values(val)[0];
+      out[key] = inner === undefined || inner === null ? "" : String(inner);
+    } else {
+      out[key] = "";
+    }
+  }
+  return out;
+}
+
 export async function fetchEnvelope(certId) {
-  const url = `${API_BASE}/v1/certificates/${encodeURIComponent(certId)}/envelope`;
+  const url = FIRESTORE_ENVELOPE_URL(certId);
   let res;
   try {
     res = await fetch(url, { method: "GET", headers: { Accept: "application/json" } });
   } catch (e) {
     throw new NetworkError(String(e));
   }
+  // Firestore returns 404 NOT_FOUND for a missing document and 403
+  // PERMISSION_DENIED if the security rules deny the read. These are different
+  // failures and must not collapse: a rules regression is not "no such
+  // certificate". 403 falls through to FetchError -> "Unable to verify".
   if (res.status === 404) throw new NotFoundError("certificate not found");
+  if (res.status === 403) throw new FetchError("HTTP 403 (public read denied)");
   if (!res.ok) throw new FetchError(`HTTP ${res.status}`);
+  let doc;
   try {
-    return await res.json();
+    doc = await res.json();
   } catch (e) {
     throw new ParseError(String(e));
   }
+  return unwrapFirestoreFields(doc);
 }
 
 export async function fetchTrustAnchorPem(url = TRUST_ANCHOR_PEM_URL) {
@@ -259,6 +327,145 @@ export function renderBadgeState(state, opts = {}) {
   }
 }
 
+/**
+ * Decode the signed canonical bytes into an object. The canonical form is
+ * deterministic UTF-8 JSON (ADR-0015: sorted keys, compact separators). These
+ * are the exact bytes the Ed25519 signature covers -- rendering from them, and
+ * only from them, is what makes the displayed contents attested rather than
+ * merely asserted.
+ */
+export function decodeCanonical(canonicalFormB64) {
+  const bytes = base64ToBytes(canonicalFormB64);
+  const text = new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+  return JSON.parse(text);
+}
+
+// Display policy for partnership_classification (signed, world-readable).
+// "verbatim" renders the enum exactly as it appears in the signed canonical.
+// That value is public regardless -- canonical_form_b64 is world-readable and
+// must be, for the browser to verify over it -- so any softening here would be
+// presentational only, and discoverable. Display-only; never affects the
+// signature. All registered methodologies are INTERNAL as of 2026-08-01.
+const PARTNERSHIP_DISPLAY = "verbatim";
+
+function partnershipLabel(raw) {
+  if (PARTNERSHIP_DISPLAY === "omit") return null;
+  if (typeof raw !== "string" || raw.length === 0) return null;
+  if (PARTNERSHIP_DISPLAY === "verbatim") return raw;
+  return raw.toUpperCase() === "INTERNAL" ? "Internal" : "Partner";
+}
+
+function mkEl(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  // textContent only -- never innerHTML. This content is world-readable and
+  // unauthenticated by construction; it is rendered as text, never as markup.
+  if (text !== undefined && text !== null) node.textContent = String(text);
+  return node;
+}
+
+function renderSourceEntry(entry) {
+  const li = mkEl("li", "frx-manifest-item");
+  li.appendChild(mkEl("div", "frx-manifest-name", entry.source_name || entry.source_id || ""));
+  const meta = [];
+  if (entry.source_category) meta.push(entry.source_category);
+  if (entry.source_version) meta.push(entry.source_version);
+  if (entry.accessed_at) meta.push(`${COPY.manifests.accessedLabel} ${entry.accessed_at}`);
+  if (meta.length) li.appendChild(mkEl("div", "frx-manifest-meta", meta.join(" · ")));
+  // source_url is rendered as text, not as an anchor: this is unauthenticated
+  // third-party-supplied data and must not become a clickable target.
+  if (entry.source_url) li.appendChild(mkEl("div", "frx-manifest-url", entry.source_url));
+  return li;
+}
+
+function renderMethodologyEntry(entry) {
+  const li = mkEl("li", "frx-manifest-item");
+  const name = entry.methodology_name || entry.methodology_id || "";
+  const version = entry.methodology_version ? ` v${entry.methodology_version}` : "";
+  li.appendChild(mkEl("div", "frx-manifest-name", `${name}${version}`));
+  const label = partnershipLabel(entry.partnership_classification);
+  if (label) li.appendChild(mkEl("div", "frx-manifest-meta", label));
+  if (entry.description) li.appendChild(mkEl("div", "frx-manifest-desc", entry.description));
+  return li;
+}
+
+function renderManifestList(host, heading, entries, emptyCopy, itemRenderer) {
+  host.appendChild(mkEl("h3", "frx-manifest-heading", heading));
+  if (!Array.isArray(entries) || entries.length === 0) {
+    // Absent and empty are the same story to a reader. canonical_form() pops
+    // these keys when they equal [] (Phase 2.6 backward-compat), so absence is
+    // the common case, not an anomaly -- say so plainly rather than hiding it.
+    host.appendChild(mkEl("p", "frx-manifest-empty", emptyCopy));
+    return;
+  }
+  const ul = mkEl("ul", "frx-manifest-list");
+  for (const entry of entries) {
+    if (entry && typeof entry === "object") ul.appendChild(itemRenderer(entry));
+  }
+  host.appendChild(ul);
+}
+
+/**
+ * Render the signed source/methodology manifests beneath a valid badge.
+ *
+ * MUST NOT THROW and MUST NOT touch the badge. Called only after the badge has
+ * been rendered; any failure degrades to an in-section message.
+ */
+export function renderManifests(canonicalFormB64) {
+  const host = $("frx-manifests");
+  if (!host) return;
+  while (host.firstChild) host.removeChild(host.firstChild);
+
+  let canonical;
+  try {
+    canonical = decodeCanonical(canonicalFormB64);
+  } catch {
+    host.appendChild(mkEl("p", "frx-manifest-empty", COPY.manifests.unavailable));
+    host.hidden = false;
+    return;
+  }
+
+  try {
+    const od = canonical && canonical.output_description;
+    if (!od || typeof od !== "object") {
+      host.appendChild(mkEl("p", "frx-manifest-empty", COPY.manifests.unavailable));
+      host.hidden = false;
+      return;
+    }
+
+    // `kind` is inside the signed canonical bytes (it is the attested
+    // discriminator), so branching on it is safe. Only intelligence_report and
+    // brief_report carry manifests; synthetic_data has no such fields at all,
+    // and reporting "no sources itemized" for one would be misleading.
+    if (od.kind === "synthetic_data") {
+      host.appendChild(mkEl("p", "frx-manifest-empty", COPY.manifests.notApplicable));
+      host.hidden = false;
+      return;
+    }
+
+    host.appendChild(mkEl("p", "frx-manifest-intro", COPY.manifests.intro));
+    renderManifestList(
+      host,
+      COPY.manifests.sourcesHeading,
+      od.source_manifest,
+      COPY.manifests.sourcesEmpty,
+      renderSourceEntry
+    );
+    renderManifestList(
+      host,
+      COPY.manifests.methodologiesHeading,
+      od.methodology_manifest,
+      COPY.manifests.methodologiesEmpty,
+      renderMethodologyEntry
+    );
+    host.hidden = false;
+  } catch {
+    while (host.firstChild) host.removeChild(host.firstChild);
+    host.appendChild(mkEl("p", "frx-manifest-empty", COPY.manifests.unavailable));
+    host.hidden = false;
+  }
+}
+
 function renderCertId(certId) {
   const el = $("frx-cert-id");
   if (el) el.textContent = certId;
@@ -337,8 +544,9 @@ export async function orchestrate() {
     return renderBadgeState("trust_anchor_error", { detail: "pem" });
   }
 
+  let ok = false;
   try {
-    const ok = await verifySignature(
+    ok = await verifySignature(
       envelope.canonical_form_b64,
       envelope.signature_hex,
       rawKey
@@ -346,7 +554,20 @@ export async function orchestrate() {
     renderBadgeState(ok ? "valid" : "invalid");
   } catch {
     // Malformed signature/canonical bytes => does not verify. Honest negative.
+    ok = false;
     renderBadgeState("invalid");
+  }
+
+  // 10. Render the signed manifests -- ONLY after a valid signature, and ONLY
+  //     outside the try above. Inside it, a render throw would be caught by the
+  //     catch that renders "invalid", flipping a valid badge on a display bug.
+  //     renderManifests() does not throw; this guard is belt-and-braces.
+  if (ok) {
+    try {
+      renderManifests(envelope.canonical_form_b64);
+    } catch {
+      /* display-only; the badge above stands. */
+    }
   }
 }
 

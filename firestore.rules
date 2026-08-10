@@ -1,0 +1,23 @@
+rules_version = '2';
+// Foster Rx public data rules.
+// public_envelopes/{cert_id} holds ONLY the signed, public certificate
+// envelope projection (payload, canonical_form_b64, signature_hex,
+// signing_key_fingerprint, signature_algorithm). It is world-readable by
+// design: the verify page reads it client-side and checks the Ed25519
+// signature in-browser. Nothing here is secret and nothing is forgeable
+// (the signature is verified against the published trust anchor).
+//
+// Everything else — including `certificates/{id}` which carries
+// human_review_record and internal_metadata — is denied to clients.
+// Server-side access uses Admin SDK / IAM and bypasses these rules.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /public_envelopes/{certId} {
+      allow read: if true;
+      allow write: if false;   // writes only via Admin SDK (certify hook / backfill)
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
