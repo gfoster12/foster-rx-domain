@@ -370,3 +370,9 @@ img.portrait{display:block;width:100%;border-radius:10px;border:1px solid var(--
 #specimenLink{display:none;margin-top:1rem}
 
 #assessment{scroll-margin-top:84px}
+
+/* r7: glimpse cards - self-contained, frameless by law */
+img.shot--glimpse{display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--rule)}
+
+/* r7: a frame holding a glimpse loses its chrome - glimpses are frameless by law */
+.frame:has(> .shot--glimpse){border:0;background:transparent;box-shadow:none;padding:0;border-radius:0}
