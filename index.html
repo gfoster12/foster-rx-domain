@@ -233,6 +233,7 @@ function frxGate(){
   var n=document.getElementById('gName').value.trim(), e=document.getElementById('gEmail').value.trim(),
       o=document.getElementById('gOrg').value.trim(), r=document.getElementById('gRole').value.trim();
   if(!n||!e||!o){alert('Name, work email and organization open the download.');return false}
+  try{fetch('https://firestore.googleapis.com/v1/projects/fosterrx-prod/databases/foster-rx-synth/documents/template_requests',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fields:{name:{stringValue:n},email:{stringValue:e},organization:{stringValue:o},role:{stringValue:r},requested_at:{timestampValue:new Date().toISOString()},source:{stringValue:'site-gate'}}})}).catch(function(){});}catch(err){}
   var b=encodeURIComponent('Specimen request\n\nName: '+n+'\nEmail: '+e+'\nOrganization: '+o+'\nRole: '+r);
   var w=document.getElementById('specimenLink'); w.style.display='inline-block';
   location.href='mailto:info@fosterrx.com?subject=Assessment%20template%20specimen&body='+b;
