@@ -1,193 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Foster Rx Systems Inc. — A certified assessment, independently verifiable</title>
-  <meta name="description" content="Foster Rx builds Thesis Rx — certified assessments for life-sciences assets. Deterministic, cited analysis, signed by a named human reviewer, sealed in a certificate any reader can verify free, forever. Patent Pending No. 19/459,855." />
-  <link rel="canonical" href="https://fosterrx.com/" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="A certified assessment, independently verifiable" />
-  <meta property="og:description" content="Certified assessments for life-sciences assets. Deterministic, cited analysis, signed by a named, credentialed human, sealed in a cryptographic certificate any reader can verify." />
-  <meta property="og:url" content="https://fosterrx.com/" />
-  <meta property="og:site_name" content="Foster Rx Systems Inc." />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Foster Rx Systems Inc." />
-  <meta name="twitter:description" content="A certified assessment, independently verifiable. Patent Pending No. 19/459,855." />
-
-  <link rel="icon" type="image/png" href="/assets/logo.png" />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Foster Rx Systems Inc.",
-    "alternateName": "Foster Rx",
-    "url": "https://fosterrx.com",
-    "logo": "https://fosterrx.com/assets/logo.png",
-    "description": "Foster Rx builds certified assessments for life-sciences assets: deterministic, fully cited analysis, reviewed and signed by a named, credentialed human, and sealed in a cryptographic certificate any reader can verify independently.",
-    "foundingDate": "2024",
-    "founder": {
-      "@type": "Person",
-      "name": "Gabrielle Foster",
-      "honorificSuffix": "MSPH, MPH",
-      "jobTitle": "Founder and Chief Executive Officer"
-    },
-    "address": {
-      "@type": "PostalAddress",
-      "addressRegion": "DE",
-      "addressCountry": "US"
-    },
-    "sameAs": [
-      "https://www.linkedin.com/company/foster-rx-llc"
-    ]
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Thesis Rx",
-    "alternateName": "Thesis Rx by Foster Rx Systems Inc.",
-    "description": "Certified assessments for life-sciences assets. Deterministic, fully cited analysis, reviewed and signed by a named, credentialed human reviewer, sealed in a cryptographic certificate with a public verification link.",
-    "brand": { "@type": "Brand", "name": "Foster Rx Systems Inc." },
-    "category": "Certified assessment"
-  }
-  </script>
-
-  <style>
-    /* Palette and type scale match /verify — same tokens, same stacks. */
-    :root {
-      --c-teal:        #4A7C7E;
-      --c-teal-deep:   #244244;
-      --c-ink:         #1F2D2E;
-      --c-ink-soft:    #4A5A5C;
-      --c-ink-mute:    #7A8A8C;
-      --c-rule:        #D9E2DC;
-      --c-sage-pale:   #F4F7F4;
-      --c-paper:       #FFFFFF;
-      --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-      --font-sans:  'DM Sans', Calibri, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0; background: var(--c-sage-pale); color: var(--c-ink);
-      font-family: var(--font-sans); line-height: 1.55;
-      -webkit-font-smoothing: antialiased;
-    }
-    .container { max-width: 820px; margin: 0 auto; padding: 2.5rem 1.25rem 3rem; }
-
-    header.site { border-bottom: 1px solid var(--c-rule); padding-bottom: 1.25rem; margin-bottom: 2.25rem; }
-    header.site .brand { display: flex; align-items: center; gap: .7rem; text-decoration: none; color: var(--c-teal-deep); font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; }
-    header.site .brand img { width: 32px; height: 32px; }
-    header.site nav { margin-top: .85rem; display: flex; flex-wrap: wrap; gap: 1.25rem; font-size: .92rem; }
-    header.site nav a { color: var(--c-ink-mute); text-decoration: none; }
-    header.site nav a:hover { color: var(--c-teal); }
-    header.site nav a[aria-current="page"] { color: var(--c-teal-deep); font-weight: 600; }
-
-    h1 { font-family: var(--font-serif); font-weight: 600; font-size: 2.6rem; line-height: 1.12; color: var(--c-teal-deep); margin: 0 0 .6rem; }
-    h2 { font-family: var(--font-serif); font-weight: 600; color: var(--c-teal-deep); font-size: 1.3rem; margin: 2rem 0 .6rem; }
-    p { margin: .5rem 0; color: var(--c-ink-soft); }
-    section { margin-top: 1.5rem; }
-    a { color: var(--c-teal); }
-
-    .subhead { font-size: 1.08rem; max-width: 46rem; margin: 0 0 1.75rem; }
-
-    /* Three-point strip */
-    .points { list-style: none; margin: 2.25rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-    .points li { background: var(--c-paper); border: 1px solid var(--c-rule); border-radius: 8px; padding: 1rem 1.1rem; }
-    .points .point-head { font-family: var(--font-serif); font-weight: 600; font-size: 1.15rem; color: var(--c-teal-deep); display: block; margin-bottom: .3rem; }
-    .points p { margin: 0; font-size: .95rem; }
-
-    /* Status line */
-    .status-line { margin: 2rem 0 0; border-left: 3px solid var(--c-teal); background: var(--c-paper); border-radius: 0 6px 6px 0; padding: .85rem 1rem; }
-    .status-line p { margin: 0; color: var(--c-ink); }
-
-    /* Buttons */
-    .cta-row { margin-top: 1.75rem; display: flex; flex-wrap: wrap; gap: .75rem; }
-    .btn { display: inline-block; font-size: 1rem; font-weight: 600; text-decoration: none; border-radius: 6px; padding: .65rem 1.4rem; border: 1px solid var(--c-teal); }
-    .btn-primary { background: var(--c-teal); color: #fff; }
-    .btn-primary:hover { background: var(--c-teal-deep); border-color: var(--c-teal-deep); }
-    .btn-secondary { background: transparent; color: var(--c-teal); }
-    .btn-secondary:hover { background: #fff; color: var(--c-teal-deep); border-color: var(--c-teal-deep); }
-
-    footer.site { border-top: 1px solid var(--c-rule); margin-top: 3rem; padding-top: 1.25rem; color: var(--c-ink-mute); font-size: .88rem; }
-    footer.site p { margin: .15rem 0; color: var(--c-ink-mute); }
-    footer.site .links { margin-top: .5rem; display: flex; flex-wrap: wrap; gap: 1rem; }
-    footer.site a { color: var(--c-teal); }
-
-    @media (max-width: 720px) {
-      h1 { font-size: 2.05rem; }
-      .points { grid-template-columns: 1fr; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Foster Rx Systems - Certified IP diligence</title>
+<meta name="description" content="Certified assessments for intellectual property and capital decisions. Signed by a named reviewer and verifiable by any reader - free, permanently, without an account.">
+<meta property="og:title" content="Foster Rx Systems - Certified IP diligence">
+<meta property="og:description" content="Certified assessments for intellectual property and capital decisions. Signed by a named reviewer and verifiable by any reader - free, permanently, without an account.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/assets/mark.png">
+<script>(function(){try{var t=localStorage.getItem('frx-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-<div class="container">
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap nav__in">
+  <a class="brand" href="/" aria-label="Foster Rx Systems - home">
+    <img src="/assets/mark.png" alt="" width="26" height="26">
+    Foster&nbsp;Rx
+  </a>
+  <nav class="nav__links" aria-label="Primary">
+    <a href="/thesis-rx">Thesis Rx</a>
+    <a href="/capital-rx">Capital Rx</a>
+    <a href="/platform">Platform</a>
+    <a href="/thesis">Thesis</a>
+    <a href="/trust">Trust</a>
+    <a href="/verify">Verify</a>
+    <a href="/login">Sign in</a>
+    <a class="nav__cta" href="/design-partners">Design partners</a>
+    <button class="themebtn" type="button" onclick="frxTheme()" aria-label="Switch between light and dark appearance">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+    </button>
+  </nav>
+</div></header>
+<main id="main">
 
-  <header class="site">
-    <a class="brand" href="/">
-      <img src="/assets/logo.png" alt="" />
-      <span>Foster Rx Systems Inc.</span>
-    </a>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/verify">Verify a certificate</a>
-      <a href="/design-partners">Design-partner program</a>
-    </nav>
-  </header>
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero__grid">
+      <div>
+        <p class="eyebrow">Certified IP diligence</p>
+        <h1>Diligence your counterparty can check.</h1>
+        <p class="hero__sub">Verified by the reader, not by us.</p>
+        <p class="hero__body">Foster Rx assesses intellectual property and the deals attached to it, then signs the result. Your counterparty opens a link and verifies it themselves &mdash; no account, no fee, and nothing of ours in the path.</p>
+        <div class="actions">
+          <a class="btn btn--p" href="/design-partners">Join the founding cohort</a>
+          <a class="btn btn--g" href="/verify">Verify a certificate</a>
+        </div>
+      </div>
+      <div class="hero__shot">
+        <div class="frame">
+          <div class="frame__bar"><i></i><i></i><i></i><span class="frame__url">app.fosterrx.com/portfolio</span></div>
+          <div class="shot shot--ph"><b>Product screenshot</b><span>Thesis Rx portfolio view &mdash; composition, coverage across twenty-five diligence sections, and the decision queue.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section class="hero">
-    <h1>A certified assessment, independently verifiable.</h1>
-    <p class="subhead">
-      Foster Rx builds Thesis Rx &mdash; certified assessments for
-      life-sciences assets. Deterministic, fully cited analysis; reviewed
-      and signed by a named, credentialed human; sealed in a cryptographic
-      certificate any reader can verify &mdash; free, forever, without
-      trusting the sender.
-    </p>
+<!-- WHAT IT IS -->
+<section class="tight soft">
+  <div class="wrap">
+    <div class="stats">
+      <div><b>25</b><span>diligence sections, every one rendered</span></div>
+      <div><b>4</b><span>evidence states, enforced in the schema</span></div>
+      <div><b>1</b><span>named human signs every certificate</span></div>
+      <div><b>&infin;</b><span>free verification, permanently</span></div>
+    </div>
+  </div>
+</section>
 
-    <ul class="points">
-      <li>
-        <span class="point-head">The reader checks, not trusts.</span>
-        <p>Every certificate carries a public verification link. Verification never requires an account, a fee, or Foster Rx&rsquo;s cooperation.</p>
-      </li>
-      <li>
-        <span class="point-head">Refusal is enforced in code.</span>
-        <p>When human review is absent, the system will not certify &mdash; and withheld publications are logged.</p>
-      </li>
-      <li>
-        <span class="point-head">Live now.</span>
-        <p>See a real certificate verify in your browser: <a href="/verify">Verify a certificate &rarr;</a></p>
-      </li>
+<!-- PROBLEM -->
+<section>
+  <div class="wrap narrow" style="text-align:center">
+    <p class="eyebrow">The problem</p>
+    <h2>Analysis is cheap. Trust is expensive.</h2>
+    <p class="lede" style="margin-left:auto;margin-right:auto">You send a valuation. The other side discounts it &mdash; not because it is wrong, but because they cannot check it. That discount is priced into every negotiation you enter, and machine-generated analysis is making it worse: more output, none of it signed, none of it anyone's responsibility.</p>
+  </div>
+</section>
+
+<!-- SEE IT — alternating product rows -->
+<section class="soft">
+  <div class="wrap">
+    <p class="eyebrow">See it</p>
+    <h2>Three screens do most of the work.</h2>
+
+    <div class="row" style="margin-top:3rem">
+      <div class="row__text">
+        <h3>A decision queue, not a dashboard</h3>
+        <p>Your portfolio sorted by the decision that falls first &mdash; fee windows, prosecution clocks, responses due. Coverage travels with every row, so nothing is triaged against an unknown evidence base.</p>
+        <ul class="row__list">
+          <li>Every material event resolves to a signed change or a logged dismissal</li>
+          <li>Nothing is scored or ranked by importance</li>
+          <li>An unassessed asset says so</li>
+        </ul>
+        <p style="margin-top:1.3rem"><a class="btn btn--o" href="/thesis-rx">Explore Thesis Rx</a></p>
+      </div>
+      <div>
+        <div class="frame frame--flat">
+          <div class="frame__bar"><i></i><i></i><i></i><span class="frame__url">app.fosterrx.com/queue</span></div>
+          <div class="shot shot--ph"><b>Screenshot</b><span>Decision queue with coverage strips per row</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row row--flip">
+      <div class="row__text">
+        <h3>A band with conditions, and the ask marked on it</h3>
+        <p>Valuation is never a point estimate. It is a range against the derived value distribution for the domain, with its conditions enumerated and the asking price marked as a negotiating position rather than a verdict.</p>
+        <ul class="row__list">
+          <li>Right-skewed distributions, so mean-anchored comparables overstate the median asset</li>
+          <li>Every gap rendered with an explanation, never filled</li>
+          <li>No certificate means no relation &mdash; the interface shows an em dash, never a default</li>
+        </ul>
+        <p style="margin-top:1.3rem"><a class="btn btn--o" href="/capital-rx">Explore Capital Rx</a></p>
+      </div>
+      <div>
+        <div class="frame frame--flat">
+          <div class="frame__bar"><i></i><i></i><i></i><span class="frame__url">app.fosterrx.com/deal</span></div>
+          <div class="shot shot--ph"><b>Screenshot</b><span>Ask plotted against the certified band, with stated conditions</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row__text">
+        <h3>Ask anything &mdash; and always know which answer counts</h3>
+        <p>ANGIS answers instantly from the same records and the same methodologies, labelled unreviewed. When an answer has to count, send it for review: a named reviewer signs it and it issues as a certificate at a verifiable address.</p>
+        <ul class="row__list">
+          <li>An unreviewed answer is structurally unable to carry a seal</li>
+          <li>The label is architecture, not a disclaimer someone remembered to add</li>
+        </ul>
+        <p style="margin-top:1.3rem"><a class="btn btn--o" href="/angis">Explore ANGIS</a></p>
+      </div>
+      <div>
+        <div class="frame frame--flat">
+          <div class="frame__bar"><i></i><i></i><i></i><span class="frame__url">app.fosterrx.com/assistant</span></div>
+          <div class="shot shot--ph"><b>Screenshot</b><span>Two registers side by side: informational and certified</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The platform</p>
+    <h2>One engine. Four ways in.</h2>
+    <p class="lede">Which view a client sees is configuration, not a different product. An assessment is produced by the same machinery whichever side of the table you sit on.</p>
+    <div class="grid g4">
+      <a class="card card--link" href="/thesis-rx"><div class="card__top"></div><h3>Thesis Rx</h3>
+        <p>For technology transfer, biotech and device holders. Portfolio triage, monitored events, certified valuation and freedom-to-operate analysis.</p>
+        <p class="card__more">Explore &rarr;</p></a>
+      <a class="card card--link" href="/capital-rx"><div class="card__top card__top--sage"></div><h3>Capital Rx</h3>
+        <p>For funds, family offices, corporate development and advisories. Pipeline by decision due, ask against band, evidence mapped with gaps stated.</p>
+        <p class="card__more">Explore &rarr;</p></a>
+      <a class="card card--link" href="/angis"><div class="card__top card__top--blue"></div><h3>ANGIS</h3>
+        <p>The assistant. Instant answers labelled unreviewed, escalating to a signed certificate when the answer has to count.</p>
+        <p class="card__more">Explore &rarr;</p></a>
+      <a class="card card--link" href="/platform"><div class="card__top"></div><h3>Platform</h3>
+        <p>How an assessment is produced: ingested and computed claims, a methodology registry published with its gaps, and the review gate.</p>
+        <p class="card__more">Explore &rarr;</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- HONEST -->
+<section class="soft">
+  <div class="wrap">
+    <div class="row">
+      <div class="row__text">
+        <p class="eyebrow">Honest by construction</p>
+        <h3 style="font-size:clamp(1.7rem,2.8vw,2.4rem)">Every gap is rendered. None is filled.</h3>
+        <p>A diligence review covers twenty-five sections. Sections with nothing behind them are shown as such, with an explanation &mdash; the stated gap is often the most valuable line in the document.</p>
+        <p style="margin-top:1rem">Coverage never reads as provenance. Twenty-five complete sections is not a certification, and the two are never merged.</p>
+      </div>
+      <div>
+        <div class="cov" role="img" aria-label="Coverage across twenty-five sections: fourteen complete, four partial, three with insufficient evidence, four with no data available.">
+          <i class="c1"></i><i class="c1"></i><i class="c1"></i><i class="c1"></i><i class="c1"></i><i class="c1"></i><i class="c1"></i><i class="c1"></i><i class="c1"></i><i class="c1"></i><i class="c1"></i><i class="c1"></i><i class="c1"></i><i class="c1"></i>
+          <i class="c2"></i><i class="c2"></i><i class="c2"></i><i class="c2"></i>
+          <i class="c3"></i><i class="c3"></i><i class="c3"></i>
+          <i class="c4"></i><i class="c4"></i><i class="c4"></i><i class="c4"></i>
+        </div>
+        <div class="covleg">
+          <span><b class="c1"></b>complete</span><span><b class="c2"></b>partial</span>
+          <span><b class="c3"></b>evidence_insufficient</span><span><b class="c4"></b>no_data_available</span>
+        </div>
+        <div class="callout"><p><strong>When we are wrong, we sign the correction.</strong> A superseding certificate is issued and the original stays verifiable. An attestation you can quietly delete was never an attestation.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VERIFY -->
+<section class="dark">
+  <div class="wrap">
+    <p class="eyebrow">Verification</p>
+    <h2>What your counterparty sees</h2>
+    <p class="vurl">fosterrx.com/verify</p>
+    <ul class="vlist">
+      <li><strong>Open the link</strong><span>No account. No fee. Ever. The reader is never asked to register and never asked to pay.</span></li>
+      <li><strong>Check the signature</strong><span>The certificate verifies against a published trust anchor, with no Foster Rx server anywhere in the path.</span></li>
+      <li><strong>Read what we stand behind</strong><span>The reviewer, the methods, the conditions &mdash; and the gaps we stated rather than filled.</span></li>
     </ul>
+    <div class="actions"><a class="btn btn--p" href="/verify">Verify a certificate</a><a class="btn btn--g" href="/trust">Trust &amp; security</a></div>
+  </div>
+</section>
 
-    <div class="status-line">
-      <p>
-        Now certifying reimbursement diligence for medical devices as the
-        first artifact class. The founding design-partner cohort is open
-        &mdash; three roles, published criteria, program ends Q1 2027.
-      </p>
+<!-- AVAILABILITY -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Availability</p>
+    <h2>What you can engage, and when</h2>
+    <div class="avail">
+      <div class="avail__r"><span class="chip">Now</span><p>Certified reimbursement diligence for medical devices &middot; certified IP valuation</p></div>
+      <div class="avail__r"><span class="chip chip--s">1 October</span><p>Platform access opens for the founding cohort &mdash; Thesis Rx and Capital Rx</p></div>
+      <div class="avail__r"><span class="chip chip--b">1 November</span><p>Freedom-to-operate claim analysis, first cohort &mdash; attorney-reviewed</p></div>
+      <div class="avail__r"><span class="chip chip--b">31 October</span><p>The founding design-partner cohort closes. <a href="/design-partners" style="color:var(--blue);font-weight:600">See the programme &rarr;</a></p></div>
     </div>
+  </div>
+</section>
 
-    <div class="cta-row">
-      <a class="btn btn-primary" href="/verify">Verify a certificate</a>
-      <a class="btn btn-secondary" href="/design-partners">Design-partner program</a>
-    </div>
-  </section>
-
-  <footer class="site">
-    <p>Foster Rx Systems Inc. &middot; U.S. Patent Pending No. 19/459,855 &middot; &copy; 2026.</p>
-    <div class="links">
-      <a href="/verify">Verify a certificate</a>
-      <a href="/design-partners">Design-partner program</a>
-      <a href="/.well-known/angis-signing-key-v1.pub">Signing key (PEM)</a>
-    </div>
-  </footer>
-
-</div>
+<!-- CTA -->
+<section class="deep cta">
+  <div class="wrap">
+    <p class="eyebrow">Let's talk</p>
+    <h2>Bring us one asset with a live counterparty conversation.</h2>
+    <p class="lede">We will certify it. Then send it to the person who was going to doubt you &mdash; that is the only test that matters, and it is the one we built for.</p>
+    <div class="actions"><a class="btn btn--p" href="mailto:info@fosterrx.com">info@fosterrx.com</a><a class="btn btn--g" href="/about">Who stands behind it</a></div>
+  </div>
+</section>
+</main>
+<footer class="foot"><div class="wrap foot__g">
+  <div>
+    <p style="font-family:var(--display);font-weight:700;font-size:1.1rem">Foster Rx Systems Inc.</p>
+    <p style="color:var(--aqua);opacity:.85;margin-top:.5rem;max-width:34ch">Certified assessments for intellectual property and capital decisions.</p>
+    <p style="color:var(--aqua);opacity:.7;margin-top:1rem;font-size:.82rem">A Delaware corporation &middot; Annapolis, Maryland</p>
+  </div>
+  <div><h4>Products</h4>
+    <a href="/thesis-rx">Thesis Rx</a><a href="/capital-rx">Capital Rx</a>
+    <a href="/angis">ANGIS</a><a href="/platform">Platform</a></div>
+  <div><h4>Verification</h4>
+    <a href="/verify">Verify a certificate</a><a href="/platform#registry">Methodology registry</a>
+    <a href="/login">Sign in</a></div>
+  <div><h4>Company</h4>
+    <a href="/about">About</a><a href="/thesis">The thesis</a>
+    <a href="/design-partners">Design partners</a><a href="/trust">Trust &amp; security</a>
+    <a href="mailto:info@fosterrx.com">Contact</a></div>
+  <div><h4>Legal</h4>
+    <a href="/legal/privacy">Privacy policy</a><a href="/legal/terms">Terms of use</a>
+    <a href="/legal/cookies">Cookie policy</a><a href="/legal/services-agreement">Services agreement</a></div>
+  <p class="foot__legal">&copy; 2026 Foster Rx Systems Inc., a Delaware corporation &middot; Patent Pending No. 19/459,855 &middot; Verification is free and permanent for any reader, with no account required.</p>
+</div></footer>
+<script>
+function frxTheme(){var r=document.documentElement;
+ var cur=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+ var next=cur==='dark'?'light':'dark';
+ r.setAttribute('data-theme',next);
+ try{localStorage.setItem('frx-theme',next)}catch(e){}}
+(function(){var e=document.querySelectorAll('.reveal');
+if(!('IntersectionObserver'in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){e.forEach(function(x){x.classList.add('in')});return}
+var o=new IntersectionObserver(function(n){n.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');o.unobserve(x.target)}})},{threshold:.06,rootMargin:'0px 0px -6% 0px'});
+e.forEach(function(x){o.observe(x)})})();
+</script>
 </body>
 </html>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" role="img" aria-label="ANGIS">
+  <!-- two registers: one open, one sealed -->
+  <rect x="4" y="9" width="15" height="22" rx="3" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3" opacity=".6"/>
+  <rect x="21" y="9" width="15" height="22" rx="3" fill="currentColor" opacity=".16"/>
+  <rect x="21" y="9" width="15" height="22" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/>
+  <path d="M25 20 l3 3 l6 -6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
