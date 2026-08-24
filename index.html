@@ -23,14 +23,13 @@
     Foster&nbsp;Rx
   </a>
   <nav class="nav__links" aria-label="Primary">
+    <a href="/platform">Platform</a>
     <a href="/thesis-rx">Thesis Rx</a>
     <a href="/capital-rx">Capital Rx</a>
-    <a href="/platform">Platform</a>
-    <a href="/thesis">Thesis</a>
     <a href="/trust">Trust</a>
+    <a href="/about">About</a>
     <a href="/verify">Verify</a>
-    <a href="/login">Sign in</a>
-    <a class="nav__cta" href="/design-partners">Design partners</a>
+    <a class="nav__login" href="/login">Log in</a>
     <button class="themebtn" type="button" onclick="frxTheme()" aria-label="Switch between light and dark appearance">
       <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
       <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
@@ -56,7 +55,7 @@
       <div class="hero__shot">
         <div class="frame">
           <div class="frame__bar"><i></i><i></i><i></i><span class="frame__url">app.fosterrx.com/portfolio</span></div>
-          <div class="shot shot--ph"><b>Product screenshot</b><span>Thesis Rx portfolio view &mdash; composition, coverage across twenty-five diligence sections, and the decision queue.</span></div>
+          <img class="shot" src="/assets/shots/portfolio.webp" alt="Thesis Rx portfolio overview: composition, coverage, and the claim-shape computation with its trace">
         </div>
       </div>
     </div>
@@ -104,7 +103,7 @@
       <div>
         <div class="frame frame--flat">
           <div class="frame__bar"><i></i><i></i><i></i><span class="frame__url">app.fosterrx.com/queue</span></div>
-          <div class="shot shot--ph"><b>Screenshot</b><span>Decision queue with coverage strips per row</span></div>
+          <img class="shot" src="/assets/shots/pipeline-light.webp" alt="Capital Rx pipeline: positions ordered by the decision that falls first, evidence per row">
         </div>
       </div>
     </div>
@@ -123,7 +122,7 @@
       <div>
         <div class="frame frame--flat">
           <div class="frame__bar"><i></i><i></i><i></i><span class="frame__url">app.fosterrx.com/deal</span></div>
-          <div class="shot shot--ph"><b>Screenshot</b><span>Ask plotted against the certified band, with stated conditions</span></div>
+          <img class="shot" src="/assets/shots/deal.webp" alt="Deal view: the ask plotted against the certified band, with the evidence map and delta history">
         </div>
       </div>
     </div>
@@ -141,7 +140,7 @@
       <div>
         <div class="frame frame--flat">
           <div class="frame__bar"><i></i><i></i><i></i><span class="frame__url">app.fosterrx.com/assistant</span></div>
-          <div class="shot shot--ph"><b>Screenshot</b><span>Two registers side by side: informational and certified</span></div>
+          <img class="shot" src="/assets/shots/certificate-light.webp" alt="The certificate record shown exactly as recorded, with its review status explained in plain language">
         </div>
       </div>
     </div>
@@ -214,6 +213,43 @@
 </section>
 
 <!-- AVAILABILITY -->
+
+<section id="assessment"><div class="wrap">
+  <p class="eyebrow">Inside a certified assessment</p>
+  <h2>Seven parts. Twenty-five sections. Every gap stated.</h2>
+  <p class="lede" style="max-width:70ch">The reimbursement diligence assessment follows a ratified section architecture. Every figure carries its provenance class, every section carries its evidence status, and a section the record cannot support is rendered as a stated absence rather than filled. The architecture below is the deliverable's own table of contents.</p>
+  <div class="parts">
+    <div class="part"><b>I &middot; Scope &amp; basis</b><p>Engagement scope &amp; asset identification &middot; Sources of record &amp; retrieval dates &middot; Methodology &amp; version &middot; Conditions &amp; limitations</p></div>
+    <div class="part"><b>II &middot; Benefit &amp; regulatory</b><p>Benefit category determination &middot; Statutory &amp; regulatory basis &middot; Regulatory status as it bears on coverage</p></div>
+    <div class="part"><b>III &middot; Coverage</b><p>National coverage posture &middot; Local coverage by contractor &middot; Jurisdiction variation &middot; Coverage-with-evidence exposure &middot; Commercial &amp; MA landscape &middot; Prior authorization</p></div>
+    <div class="part"><b>IV &middot; Coding</b><p>Code inventory &amp; status &middot; Code adequacy &amp; gap analysis &middot; Pathways for new or temporary codes</p></div>
+    <div class="part"><b>V &middot; Payment</b><p>Payment system mapping &middot; Rates &amp; relativity as stated &middot; Site-of-service economics &middot; Policy-change exposure</p></div>
+    <div class="part"><b>VI &middot; Evidence</b><p>Evidence base inventory &middot; Sufficiency against payer criteria &middot; Evidence gaps, stated</p></div>
+    <div class="part"><b>VII &middot; Synthesis</b><p>Findings &amp; conditions &middot; Reviewer attestation &amp; verification</p></div>
+  </div>
+  <div class="gate">
+    <h3 style="margin:0">Request the specimen</h3>
+    <p class="small" style="margin-top:.4rem">A watermarked specimen of the full template &mdash; the honest-empty rendering included. Tell us who you are and the download opens; the same message reaches us so we can follow up properly. Handled under our <a href="/legal/privacy" style="text-decoration:underline">privacy policy</a>.</p>
+    <label>Name<input id="gName" type="text" autocomplete="name"></label>
+    <label>Work email<input id="gEmail" type="email" autocomplete="email"></label>
+    <label>Organization<input id="gOrg" type="text" autocomplete="organization"></label>
+    <label>Role<input id="gRole" type="text" autocomplete="organization-title"></label>
+    <a class="btn btn--g" href="#" onclick="return frxGate()">Open the specimen</a>
+    <a id="specimenLink" class="btn btn--o" href="/assets/downloads/FRX_Reimbursement_Diligence_Template_SPECIMEN.pdf" download>Download &mdash; Certified Reimbursement Diligence Assessment, specimen (PDF)</a>
+  </div>
+</div></section>
+<script>
+function frxGate(){
+  var n=document.getElementById('gName').value.trim(), e=document.getElementById('gEmail').value.trim(),
+      o=document.getElementById('gOrg').value.trim(), r=document.getElementById('gRole').value.trim();
+  if(!n||!e||!o){alert('Name, work email and organization open the download.');return false}
+  var b=encodeURIComponent('Specimen request\n\nName: '+n+'\nEmail: '+e+'\nOrganization: '+o+'\nRole: '+r);
+  var w=document.getElementById('specimenLink'); w.style.display='inline-block';
+  location.href='mailto:info@fosterrx.com?subject=Assessment%20template%20specimen&body='+b;
+  return false;
+}
+</script>
+
 <section>
   <div class="wrap">
     <p class="eyebrow">Availability</p>

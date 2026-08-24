@@ -346,3 +346,27 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   text-align:center;padding:1.5rem;border:1.5px dashed var(--sage);color:var(--sage-ink);font-size:.82rem}
 .founderblock{display:grid;grid-template-columns:240px minmax(0,1fr);gap:2.2rem;align-items:start}
 @media(max-width:760px){.founderblock{grid-template-columns:1fr}}
+
+
+/* r3: the login door wears blue - the one hue meaning "way in" */
+.nav__login{background:#2F5D7C;color:#fff!important;padding:.42rem .95rem;border-radius:6px;font-weight:600}
+.nav__login:hover{background:#35617E}
+:root[data-theme="dark"] .nav__login{background:#5E8CAD;color:#0E1917!important}
+/* r3: real screenshots in the shot frames */
+img.shot{display:block;width:100%;height:auto;border-radius:0 0 10px 10px}
+/* r3: the founder portrait */
+img.portrait{display:block;width:100%;border-radius:10px;border:1px solid var(--rule);object-fit:cover}
+/* r3: the Now marker holds its contrast in dark */
+:root[data-theme="dark"] .avail__r .chip{background:var(--aqua);color:#0E1917;border-color:transparent}
+/* r3: inside-the-assessment section */
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1.4rem}
+.part{border:1px solid var(--rule);border-radius:10px;padding:1rem 1.1rem;background:var(--paper)}
+.part b{display:block;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--sage-ink,#4E6B65);margin-bottom:.45rem}
+.part p{font-size:.88rem;line-height:1.55;margin:0;color:inherit}
+.gate{border:1px solid var(--rule);border-radius:10px;padding:1.3rem 1.4rem;background:var(--paper);margin-top:1.6rem;max-width:640px}
+.gate label{display:block;font-size:.8rem;font-weight:600;margin-top:.8rem}
+.gate input{width:100%;padding:.5rem .6rem;border:1px solid var(--rule);border-radius:6px;background:transparent;color:inherit;font:inherit}
+.gate .btn{margin-top:1rem}
+#specimenLink{display:none;margin-top:1rem}
+
+#assessment{scroll-margin-top:84px}
