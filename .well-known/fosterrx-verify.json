@@ -1,0 +1,31 @@
+{
+  "service": "Foster Rx public certificate verification",
+  "spec_version": "1.0",
+  "trust_anchor": {
+    "pem_url": "https://fosterrx.com/.well-known/angis-signing-key-v1.pub",
+    "fingerprint_url": "https://fosterrx.com/.well-known/angis-signing-key-v1.fingerprint",
+    "fingerprint_definition": "SHA-256 over the DER-encoded SubjectPublicKeyInfo bytes of the PEM public key",
+    "algorithm": "ed25519"
+  },
+  "certificate_envelope": {
+    "rest_url_template": "https://firestore.googleapis.com/v1/projects/fosterrx-prod/databases/foster-rx-synth/documents/public_envelopes/{certificate_id}",
+    "static_page_template": "https://fosterrx.com/verify/{certificate_id}/",
+    "fields": [
+      "canonical_form_b64",
+      "signature_hex",
+      "signing_key_fingerprint",
+      "signature_algorithm"
+    ],
+    "verification": "ed25519_verify(anchor_public_key, hex_decode(signature_hex), base64_decode(canonical_form_b64)); record fields are the decoded canonical JSON"
+  },
+  "interactive_verify_url_template": "https://fosterrx.com/verify/{certificate_id}",
+  "mcp_server": {
+    "url": "https://fosterrx-verify-mcp-630726936307.us-east4.run.app/mcp",
+    "source": "https://github.com/gfoster12/fosterrx-verify-mcp"
+  },
+  "certificate_id_forms": [
+    "FRXS-{16 hex}",
+    "FRXS-{uuid}"
+  ],
+  "contact": "info@fosterrx.com"
+}

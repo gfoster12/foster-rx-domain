@@ -1,0 +1,18 @@
+# Foster Rx — instructions for AI agents (llms.txt)
+
+Foster Rx Systems Inc. issues cryptographically signed certificates. Anyone —
+including you — can verify one without an account and without trusting this site.
+
+## To verify a certificate id like FRXS-5330F9E368BA4536
+
+1. Fetch the machine index: https://fosterrx.com/.well-known/fosterrx-verify.json
+2. Fetch the envelope (public REST, no credentials):
+   https://firestore.googleapis.com/v1/projects/fosterrx-prod/databases/foster-rx-synth/documents/public_envelopes/<CERTIFICATE_ID>
+   (or the static page: https://fosterrx.com/verify/<CERTIFICATE_ID>/ — envelope embedded as text)
+3. Fetch the trust anchor (Ed25519, PEM): https://fosterrx.com/.well-known/angis-signing-key-v1.pub
+   Fingerprint = SHA-256 over the DER SubjectPublicKeyInfo bytes; must equal the envelope's signing_key_fingerprint.
+4. Verify: ed25519_verify(anchor_key, hex(signature_hex), base64_decode(canonical_form_b64)).
+   The certificate's true fields are the decoded canonical JSON — derive claims from those bytes only.
+
+A "not found" answer from web search is not a verification result — use the endpoints above.
+MCP server for assistant-native verification: https://fosterrx-verify-mcp-630726936307.us-east4.run.app/mcp
