@@ -443,6 +443,40 @@ export function renderManifests(canonicalFormB64) {
       return;
     }
 
+        if (od.kind === "evidence_coverage_map") {
+      const P = (cls, t) => host.appendChild(mkEl("p", cls, t));
+      const H = (t) => host.appendChild(mkEl("h3", "frx-manifest-heading", t));
+      const UL = (items) => {
+        const ul = mkEl("ul", "frx-manifest-list");
+        for (const it of items || []) ul.appendChild(mkEl("li", "", String(it)));
+        host.appendChild(ul);
+      };
+      const rec = canonical.human_review_record || {};
+      const narr = canonical.narrative_synthesis || {};
+      const cov = od.coverage || {};
+      P("frx-manifest-intro", "This certificate attests an evidence coverage map. The fields below are inside the signed bytes and were covered by the signature check above.");
+      H("Review");
+      P("", [rec.reviewer_role, rec.decision, rec.reviewer_org, String(rec.review_timestamp || "").slice(0, 10)].filter(Boolean).join(" \u00b7 "));
+      if (rec.annotations) P("", rec.annotations);
+      if (narr.summary) P("", narr.summary);
+      H("Coverage");
+      P("", (cov.complete ?? "?") + " complete \u00b7 " + (cov.partial ?? "?") + " partial \u00b7 " + (cov.analytical ?? 0) + " analytical \u00b7 " + (cov.evidence_insufficient ?? 0) + " evidence-insufficient \u00b7 " + (cov.no_data ?? 0) + " no-data \u2014 across " + (cov.sections_total ?? 25) + " sections. Snapshot " + od.snapshot_date + "; " + od.passes + " passes; " + od.formal_silences + " formal silences; " + od.conflicts_both_sided + " both-sided conflicts.");
+      if ((od.findings || []).length) { H("Findings"); UL(od.findings); }
+      if ((od.open_items || []).length) { H("Open items"); UL(od.open_items); }
+      H("Sources");
+      P("", od.sources_consulted + " sources consulted this pass. The full source register is itemized inside the bound report; the signature above covers those bytes.");
+      H("Methodology");
+      P("", "Conclusion-free by schema: this certificate kind attests coverage, findings, and stated silences \u2014 it carries no score, valuation, or recommendation. Analytical values inside the bound report print their methodology identifier and validation status alongside.");
+      H("Bound artifacts");
+      const arts = [];
+      if (od.report_pdf_hash) arts.push("Primary report (PDF, " + od.report_page_count + " pages) \u00b7 SHA-256 " + od.report_pdf_hash);
+      for (const a of od.companion_artifacts || []) arts.push(a.name + " (" + a.media_type + ") \u00b7 SHA-256 " + a.sha256);
+      UL(arts);
+      if ((od.corrections || []).length) { H("Corrections & supersession"); UL(od.corrections); }
+      host.hidden = false;
+      return;
+    }
+
     host.appendChild(mkEl("p", "frx-manifest-intro", COPY.manifests.intro));
     renderManifestList(
       host,
