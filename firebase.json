@@ -13,7 +13,15 @@
       "LICENSE",
       ".github/**",
       "verify/_test.html",
-      "assets/verify/fixtures/**"
+      "assets/verify/fixtures/**",
+      "*.py",
+      "tools/**",
+      "docs/**",
+      "**/*.rules",
+      "**/*.bak*",
+      "**/*.log",
+      ".git/**",
+      ".claude/**"
     ],
     "headers": [
       {

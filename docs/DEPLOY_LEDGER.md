@@ -14,3 +14,22 @@
 - Deferred: verify not-found banner renders warm gold (predates the app color law) — future
   supervised verify session. Legal drafts are best-practice versions; counsel documents win where
   they differ.
+
+## 2026-10-15 — hosting hygiene: dev files and .git removed from the web root
+- Finding: `"public": "."` makes the repo root the web root. Live origin served
+  `/apply_verify_ecm.py`, `/firestore.rules`, `/tools/*.py`, `/docs/*` (this ledger) and
+  `/.git/**` — `**/.*` ignores the `.git` entry but not files under it.
+- CREDENTIAL EXPOSURE (logged as such): the deployed `.git/config` carried the
+  `http.extraheader` AUTHORIZATION that `actions/checkout` persists. Both workflows used the
+  default checkout token (no `with: token:` PAT), so it was the per-job GITHUB_TOKEN
+  (contents: read) from the 2026-09-08 deploy run, invalid since that job ended. Repo is
+  public. Nothing to rotate; impact low.
+- Fix: `hosting.ignore` += `*.py` (root only — `/verify/check.py` is public by design and
+  named in llms.txt), `tools/**`, `docs/**`, `**/*.rules`, `**/*.bak*`, `**/*.log`, `.git/**`,
+  `.claude/**`. `apply_verify_ecm.py` moved to `tools/`. Both workflows: checkout
+  `persist-credentials: false`. Upload set verified pre-push at 65 files.
+- Rollback point: live release 1788898570217000, version 3b3d17f3309f7fed (2026-09-08).
+- Channel hazard note: comp360-record channel deployed 2026-10-15T15:45Z did NOT move live
+  (live release unchanged) — one clean observation, not yet a re-verification.
+- Byte checks must use fosterrx-prod.web.app: Cloudflare rewrites HTML on fosterrx.com
+  (email obfuscation, injected challenge script).
