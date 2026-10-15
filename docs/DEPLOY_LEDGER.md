@@ -33,3 +33,20 @@
   (live release unchanged) — one clean observation, not yet a re-verification.
 - Byte checks must use fosterrx-prod.web.app: Cloudflare rewrites HTML on fosterrx.com
   (email obfuscation, injected challenge script).
+- Hosting deploy (CI run 38782335216, fd8e0e5): live release 1792087392526000, version
+  f5c0ac51e447c883. On fosterrx-prod.web.app: .git/*, the scripts, rules, docs, *.bak, *.log
+  all 404; /verify/check.py 200; all 65 served files byte-identical to repo; /verify/<id>
+  rewrite intact. Same 404s confirmed on fosterrx.com (cf-cache DYNAMIC). No rollback needed.
+
+## 2026-10-15 — Firestore rules hardening (`--only firestore:rules`, after hosting fix live)
+- public_envelopes: `read` → `get` only; `list` denied. Collection no longer enumerable;
+  verify-by-id unaffected (fosterrx-synth writes via Admin SDK, bypasses rules).
+- template_requests: email format check; requested_at must be within ±10 min of server time
+  (form sends client clock over plain REST and swallows errors, so `== request.time` would
+  have silently dropped every lead). Accepted-field contract unchanged.
+- Pre-deploy: 13/13 emulator cases passed using the live form's exact POST shape.
+- Post-deploy, live: list 403, runQuery 403, get of all three published envelopes 200,
+  bad-email create 403, check.py FRXS-5330F9E368BA4536 → PASS / VALID. No valid lead was
+  written to prod as a test. Rollback: redeploy firestore.rules from fd8e0e5.
+- Open: App Check / rate limiting on template_requests (needs client work). HOLD before any
+  new envelope is published: audit public_envelopes payload shape for PII/reviewer identity.
