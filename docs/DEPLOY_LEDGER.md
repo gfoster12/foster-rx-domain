@@ -50,3 +50,16 @@
   written to prod as a test. Rollback: redeploy firestore.rules from fd8e0e5.
 - Open: App Check / rate limiting on template_requests (needs client work). HOLD before any
   new envelope is published: audit public_envelopes payload shape for PII/reviewer identity.
+
+## 2026-10-15 — VK2735 remediation: r3 supersedes r1/r2; old record pages removed
+- Cause: r1 (FRXS-77D919B4CFBFFC39) and r2 (FRXS-2525EAF4F6F4469B) carried a personal
+  reviewer name in human_review_record.annotations and narrative_synthesis.generated_by
+  (signed, so not editable). Founder decision 2026-10-15: remediate now.
+- r3 FRXS-36314D16200149D6 issued from foster-rx-synth-v2 deliverables/vk2735/issue_r3.py:
+  same record bytes (PDF 3222805b…, HTML aa7a1f4c…), reviewer = founder_reviewer +
+  Foster Rx Systems Inc. only, lineage in output_description.corrections[0] and the
+  provenance payload `supersedes`. Content hash eeedf26602f6…051dc. PII gate
+  (deliverables/pii_gate.py) cleared it pre-sign; signed with the anchor key d7c581cc….
+- r1/r2 envelopes deleted from public_envelopes (public GET now 404; founder accepted the old
+  ids stop resolving). Their record pages are removed; r3's record page is generated.
+- Rollback point before this deploy: live release 1792087903091000, version f0e030c7556b9b89.
