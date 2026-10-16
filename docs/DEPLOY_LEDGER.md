@@ -63,3 +63,15 @@
 - r1/r2 envelopes deleted from public_envelopes (public GET now 404; founder accepted the old
   ids stop resolving). Their record pages are removed; r3's record page is generated.
 - Rollback point before this deploy: live release 1792087903091000, version f0e030c7556b9b89.
+
+## 2026-10-16 — COMP360 assessment record published at /intelligence/comp360/
+- Record: 2026-10-14_FosterRx_Assessment_Record_COMP360_rev1.html, served byte-for-byte as
+  intelligence/comp360/index.html; SHA-256 8221d0cb7066ae6f…6f96423 (hash-checked on arrival
+  in _jnj_inbound, which stays read-only). Printed content hash 1b5e065989a17ec7….
+- Bound by certificate FRXS-B0BB55323E304DAC (evidence_coverage_map, demonstration,
+  foster_rx_internal). icotrokinra (FRXS-245F001967D94602) is NOT deployed here: its record and
+  companion stay gated in the Thesis Rx demo.
+- Canonical host: records.fosterrx.com (grey-cloud CNAME to fosterrx-prod.web.app, byte-exact).
+  fosterrx.com serves the same path through Cloudflare, which rewrites HTML.
+- Rollback: local firebase auth had lapsed, so no release id was read; revert this commit and
+  push (CI redeploys d1797de, the prior live state).
