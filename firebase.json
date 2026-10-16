@@ -25,6 +25,12 @@
     ],
     "headers": [
       {
+        "source": "/intelligence/comp360/structure{,/**}",
+        "headers": [
+          {"key": "X-Robots-Tag", "value": "noindex"}
+        ]
+      },
+      {
         "source": "/.well-known/**",
         "headers": [
           {"key": "Content-Type", "value": "application/x-pem-file"},

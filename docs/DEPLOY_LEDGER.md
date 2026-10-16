@@ -83,3 +83,9 @@
 - Envelopes published 2026-10-16 from the saved signed files (identical bytes and signature;
   check.py PASS / VALID): FRXS-B0BB55323E304DAC (COMP360), FRXS-245F001967D94602
   (icotrokinra). Both cleared the pre-sign PII gate.
+
+## 2026-10-16 — COMP360 structural companion at /intelligence/comp360/structure
+- Re-received via Taildrop (the earlier transfer was the stale 32722fcb…); `sha256sum -c` OK on
+  arrival: 4987d1aa157a5fb01e7021417c8cfcf32f05514742bcb2a27842fe860d87f333. Served byte-for-byte
+  as intelligence/comp360/structure/index.html, with `X-Robots-Tag: noindex` on that path.
+- Rollback point before this deploy: live release 1792156825199000, version 51d5644e11d77cdf.
