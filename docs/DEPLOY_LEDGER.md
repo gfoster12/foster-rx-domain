@@ -73,5 +73,13 @@
   companion stay gated in the Thesis Rx demo.
 - Canonical host: records.fosterrx.com (grey-cloud CNAME to fosterrx-prod.web.app, byte-exact).
   fosterrx.com serves the same path through Cloudflare, which rewrites HTML.
-- Rollback: local firebase auth had lapsed, so no release id was read; revert this commit and
-  push (CI redeploys d1797de, the prior live state).
+- Rollback: local firebase auth had lapsed at deploy time, so no release id was read; revert
+  this commit and push (CI redeploys d1797de, the prior live state).
+- Release id (read after re-auth, 2026-10-16): live release 1792155361491000, version
+  31c983af6e779d97, released 2026-10-16T12:56:01Z — inside CI run 38903974698 (17d80fd,
+  12:55:29Z–12:56:16Z), no later deploy run. Verified on release: records.fosterrx.com and
+  fosterrx-prod.web.app serve /intelligence/comp360 at SHA-256 8221d0cb…; /intelligence/
+  icotrokinra 404.
+- Envelopes published 2026-10-16 from the saved signed files (identical bytes and signature;
+  check.py PASS / VALID): FRXS-B0BB55323E304DAC (COMP360), FRXS-245F001967D94602
+  (icotrokinra). Both cleared the pre-sign PII gate.
