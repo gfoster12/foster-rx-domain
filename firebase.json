@@ -39,6 +39,12 @@
         ]
       }
     ],
+    "redirects": [
+      {"source": "/login{,/**}", "destination": "/thesis-rx", "type": 301},
+      {"source": "/capital-rx{,/**}", "destination": "/thesis-rx", "type": 301},
+      {"source": "/design-partners{,/**}", "destination": "/thesis-rx", "type": 301},
+      {"source": "/angis{,/**}", "destination": "/thesis-rx", "type": 301}
+    ],
     "rewrites": [
       {"source": "/verify/**", "destination": "/verify/index.html"}
     ],
