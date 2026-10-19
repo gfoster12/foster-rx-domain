@@ -35,9 +35,9 @@
 <main id="main">
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero hero--text">
   <div class="wrap">
-    <div class="hero__grid">
+    <div>
       <div>
         <p class="eyebrow">A signed record, independently verifiable</p>
         <h1>Diligence your counterparty can check.</h1>
@@ -46,12 +46,6 @@
         <div class="actions">
           <a class="btn btn--p" href="mailto:info@fosterrx.com?subject=Demo%20request">Request a demo</a>
           <a class="btn btn--g" href="/verify">Verify a certificate</a>
-        </div>
-      </div>
-      <div class="hero__shot">
-        <div class="frame">
-          <div class="frame__bar"><i></i><i></i><i></i><span class="frame__url">thesisrx.ai</span></div>
-          <img class="shot" src="/assets/shots/portfolio-hero.webp" alt="Thesis Rx portfolio overview: composition, coverage, and the claim-shape computation with its trace">
         </div>
       </div>
     </div>
@@ -82,10 +76,10 @@
 <!-- SEE IT — alternating product rows -->
 <section class="soft">
   <div class="wrap">
-    <p class="eyebrow">See it</p>
-    <h2>Three screens do most of the work.</h2>
+    <p class="eyebrow">In the product</p>
+    <h2>Three things do most of the work.</h2>
 
-    <div class="row" style="margin-top:3rem">
+    <div class="row row--prose" style="margin-top:3rem">
       <div class="row__text">
         <h3>A decision queue, not a dashboard</h3>
         <p>Your portfolio sorted by the decision that falls first &mdash; fee windows, prosecution clocks, responses due. Coverage travels with every row, so nothing is triaged against an unknown evidence base.</p>
@@ -96,15 +90,9 @@
         </ul>
         <p style="margin-top:1.3rem"><a class="btn btn--o" href="/thesis-rx">Explore Thesis Rx</a></p>
       </div>
-      <div>
-        <div class="frame frame--flat">
-          
-          <img class="shot shot--glimpse" src="/assets/glimpses/decision-queue.webp" alt="A decision queue, not a dashboard - positions ordered by the decision that falls first">
-        </div>
-      </div>
     </div>
 
-    <div class="row row--flip">
+    <div class="row row--prose">
       <div class="row__text">
         <h3>A band with conditions, and the ask marked on it</h3>
         <p>Valuation is never a point estimate. It is a range against the derived value distribution for the domain, with its conditions enumerated and the asking price marked as a negotiating position rather than a verdict.</p>
@@ -114,28 +102,16 @@
           <li>No certificate means no relation &mdash; the interface shows an em dash, never a default</li>
         </ul>
       </div>
-      <div>
-        <div class="frame frame--flat">
-          
-          <img class="shot shot--glimpse" src="/assets/glimpses/band-conditions.webp" alt="The valuation band with its stated conditions, the ask marked on it">
-        </div>
-      </div>
     </div>
 
-    <div class="row">
+    <div class="row row--prose">
       <div class="row__text">
         <h3>Ask anything &mdash; and always know which answer counts</h3>
         <p>ANGIS answers instantly from the same records and the same methodologies, labelled unreviewed. When an answer has to count, it issues as a signed record at a verifiable address &mdash; machine-signed under the company key, over registered, validated methodologies.</p>
         <ul class="row__list">
-          <li>An unreviewed answer is structurally unable to carry a seal</li>
+          <li>An unreviewed answer carries no certificate &mdash; no record was issued for it</li>
           <li>The label is architecture, not a disclaimer someone remembered to add</li>
         </ul>
-      </div>
-      <div>
-        <div class="frame frame--flat">
-          
-          <img class="shot shot--glimpse" src="/assets/glimpses/which-answer-counts.webp" alt="The same question answered twice - analytical and unreviewed, then as a signed record">
-        </div>
       </div>
     </div>
   </div>
@@ -188,36 +164,15 @@
 <section id="assessment"><div class="wrap">
   <p class="eyebrow">Inside an assessment record</p>
   <h2>Seven parts. Twenty-five sections. Every gap stated.</h2>
-  <p class="lede" style="max-width:70ch">Every assessment record follows a ratified architecture, and every statement in one is classified by what stands behind it. Four conventions govern the whole document; the full part-by-part architecture ships in the specimen, not here.</p>
+  <p class="lede" style="max-width:70ch">Every assessment record follows a ratified architecture, and every statement in one is classified by what stands behind it. Four conventions govern the whole document.</p>
   <div class="parts">
     <div class="part"><b>Certificate record</b><p>Reproduced exactly as recorded from a signed source. Never paraphrased, never improved on.</p></div>
     <div class="part"><b>Computed</b><p>Arithmetic over enumerated inputs, recomputable by anyone holding the same record. The computation is named.</p></div>
     <div class="part"><b>Analytical</b><p>Synthesis, attributed to its method and signed as part of the record. Analysis is never presented as record.</p></div>
     <div class="part"><b>Stated absence</b><p>Where the record supports nothing, the section says so and stays empty. A gap is rendered, never filled.</p></div>
   </div>
-  <div class="gate">
-    <h3 style="margin:0">Request the specimen</h3>
-    <p class="small" style="margin-top:.4rem">A watermarked specimen of the full template &mdash; the complete section architecture and the honest-empty rendering included. Tell us who you are and the download opens; the same message reaches us so we can follow up properly. Handled under our <a href="/legal/privacy" style="text-decoration:underline">privacy policy</a>.</p>
-    <label>Name<input id="gName" type="text" autocomplete="name"></label>
-    <label>Work email<input id="gEmail" type="email" autocomplete="email"></label>
-    <label>Organization<input id="gOrg" type="text" autocomplete="organization"></label>
-    <label>Role<input id="gRole" type="text" autocomplete="organization-title"></label>
-    <a class="btn btn--g" href="#" onclick="return frxGate()">Open the specimen</a>
-    <a id="specimenLink" class="btn btn--o" href="/assets/downloads/FRX_Reimbursement_Diligence_Template_SPECIMEN.pdf" download>Download &mdash; Reimbursement Diligence Assessment, specimen (PDF)</a>
-  </div>
+  <div class="actions"><a class="btn btn--p" href="mailto:info@fosterrx.com?subject=Demo%20request">Request a demo</a></div>
 </div></section>
-<script>
-function frxGate(){
-  var n=document.getElementById('gName').value.trim(), e=document.getElementById('gEmail').value.trim(),
-      o=document.getElementById('gOrg').value.trim(), r=document.getElementById('gRole').value.trim();
-  if(!n||!e||!o){alert('Name, work email and organization open the download.');return false}
-  try{fetch('https://firestore.googleapis.com/v1/projects/fosterrx-prod/databases/foster-rx-synth/documents/template_requests',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fields:{name:{stringValue:n},email:{stringValue:e},organization:{stringValue:o},role:{stringValue:r},requested_at:{timestampValue:new Date().toISOString()},source:{stringValue:'site-gate'}}})}).catch(function(){});}catch(err){}
-  var b=encodeURIComponent('Specimen request\n\nName: '+n+'\nEmail: '+e+'\nOrganization: '+o+'\nRole: '+r);
-  var w=document.getElementById('specimenLink'); w.style.display='inline-block';
-  location.href='mailto:info@fosterrx.com?subject=Assessment%20template%20specimen&body='+b;
-  return false;
-}
-</script>
 
 <!-- CTA -->
 <section class="deep cta">
