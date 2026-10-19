@@ -339,11 +339,6 @@ img.portrait{display:block;width:100%;border-radius:10px;border:1px solid var(--
 .part{border:1px solid var(--rule);border-radius:10px;padding:1rem 1.1rem;background:var(--paper)}
 .part b{display:block;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--sage-ink,#4E6B65);margin-bottom:.45rem}
 .part p{font-size:.88rem;line-height:1.55;margin:0;color:inherit}
-.gate{border:1px solid var(--rule);border-radius:10px;padding:1.3rem 1.4rem;background:var(--paper);margin-top:1.6rem;max-width:640px}
-.gate label{display:block;font-size:.8rem;font-weight:600;margin-top:.8rem}
-.gate input{width:100%;padding:.5rem .6rem;border:1px solid var(--rule);border-radius:6px;background:transparent;color:inherit;font:inherit}
-.gate .btn{margin-top:1rem}
-#specimenLink{display:none;margin-top:1rem}
 
 #assessment{scroll-margin-top:84px}
 
